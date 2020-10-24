@@ -294,7 +294,7 @@ void oss(int maxProcesses) {
 
     int i = 0;  // loop iterator
     int pid;    // holds wait() and fork() return values
-
+	printf("here 1 \n");
     /*Statistics*/
     simtime_t totalCPU = { .s = 0, .ns = 0 };
     simtime_t totalSYS = { .s = 0, .ns = 0 };
@@ -368,7 +368,7 @@ void oss(int maxProcesses) {
                 cleanup();
             }
             else if (pid == 0) {  // child
-                execl("./user", "user", simPidArg, msqidArg, quantumArg, (char*)NULL);
+                execl("./user_proc", "user_proc", simPidArg, msqidArg, quantumArg, (char*)NULL);
             }
             // parent
             generated += 1;  // increment generated processes counter
