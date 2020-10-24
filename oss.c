@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 #include "oss.h"
-#include "queue.h"
+#include "user_proc.h"
 
 // Prototypes
 void no_args_msg();
