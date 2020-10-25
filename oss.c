@@ -13,7 +13,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MAX_PCB = 18;                    // max amount of processes allowed in the system at one time
+#define MAX_PCB 18                    // max amount of processes allowed in the system at one time
 
 //msg struct for msgqueue
 typedef struct {
@@ -190,7 +190,6 @@ int main(int argc, char* argv[]) {
             help_msg();
             return 0;
         case 'n':
-            MAX_PCB = atoi(optarg);
             break;
         case 'o':
             logName = optarg;

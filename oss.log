@@ -1,0 +1,1815 @@
+0    : OSS: Generating process PID 0 in queue 1 at 0s271600000ns
+1    : OSS: Dispatch   PID:   0 Queue: 1 TIME: 0s271611000ns
+2    : OSS: Full Slice PID:   0 Used:  20000000ns
+3    : OSS: PID:   0 -> Queue 2
+4    : OSS: Dispatch   PID:   0 Queue: 2 TIME: 0s291612000ns
+5    : OSS: Full Slice PID:   0 Used:  40000000ns
+6    : OSS: PID:   0 -> Queue 3
+7    : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s331613000ns
+8    : OSS: Full Slice PID:   0 Used:  80000000ns
+9    : OSS: PID:   0 -> Queue 3
+10   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s411614000ns
+11   : OSS: Full Slice PID:   0 Used:  80000000ns
+12   : OSS: PID:   0 -> Queue 3
+13   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s491615000ns
+14   : OSS: Full Slice PID:   0 Used:  80000000ns
+15   : OSS: PID:   0 -> Queue 3
+16   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s571616000ns
+17   : OSS: Full Slice PID:   0 Used:  80000000ns
+18   : OSS: PID:   0 -> Queue 3
+19   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s651617000ns
+20   : OSS: Full Slice PID:   0 Used:  80000000ns
+21   : OSS: PID:   0 -> Queue 3
+22   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s731618000ns
+23   : OSS: Full Slice PID:   0 Used:  80000000ns
+24   : OSS: PID:   0 -> Queue 3
+25   : OSS: Generating process PID 1 in queue 1 at 0s811618000ns
+26   : OSS: Dispatch   PID:   1 Queue: 1 TIME: 0s811629000ns
+27   : OSS: Full Slice PID:   1 Used:  20000000ns
+28   : OSS: PID:   1 -> Queue 2
+29   : OSS: Dispatch   PID:   1 Queue: 2 TIME: 0s831630000ns
+30   : OSS: Full Slice PID:   1 Used:  40000000ns
+31   : OSS: PID:   1 -> Queue 3
+32   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 0s871631000ns
+33   : OSS: Full Slice PID:   0 Used:  80000000ns
+34   : OSS: PID:   0 -> Queue 3
+35   : OSS: Dispatch   PID:   1 Queue: 3 TIME: 0s951632000ns
+36   : OSS: Full Slice PID:   1 Used:  80000000ns
+37   : OSS: PID:   1 -> Queue 3
+38   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 1s031633000ns
+39   : OSS: Full Slice PID:   0 Used:  80000000ns
+40   : OSS: PID:   0 -> Queue 3
+41   : OSS: Generating process PID 2 in queue 1 at 1s111633000ns
+42   : OSS: Dispatch   PID:   2 Queue: 1 TIME: 1s111644000ns
+43   : OSS: Full Slice PID:   2 Used:  20000000ns
+44   : OSS: PID:   2 -> Queue 2
+45   : OSS: Dispatch   PID:   2 Queue: 2 TIME: 1s131645000ns
+46   : OSS: Blocked    PID:   2 Used:  12400000ns
+47   : OSS: PID:   2 -> Blocked queue
+48   : OSS: Unblocked. PID:   2 TIME: 1s144045000ns
+49   : OSS: PID:   2 -> Queue 1
+50   : OSS: Dispatch   PID:   2 Queue: 1 TIME: 1s145046000ns
+51   : OSS: Full Slice PID:   2 Used:  20000000ns
+52   : OSS: PID:   2 -> Queue 2
+53   : OSS: Dispatch   PID:   2 Queue: 2 TIME: 1s165047000ns
+54   : OSS: Full Slice PID:   2 Used:  40000000ns
+55   : OSS: PID:   2 -> Queue 3
+56   : OSS: Dispatch   PID:   1 Queue: 3 TIME: 1s205048000ns
+57   : OSS: Full Slice PID:   1 Used:  80000000ns
+58   : OSS: PID:   1 -> Queue 3
+59   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 1s285049000ns
+60   : OSS: Full Slice PID:   0 Used:  80000000ns
+61   : OSS: PID:   0 -> Queue 3
+62   : OSS: Dispatch   PID:   2 Queue: 3 TIME: 1s365050000ns
+63   : OSS: Full Slice PID:   2 Used:  80000000ns
+64   : OSS: PID:   2 -> Queue 3
+65   : OSS: Dispatch   PID:   1 Queue: 3 TIME: 1s445051000ns
+66   : OSS: Full Slice PID:   1 Used:  80000000ns
+67   : OSS: PID:   1 -> Queue 3
+68   : OSS: Generating process PID 3 in queue 1 at 1s525051000ns
+69   : OSS: Dispatch   PID:   3 Queue: 1 TIME: 1s525062000ns
+70   : OSS: Full Slice PID:   3 Used:  20000000ns
+71   : OSS: PID:   3 -> Queue 2
+72   : OSS: Dispatch   PID:   3 Queue: 2 TIME: 1s545063000ns
+73   : OSS: Full Slice PID:   3 Used:  40000000ns
+74   : OSS: PID:   3 -> Queue 3
+75   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 1s585064000ns
+76   : OSS: Full Slice PID:   0 Used:  80000000ns
+77   : OSS: PID:   0 -> Queue 3
+78   : OSS: Dispatch   PID:   2 Queue: 3 TIME: 1s665065000ns
+79   : OSS: Full Slice PID:   2 Used:  80000000ns
+80   : OSS: PID:   2 -> Queue 3
+81   : OSS: Dispatch   PID:   1 Queue: 3 TIME: 1s745066000ns
+82   : OSS: Full Slice PID:   1 Used:  80000000ns
+83   : OSS: PID:   1 -> Queue 3
+84   : OSS: Generating process PID 4 in queue 1 at 1s825066000ns
+85   : OSS: Dispatch   PID:   4 Queue: 1 TIME: 1s825077000ns
+86   : OSS: Full Slice PID:   4 Used:  20000000ns
+87   : OSS: PID:   4 -> Queue 2
+88   : OSS: Dispatch   PID:   4 Queue: 2 TIME: 1s845078000ns
+89   : OSS: Full Slice PID:   4 Used:  40000000ns
+90   : OSS: PID:   4 -> Queue 3
+91   : OSS: Dispatch   PID:   3 Queue: 3 TIME: 1s885079000ns
+92   : OSS: Full Slice PID:   3 Used:  80000000ns
+93   : OSS: PID:   3 -> Queue 3
+94   : OSS: Dispatch   PID:   0 Queue: 3 TIME: 1s965080000ns
+95   : OSS: Full Slice PID:   0 Used:  80000000ns
+96   : OSS: PID:   0 -> Queue 3
+97   : OSS: Dispatch   PID:   2 Queue: 3 TIME: 2s045081000ns
+98   : OSS: Full Slice PID:   2 Used:  80000000ns
+99   : OSS: PID:   2 -> Queue 3
+100  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 2s125082000ns
+101  : OSS: Full Slice PID:   1 Used:  80000000ns
+102  : OSS: PID:   1 -> Queue 3
+103  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 2s205083000ns
+104  : OSS: Full Slice PID:   4 Used:  80000000ns
+105  : OSS: PID:   4 -> Queue 3
+106  : OSS: Generating process PID 5 in queue 1 at 2s285083000ns
+107  : OSS: Dispatch   PID:   5 Queue: 1 TIME: 2s285094000ns
+108  : OSS: Full Slice PID:   5 Used:  20000000ns
+109  : OSS: PID:   5 -> Queue 2
+110  : OSS: Dispatch   PID:   5 Queue: 2 TIME: 2s305095000ns
+111  : OSS: Full Slice PID:   5 Used:  40000000ns
+112  : OSS: PID:   5 -> Queue 3
+113  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 2s345096000ns
+114  : OSS: Full Slice PID:   3 Used:  80000000ns
+115  : OSS: PID:   3 -> Queue 3
+116  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 2s425097000ns
+117  : OSS: Full Slice PID:   0 Used:  80000000ns
+118  : OSS: PID:   0 -> Queue 3
+119  : OSS: Generating process PID 6 in queue 1 at 2s505097000ns
+120  : OSS: Dispatch   PID:   6 Queue: 1 TIME: 2s505108000ns
+121  : OSS: Full Slice PID:   6 Used:  20000000ns
+122  : OSS: PID:   6 -> Queue 2
+123  : OSS: Dispatch   PID:   6 Queue: 2 TIME: 2s525109000ns
+124  : OSS: Full Slice PID:   6 Used:  40000000ns
+125  : OSS: PID:   6 -> Queue 3
+126  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 2s565110000ns
+127  : OSS: Full Slice PID:   2 Used:  80000000ns
+128  : OSS: PID:   2 -> Queue 3
+129  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 2s645111000ns
+130  : OSS: Full Slice PID:   1 Used:  80000000ns
+131  : OSS: PID:   1 -> Queue 3
+132  : OSS: Generating process PID 7 in queue 1 at 2s725111000ns
+133  : OSS: Dispatch   PID:   7 Queue: 1 TIME: 2s725122000ns
+134  : OSS: Full Slice PID:   7 Used:  20000000ns
+135  : OSS: PID:   7 -> Queue 2
+136  : OSS: Dispatch   PID:   7 Queue: 2 TIME: 2s745123000ns
+137  : OSS: Full Slice PID:   7 Used:  40000000ns
+138  : OSS: PID:   7 -> Queue 3
+139  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 2s785124000ns
+140  : OSS: Terminated PID:   4 Used:  52000000ns
+141  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 2s837125000ns
+142  : OSS: Full Slice PID:   5 Used:  80000000ns
+143  : OSS: PID:   5 -> Queue 3
+144  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 2s917126000ns
+145  : OSS: Full Slice PID:   3 Used:  80000000ns
+146  : OSS: PID:   3 -> Queue 3
+147  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 2s997127000ns
+148  : OSS: Terminated PID:   0 Used:  57600000ns
+149  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 3s054728000ns
+150  : OSS: Full Slice PID:   6 Used:  80000000ns
+151  : OSS: PID:   6 -> Queue 3
+152  : OSS: Generating process PID 0 in queue 1 at 3s134728000ns
+153  : OSS: Dispatch   PID:   0 Queue: 1 TIME: 3s134739000ns
+154  : OSS: Full Slice PID:   0 Used:  20000000ns
+155  : OSS: PID:   0 -> Queue 2
+156  : OSS: Generating process PID 4 in queue 1 at 3s154739000ns
+157  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 3s154750000ns
+158  : OSS: Full Slice PID:   4 Used:  20000000ns
+159  : OSS: PID:   4 -> Queue 2
+160  : OSS: Dispatch   PID:   0 Queue: 2 TIME: 3s174751000ns
+161  : OSS: Full Slice PID:   0 Used:  40000000ns
+162  : OSS: PID:   0 -> Queue 3
+163  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 3s214752000ns
+164  : OSS: Full Slice PID:   4 Used:  40000000ns
+165  : OSS: PID:   4 -> Queue 3
+166  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 3s254753000ns
+167  : OSS: Full Slice PID:   2 Used:  80000000ns
+168  : OSS: PID:   2 -> Queue 3
+169  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 3s334754000ns
+170  : OSS: Full Slice PID:   1 Used:  80000000ns
+171  : OSS: PID:   1 -> Queue 3
+172  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 3s414755000ns
+173  : OSS: Full Slice PID:   7 Used:  80000000ns
+174  : OSS: PID:   7 -> Queue 3
+175  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 3s494756000ns
+176  : OSS: Full Slice PID:   5 Used:  80000000ns
+177  : OSS: PID:   5 -> Queue 3
+178  : OSS: Generating process PID 8 in queue 1 at 3s574756000ns
+179  : OSS: Dispatch   PID:   8 Queue: 1 TIME: 3s574767000ns
+180  : OSS: Blocked    PID:   8 Used:   6800000ns
+181  : OSS: PID:   8 -> Blocked queue
+182  : OSS: Unblocked. PID:   8 TIME: 3s581567000ns
+183  : OSS: PID:   8 -> Queue 1
+184  : OSS: Dispatch   PID:   8 Queue: 1 TIME: 3s582568000ns
+185  : OSS: Full Slice PID:   8 Used:  20000000ns
+186  : OSS: PID:   8 -> Queue 2
+187  : OSS: Dispatch   PID:   8 Queue: 2 TIME: 3s602569000ns
+188  : OSS: Full Slice PID:   8 Used:  40000000ns
+189  : OSS: PID:   8 -> Queue 3
+190  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 3s642570000ns
+191  : OSS: Full Slice PID:   3 Used:  80000000ns
+192  : OSS: PID:   3 -> Queue 3
+193  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 3s722571000ns
+194  : OSS: Full Slice PID:   6 Used:  80000000ns
+195  : OSS: PID:   6 -> Queue 3
+196  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 3s802572000ns
+197  : OSS: Full Slice PID:   0 Used:  80000000ns
+198  : OSS: PID:   0 -> Queue 3
+199  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 3s882573000ns
+200  : OSS: Full Slice PID:   4 Used:  80000000ns
+201  : OSS: PID:   4 -> Queue 3
+202  : OSS: Generating process PID 9 in queue 1 at 3s962573000ns
+203  : OSS: Dispatch   PID:   9 Queue: 1 TIME: 3s962584000ns
+204  : OSS: Full Slice PID:   9 Used:  20000000ns
+205  : OSS: PID:   9 -> Queue 2
+206  : OSS: Dispatch   PID:   9 Queue: 2 TIME: 3s982585000ns
+207  : OSS: Full Slice PID:   9 Used:  40000000ns
+208  : OSS: PID:   9 -> Queue 3
+209  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 4s022586000ns
+210  : OSS: Full Slice PID:   2 Used:  80000000ns
+211  : OSS: PID:   2 -> Queue 3
+212  : OSS: Generating process PID 10 in queue 1 at 4s102586000ns
+213  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 4s102597000ns
+214  : OSS: Full Slice PID:  10 Used:  20000000ns
+215  : OSS: PID:  10 -> Queue 2
+216  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 4s122598000ns
+217  : OSS: Terminated PID:  10 Used:  21200000ns
+218  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 4s143799000ns
+219  : OSS: Full Slice PID:   1 Used:  80000000ns
+220  : OSS: PID:   1 -> Queue 3
+221  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 4s223800000ns
+222  : OSS: Full Slice PID:   7 Used:  80000000ns
+223  : OSS: PID:   7 -> Queue 3
+224  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 4s303801000ns
+225  : OSS: Full Slice PID:   5 Used:  80000000ns
+226  : OSS: PID:   5 -> Queue 3
+227  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 4s383802000ns
+228  : OSS: Full Slice PID:   8 Used:  80000000ns
+229  : OSS: PID:   8 -> Queue 3
+230  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 4s463803000ns
+231  : OSS: Full Slice PID:   3 Used:  80000000ns
+232  : OSS: PID:   3 -> Queue 3
+233  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 4s543804000ns
+234  : OSS: Full Slice PID:   6 Used:  80000000ns
+235  : OSS: PID:   6 -> Queue 3
+236  : OSS: Generating process PID 10 in queue 1 at 4s623804000ns
+237  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 4s623815000ns
+238  : OSS: Full Slice PID:  10 Used:  20000000ns
+239  : OSS: PID:  10 -> Queue 2
+240  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 4s643816000ns
+241  : OSS: Terminated PID:  10 Used:  21200000ns
+242  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 4s665017000ns
+243  : OSS: Full Slice PID:   0 Used:  80000000ns
+244  : OSS: PID:   0 -> Queue 3
+245  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 4s745018000ns
+246  : OSS: Terminated PID:   4 Used:  52000000ns
+247  : OSS: Generating process PID 4 in queue 1 at 4s797018000ns
+248  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 4s797029000ns
+249  : OSS: Full Slice PID:   4 Used:  20000000ns
+250  : OSS: PID:   4 -> Queue 2
+251  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 4s817030000ns
+252  : OSS: Full Slice PID:   4 Used:  40000000ns
+253  : OSS: PID:   4 -> Queue 3
+254  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 4s857031000ns
+255  : OSS: Full Slice PID:   9 Used:  80000000ns
+256  : OSS: PID:   9 -> Queue 3
+257  : OSS: Generating process PID 10 in queue 1 at 4s937031000ns
+258  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 4s937042000ns
+259  : OSS: Full Slice PID:  10 Used:  20000000ns
+260  : OSS: PID:  10 -> Queue 2
+261  : OSS: Generating process PID 11 in queue 1 at 4s957042000ns
+262  : OSS: Dispatch   PID:  11 Queue: 1 TIME: 4s957053000ns
+263  : OSS: Full Slice PID:  11 Used:  20000000ns
+264  : OSS: PID:  11 -> Queue 2
+265  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 4s977054000ns
+266  : OSS: Terminated PID:  10 Used:  21200000ns
+267  : OSS: Dispatch   PID:  11 Queue: 2 TIME: 4s998255000ns
+268  : OSS: Full Slice PID:  11 Used:  40000000ns
+269  : OSS: PID:  11 -> Queue 3
+270  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 5s038256000ns
+271  : OSS: Full Slice PID:   2 Used:  80000000ns
+272  : OSS: PID:   2 -> Queue 3
+273  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 5s118257000ns
+274  : OSS: Full Slice PID:   1 Used:  80000000ns
+275  : OSS: PID:   1 -> Queue 3
+276  : OSS: Generating process PID 10 in queue 1 at 5s198257000ns
+277  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 5s198268000ns
+278  : OSS: Full Slice PID:  10 Used:  20000000ns
+279  : OSS: PID:  10 -> Queue 2
+280  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 5s218269000ns
+281  : OSS: Terminated PID:  10 Used:  21200000ns
+282  : OSS: Generating process PID 10 in queue 1 at 5s239469000ns
+283  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 5s239480000ns
+284  : OSS: Full Slice PID:  10 Used:  20000000ns
+285  : OSS: PID:  10 -> Queue 2
+286  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 5s259481000ns
+287  : OSS: Terminated PID:  10 Used:  21200000ns
+288  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 5s280682000ns
+289  : OSS: Terminated PID:   7 Used:  15200000ns
+290  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 5s295883000ns
+291  : OSS: Full Slice PID:   5 Used:  80000000ns
+292  : OSS: PID:   5 -> Queue 3
+293  : OSS: Generating process PID 7 in queue 1 at 5s375883000ns
+294  : OSS: Dispatch   PID:   7 Queue: 1 TIME: 5s375894000ns
+295  : OSS: Full Slice PID:   7 Used:  20000000ns
+296  : OSS: PID:   7 -> Queue 2
+297  : OSS: Dispatch   PID:   7 Queue: 2 TIME: 5s395895000ns
+298  : OSS: Full Slice PID:   7 Used:  40000000ns
+299  : OSS: PID:   7 -> Queue 3
+300  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 5s435896000ns
+301  : OSS: Full Slice PID:   8 Used:  80000000ns
+302  : OSS: PID:   8 -> Queue 3
+303  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 5s515897000ns
+304  : OSS: Full Slice PID:   3 Used:  80000000ns
+305  : OSS: PID:   3 -> Queue 3
+306  : OSS: Generating process PID 10 in queue 1 at 5s595897000ns
+307  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 5s595908000ns
+308  : OSS: Full Slice PID:  10 Used:  20000000ns
+309  : OSS: PID:  10 -> Queue 2
+310  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 5s615909000ns
+311  : OSS: Terminated PID:  10 Used:  21200000ns
+312  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 5s637110000ns
+313  : OSS: Full Slice PID:   6 Used:  80000000ns
+314  : OSS: PID:   6 -> Queue 3
+315  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 5s717111000ns
+316  : OSS: Full Slice PID:   0 Used:  80000000ns
+317  : OSS: PID:   0 -> Queue 3
+318  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 5s797112000ns
+319  : OSS: Full Slice PID:   4 Used:  80000000ns
+320  : OSS: PID:   4 -> Queue 3
+321  : OSS: Generating process PID 10 in queue 1 at 5s877112000ns
+322  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 5s877123000ns
+323  : OSS: Full Slice PID:  10 Used:  20000000ns
+324  : OSS: PID:  10 -> Queue 2
+325  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 5s897124000ns
+326  : OSS: Terminated PID:  10 Used:  21200000ns
+327  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 5s918325000ns
+328  : OSS: Full Slice PID:   9 Used:  80000000ns
+329  : OSS: PID:   9 -> Queue 3
+330  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 5s998326000ns
+331  : OSS: Full Slice PID:  11 Used:  80000000ns
+332  : OSS: PID:  11 -> Queue 3
+333  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 6s078327000ns
+334  : OSS: Full Slice PID:   2 Used:  80000000ns
+335  : OSS: PID:   2 -> Queue 3
+336  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 6s158328000ns
+337  : OSS: Full Slice PID:   1 Used:  80000000ns
+338  : OSS: PID:   1 -> Queue 3
+339  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 6s238329000ns
+340  : OSS: Full Slice PID:   5 Used:  80000000ns
+341  : OSS: PID:   5 -> Queue 3
+342  : OSS: Generating process PID 10 in queue 1 at 6s318329000ns
+343  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 6s318340000ns
+344  : OSS: Full Slice PID:  10 Used:  20000000ns
+345  : OSS: PID:  10 -> Queue 2
+346  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 6s338341000ns
+347  : OSS: Terminated PID:  10 Used:  21200000ns
+348  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 6s359542000ns
+349  : OSS: Full Slice PID:   7 Used:  80000000ns
+350  : OSS: PID:   7 -> Queue 3
+351  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 6s439543000ns
+352  : OSS: Full Slice PID:   8 Used:  80000000ns
+353  : OSS: PID:   8 -> Queue 3
+354  : OSS: Generating process PID 10 in queue 1 at 6s519543000ns
+355  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 6s519554000ns
+356  : OSS: Full Slice PID:  10 Used:  20000000ns
+357  : OSS: PID:  10 -> Queue 2
+358  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 6s539555000ns
+359  : OSS: Terminated PID:  10 Used:  21200000ns
+360  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 6s560756000ns
+361  : OSS: Full Slice PID:   3 Used:  80000000ns
+362  : OSS: PID:   3 -> Queue 3
+363  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 6s640757000ns
+364  : OSS: Full Slice PID:   6 Used:  80000000ns
+365  : OSS: PID:   6 -> Queue 3
+366  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 6s720758000ns
+367  : OSS: Full Slice PID:   0 Used:  80000000ns
+368  : OSS: PID:   0 -> Queue 3
+369  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 6s800759000ns
+370  : OSS: Terminated PID:   4 Used:  52000000ns
+371  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 6s852760000ns
+372  : OSS: Full Slice PID:   9 Used:  80000000ns
+373  : OSS: PID:   9 -> Queue 3
+374  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 6s932761000ns
+375  : OSS: Full Slice PID:  11 Used:  80000000ns
+376  : OSS: PID:  11 -> Queue 3
+377  : OSS: Generating process PID 4 in queue 1 at 7s012761000ns
+378  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 7s012772000ns
+379  : OSS: Full Slice PID:   4 Used:  20000000ns
+380  : OSS: PID:   4 -> Queue 2
+381  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 7s032773000ns
+382  : OSS: Full Slice PID:   4 Used:  40000000ns
+383  : OSS: PID:   4 -> Queue 3
+384  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 7s072774000ns
+385  : OSS: Full Slice PID:   2 Used:  80000000ns
+386  : OSS: PID:   2 -> Queue 3
+387  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 7s152775000ns
+388  : OSS: Full Slice PID:   1 Used:  80000000ns
+389  : OSS: PID:   1 -> Queue 3
+390  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 7s232776000ns
+391  : OSS: Full Slice PID:   5 Used:  80000000ns
+392  : OSS: PID:   5 -> Queue 3
+393  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 7s312777000ns
+394  : OSS: Full Slice PID:   7 Used:  80000000ns
+395  : OSS: PID:   7 -> Queue 3
+396  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 7s392778000ns
+397  : OSS: Full Slice PID:   8 Used:  80000000ns
+398  : OSS: PID:   8 -> Queue 3
+399  : OSS: Generating process PID 10 in queue 0 at 7s472778000ns
+400  : OSS: Dispatch   PID:  10 Queue: 0 TIME: 7s472789000ns
+401  : OSS: Full Slice PID:  10 Used:  10000000ns
+402  : OSS: PID:  10 -> Round Robin
+403  : OSS: Dispatch   PID:  10 Queue: 0 TIME: 7s482790000ns
+404  : OSS: Terminated PID:  10 Used:   5300000ns
+405  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 7s488091000ns
+406  : OSS: Terminated PID:   3 Used:  40800000ns
+407  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 7s528892000ns
+408  : OSS: Full Slice PID:   6 Used:  80000000ns
+409  : OSS: PID:   6 -> Queue 3
+410  : OSS: Generating process PID 3 in queue 1 at 7s608892000ns
+411  : OSS: Dispatch   PID:   3 Queue: 1 TIME: 7s608903000ns
+412  : OSS: Full Slice PID:   3 Used:  20000000ns
+413  : OSS: PID:   3 -> Queue 2
+414  : OSS: Dispatch   PID:   3 Queue: 2 TIME: 7s628904000ns
+415  : OSS: Full Slice PID:   3 Used:  40000000ns
+416  : OSS: PID:   3 -> Queue 3
+417  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 7s668905000ns
+418  : OSS: Full Slice PID:   0 Used:  80000000ns
+419  : OSS: PID:   0 -> Queue 3
+420  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 7s748906000ns
+421  : OSS: Full Slice PID:   9 Used:  80000000ns
+422  : OSS: PID:   9 -> Queue 3
+423  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 7s828907000ns
+424  : OSS: Full Slice PID:  11 Used:  80000000ns
+425  : OSS: PID:  11 -> Queue 3
+426  : OSS: Generating process PID 10 in queue 1 at 7s908907000ns
+427  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 7s908918000ns
+428  : OSS: Full Slice PID:  10 Used:  20000000ns
+429  : OSS: PID:  10 -> Queue 2
+430  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 7s928919000ns
+431  : OSS: Terminated PID:  10 Used:  21200000ns
+432  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 7s950120000ns
+433  : OSS: Full Slice PID:   4 Used:  80000000ns
+434  : OSS: PID:   4 -> Queue 3
+435  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 8s030121000ns
+436  : OSS: Full Slice PID:   2 Used:  80000000ns
+437  : OSS: PID:   2 -> Queue 3
+438  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 8s110122000ns
+439  : OSS: Terminated PID:   1 Used:  16800000ns
+440  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 8s126923000ns
+441  : OSS: Full Slice PID:   5 Used:  80000000ns
+442  : OSS: PID:   5 -> Queue 3
+443  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 8s206924000ns
+444  : OSS: Terminated PID:   7 Used:  15200000ns
+445  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 8s222125000ns
+446  : OSS: Full Slice PID:   8 Used:  80000000ns
+447  : OSS: PID:   8 -> Queue 3
+448  : OSS: Generating process PID 1 in queue 1 at 8s302125000ns
+449  : OSS: Dispatch   PID:   1 Queue: 1 TIME: 8s302136000ns
+450  : OSS: Full Slice PID:   1 Used:  20000000ns
+451  : OSS: PID:   1 -> Queue 2
+452  : OSS: Generating process PID 7 in queue 1 at 8s322136000ns
+453  : OSS: Dispatch   PID:   7 Queue: 1 TIME: 8s322147000ns
+454  : OSS: Full Slice PID:   7 Used:  20000000ns
+455  : OSS: PID:   7 -> Queue 2
+456  : OSS: Dispatch   PID:   1 Queue: 2 TIME: 8s342148000ns
+457  : OSS: Full Slice PID:   1 Used:  40000000ns
+458  : OSS: PID:   1 -> Queue 3
+459  : OSS: Dispatch   PID:   7 Queue: 2 TIME: 8s382149000ns
+460  : OSS: Full Slice PID:   7 Used:  40000000ns
+461  : OSS: PID:   7 -> Queue 3
+462  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 8s422150000ns
+463  : OSS: Full Slice PID:   6 Used:  80000000ns
+464  : OSS: PID:   6 -> Queue 3
+465  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 8s502151000ns
+466  : OSS: Full Slice PID:   3 Used:  80000000ns
+467  : OSS: PID:   3 -> Queue 3
+468  : OSS: Generating process PID 10 in queue 1 at 8s582151000ns
+469  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 8s582162000ns
+470  : OSS: Full Slice PID:  10 Used:  20000000ns
+471  : OSS: PID:  10 -> Queue 2
+472  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 8s602163000ns
+473  : OSS: Terminated PID:  10 Used:  21200000ns
+474  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 8s623364000ns
+475  : OSS: Full Slice PID:   0 Used:  80000000ns
+476  : OSS: PID:   0 -> Queue 3
+477  : OSS: Generating process PID 10 in queue 1 at 8s703364000ns
+478  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 8s703375000ns
+479  : OSS: Full Slice PID:  10 Used:  20000000ns
+480  : OSS: PID:  10 -> Queue 2
+481  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 8s723376000ns
+482  : OSS: Terminated PID:  10 Used:  21200000ns
+483  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 8s744577000ns
+484  : OSS: Full Slice PID:   9 Used:  80000000ns
+485  : OSS: PID:   9 -> Queue 3
+486  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 8s824578000ns
+487  : OSS: Full Slice PID:  11 Used:  80000000ns
+488  : OSS: PID:  11 -> Queue 3
+489  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 8s904579000ns
+490  : OSS: Terminated PID:   4 Used:  52000000ns
+491  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 8s956580000ns
+492  : OSS: Full Slice PID:   2 Used:  80000000ns
+493  : OSS: PID:   2 -> Queue 3
+494  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 9s036581000ns
+495  : OSS: Full Slice PID:   5 Used:  80000000ns
+496  : OSS: PID:   5 -> Queue 3
+497  : OSS: Generating process PID 4 in queue 1 at 9s116581000ns
+498  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 9s116592000ns
+499  : OSS: Full Slice PID:   4 Used:  20000000ns
+500  : OSS: PID:   4 -> Queue 2
+501  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 9s136593000ns
+502  : OSS: Full Slice PID:   4 Used:  40000000ns
+503  : OSS: PID:   4 -> Queue 3
+504  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 9s176594000ns
+505  : OSS: Full Slice PID:   8 Used:  80000000ns
+506  : OSS: PID:   8 -> Queue 3
+507  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 9s256595000ns
+508  : OSS: Full Slice PID:   1 Used:  80000000ns
+509  : OSS: PID:   1 -> Queue 3
+510  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 9s336596000ns
+511  : OSS: Full Slice PID:   7 Used:  80000000ns
+512  : OSS: PID:   7 -> Queue 3
+513  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 9s416597000ns
+514  : OSS: Blocked    PID:   6 Used:  24800000ns
+515  : OSS: PID:   6 -> Blocked queue
+516  : OSS: Unblocked. PID:   6 TIME: 9s441397000ns
+517  : OSS: PID:   6 -> Queue 1
+518  : OSS: Dispatch   PID:   6 Queue: 1 TIME: 9s442398000ns
+519  : OSS: Full Slice PID:   6 Used:  20000000ns
+520  : OSS: PID:   6 -> Queue 2
+521  : OSS: Dispatch   PID:   6 Queue: 2 TIME: 9s462399000ns
+522  : OSS: Full Slice PID:   6 Used:  40000000ns
+523  : OSS: PID:   6 -> Queue 3
+524  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 9s502400000ns
+525  : OSS: Full Slice PID:   3 Used:  80000000ns
+526  : OSS: PID:   3 -> Queue 3
+527  : OSS: Generating process PID 10 in queue 1 at 9s582400000ns
+528  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 9s582411000ns
+529  : OSS: Full Slice PID:  10 Used:  20000000ns
+530  : OSS: PID:  10 -> Queue 2
+531  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 9s602412000ns
+532  : OSS: Terminated PID:  10 Used:  21200000ns
+533  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 9s623613000ns
+534  : OSS: Full Slice PID:   0 Used:  80000000ns
+535  : OSS: PID:   0 -> Queue 3
+536  : OSS: Generating process PID 10 in queue 1 at 9s703613000ns
+537  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 9s703624000ns
+538  : OSS: Full Slice PID:  10 Used:  20000000ns
+539  : OSS: PID:  10 -> Queue 2
+540  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 9s723625000ns
+541  : OSS: Terminated PID:  10 Used:  21200000ns
+542  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 9s744826000ns
+543  : OSS: Full Slice PID:   9 Used:  80000000ns
+544  : OSS: PID:   9 -> Queue 3
+545  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 9s824827000ns
+546  : OSS: Full Slice PID:  11 Used:  80000000ns
+547  : OSS: PID:  11 -> Queue 3
+548  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 9s904828000ns
+549  : OSS: Full Slice PID:   2 Used:  80000000ns
+550  : OSS: PID:   2 -> Queue 3
+551  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 9s984829000ns
+552  : OSS: Full Slice PID:   5 Used:  80000000ns
+553  : OSS: PID:   5 -> Queue 3
+554  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 10s064830000ns
+555  : OSS: Full Slice PID:   4 Used:  80000000ns
+556  : OSS: PID:   4 -> Queue 3
+557  : OSS: Generating process PID 10 in queue 1 at 10s144830000ns
+558  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 10s144841000ns
+559  : OSS: Full Slice PID:  10 Used:  20000000ns
+560  : OSS: PID:  10 -> Queue 2
+561  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 10s164842000ns
+562  : OSS: Terminated PID:  10 Used:  21200000ns
+563  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 10s186043000ns
+564  : OSS: Full Slice PID:   8 Used:  80000000ns
+565  : OSS: PID:   8 -> Queue 3
+566  : OSS: Generating process PID 10 in queue 1 at 10s266043000ns
+567  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 10s266054000ns
+568  : OSS: Full Slice PID:  10 Used:  20000000ns
+569  : OSS: PID:  10 -> Queue 2
+570  : OSS: Generating process PID 12 in queue 1 at 10s286054000ns
+571  : OSS: Dispatch   PID:  12 Queue: 1 TIME: 10s286065000ns
+572  : OSS: Terminated PID:  12 Used:   8200000ns
+573  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 10s294266000ns
+574  : OSS: Terminated PID:  10 Used:  21200000ns
+575  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 10s315467000ns
+576  : OSS: Full Slice PID:   1 Used:  80000000ns
+577  : OSS: PID:   1 -> Queue 3
+578  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 10s395468000ns
+579  : OSS: Full Slice PID:   7 Used:  80000000ns
+580  : OSS: PID:   7 -> Queue 3
+581  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 10s475469000ns
+582  : OSS: Full Slice PID:   6 Used:  80000000ns
+583  : OSS: PID:   6 -> Queue 3
+584  : OSS: Generating process PID 10 in queue 1 at 10s555469000ns
+585  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 10s555480000ns
+586  : OSS: Full Slice PID:  10 Used:  20000000ns
+587  : OSS: PID:  10 -> Queue 2
+588  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 10s575481000ns
+589  : OSS: Terminated PID:  10 Used:  21200000ns
+590  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 10s596682000ns
+591  : OSS: Full Slice PID:   3 Used:  80000000ns
+592  : OSS: PID:   3 -> Queue 3
+593  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 10s676683000ns
+594  : OSS: Full Slice PID:   0 Used:  80000000ns
+595  : OSS: PID:   0 -> Queue 3
+596  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 10s756684000ns
+597  : OSS: Full Slice PID:   9 Used:  80000000ns
+598  : OSS: PID:   9 -> Queue 3
+599  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 10s836685000ns
+600  : OSS: Full Slice PID:  11 Used:  80000000ns
+601  : OSS: PID:  11 -> Queue 3
+602  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 10s916686000ns
+603  : OSS: Full Slice PID:   2 Used:  80000000ns
+604  : OSS: PID:   2 -> Queue 3
+605  : OSS: Generating process PID 10 in queue 1 at 10s996686000ns
+606  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 10s996697000ns
+607  : OSS: Full Slice PID:  10 Used:  20000000ns
+608  : OSS: PID:  10 -> Queue 2
+609  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 11s016698000ns
+610  : OSS: Terminated PID:  10 Used:  21200000ns
+611  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 11s037899000ns
+612  : OSS: Full Slice PID:   5 Used:  80000000ns
+613  : OSS: PID:   5 -> Queue 3
+614  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 11s117900000ns
+615  : OSS: Terminated PID:   4 Used:  52000000ns
+616  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 11s169901000ns
+617  : OSS: Full Slice PID:   8 Used:  80000000ns
+618  : OSS: PID:   8 -> Queue 3
+619  : OSS: Generating process PID 4 in queue 1 at 11s249901000ns
+620  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 11s249912000ns
+621  : OSS: Full Slice PID:   4 Used:  20000000ns
+622  : OSS: PID:   4 -> Queue 2
+623  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 11s269913000ns
+624  : OSS: Full Slice PID:   4 Used:  40000000ns
+625  : OSS: PID:   4 -> Queue 3
+626  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 11s309914000ns
+627  : OSS: Full Slice PID:   1 Used:  80000000ns
+628  : OSS: PID:   1 -> Queue 3
+629  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 11s389915000ns
+630  : OSS: Terminated PID:   7 Used:  15200000ns
+631  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 11s405116000ns
+632  : OSS: Full Slice PID:   6 Used:  80000000ns
+633  : OSS: PID:   6 -> Queue 3
+634  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 11s485117000ns
+635  : OSS: Full Slice PID:   3 Used:  80000000ns
+636  : OSS: PID:   3 -> Queue 3
+637  : OSS: Generating process PID 7 in queue 1 at 11s565117000ns
+638  : OSS: Dispatch   PID:   7 Queue: 1 TIME: 11s565128000ns
+639  : OSS: Full Slice PID:   7 Used:  20000000ns
+640  : OSS: PID:   7 -> Queue 2
+641  : OSS: Dispatch   PID:   7 Queue: 2 TIME: 11s585129000ns
+642  : OSS: Full Slice PID:   7 Used:  40000000ns
+643  : OSS: PID:   7 -> Queue 3
+644  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 11s625130000ns
+645  : OSS: Full Slice PID:   0 Used:  80000000ns
+646  : OSS: PID:   0 -> Queue 3
+647  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 11s705131000ns
+648  : OSS: Full Slice PID:   9 Used:  80000000ns
+649  : OSS: PID:   9 -> Queue 3
+650  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 11s785132000ns
+651  : OSS: Full Slice PID:  11 Used:  80000000ns
+652  : OSS: PID:  11 -> Queue 3
+653  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 11s865133000ns
+654  : OSS: Full Slice PID:   2 Used:  80000000ns
+655  : OSS: PID:   2 -> Queue 3
+656  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 11s945134000ns
+657  : OSS: Full Slice PID:   5 Used:  80000000ns
+658  : OSS: PID:   5 -> Queue 3
+659  : OSS: Generating process PID 10 in queue 1 at 12s025134000ns
+660  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 12s025145000ns
+661  : OSS: Full Slice PID:  10 Used:  20000000ns
+662  : OSS: PID:  10 -> Queue 2
+663  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 12s045146000ns
+664  : OSS: Terminated PID:  10 Used:  21200000ns
+665  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 12s066347000ns
+666  : OSS: Full Slice PID:   8 Used:  80000000ns
+667  : OSS: PID:   8 -> Queue 3
+668  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 12s146348000ns
+669  : OSS: Full Slice PID:   4 Used:  80000000ns
+670  : OSS: PID:   4 -> Queue 3
+671  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 12s226349000ns
+672  : OSS: Full Slice PID:   1 Used:  80000000ns
+673  : OSS: PID:   1 -> Queue 3
+674  : OSS: Generating process PID 10 in queue 1 at 12s306349000ns
+675  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 12s306360000ns
+676  : OSS: Full Slice PID:  10 Used:  20000000ns
+677  : OSS: PID:  10 -> Queue 2
+678  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 12s326361000ns
+679  : OSS: Terminated PID:  10 Used:  21200000ns
+680  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 12s347562000ns
+681  : OSS: Full Slice PID:   6 Used:  80000000ns
+682  : OSS: PID:   6 -> Queue 3
+683  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 12s427563000ns
+684  : OSS: Full Slice PID:   3 Used:  80000000ns
+685  : OSS: PID:   3 -> Queue 3
+686  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 12s507564000ns
+687  : OSS: Full Slice PID:   7 Used:  80000000ns
+688  : OSS: PID:   7 -> Queue 3
+689  : OSS: Generating process PID 10 in queue 1 at 12s587564000ns
+690  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 12s587575000ns
+691  : OSS: Full Slice PID:  10 Used:  20000000ns
+692  : OSS: PID:  10 -> Queue 2
+693  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 12s607576000ns
+694  : OSS: Terminated PID:  10 Used:  21200000ns
+695  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 12s628777000ns
+696  : OSS: Full Slice PID:   0 Used:  80000000ns
+697  : OSS: PID:   0 -> Queue 3
+698  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 12s708778000ns
+699  : OSS: Full Slice PID:   9 Used:  80000000ns
+700  : OSS: PID:   9 -> Queue 3
+701  : OSS: Generating process PID 10 in queue 1 at 12s788778000ns
+702  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 12s788789000ns
+703  : OSS: Full Slice PID:  10 Used:  20000000ns
+704  : OSS: PID:  10 -> Queue 2
+705  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 12s808790000ns
+706  : OSS: Terminated PID:  10 Used:  21200000ns
+707  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 12s829991000ns
+708  : OSS: Blocked    PID:  11 Used:  21600000ns
+709  : OSS: PID:  11 -> Blocked queue
+710  : OSS: Unblocked. PID:  11 TIME: 12s851591000ns
+711  : OSS: PID:  11 -> Queue 1
+712  : OSS: Dispatch   PID:  11 Queue: 1 TIME: 12s852592000ns
+713  : OSS: Full Slice PID:  11 Used:  20000000ns
+714  : OSS: PID:  11 -> Queue 2
+715  : OSS: Dispatch   PID:  11 Queue: 2 TIME: 12s872593000ns
+716  : OSS: Full Slice PID:  11 Used:  40000000ns
+717  : OSS: PID:  11 -> Queue 3
+718  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 12s912594000ns
+719  : OSS: Full Slice PID:   2 Used:  80000000ns
+720  : OSS: PID:   2 -> Queue 3
+721  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 12s992595000ns
+722  : OSS: Full Slice PID:   5 Used:  80000000ns
+723  : OSS: PID:   5 -> Queue 3
+724  : OSS: Generating process PID 10 in queue 1 at 13s072595000ns
+725  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 13s072606000ns
+726  : OSS: Full Slice PID:  10 Used:  20000000ns
+727  : OSS: PID:  10 -> Queue 2
+728  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 13s092607000ns
+729  : OSS: Terminated PID:  10 Used:  21200000ns
+730  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 13s113808000ns
+731  : OSS: Full Slice PID:   8 Used:  80000000ns
+732  : OSS: PID:   8 -> Queue 3
+733  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 13s193809000ns
+734  : OSS: Terminated PID:   4 Used:  52000000ns
+735  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 13s245810000ns
+736  : OSS: Full Slice PID:   1 Used:  80000000ns
+737  : OSS: PID:   1 -> Queue 3
+738  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 13s325811000ns
+739  : OSS: Terminated PID:   6 Used:  28000000ns
+740  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 13s353812000ns
+741  : OSS: Full Slice PID:   3 Used:  80000000ns
+742  : OSS: PID:   3 -> Queue 3
+743  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 13s433813000ns
+744  : OSS: Full Slice PID:   7 Used:  80000000ns
+745  : OSS: PID:   7 -> Queue 3
+746  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 13s513814000ns
+747  : OSS: Full Slice PID:   0 Used:  80000000ns
+748  : OSS: PID:   0 -> Queue 3
+749  : OSS: Generating process PID 4 in queue 1 at 13s593814000ns
+750  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 13s593825000ns
+751  : OSS: Full Slice PID:   4 Used:  20000000ns
+752  : OSS: PID:   4 -> Queue 2
+753  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 13s613826000ns
+754  : OSS: Full Slice PID:   4 Used:  40000000ns
+755  : OSS: PID:   4 -> Queue 3
+756  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 13s653827000ns
+757  : OSS: Full Slice PID:   9 Used:  80000000ns
+758  : OSS: PID:   9 -> Queue 3
+759  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 13s733828000ns
+760  : OSS: Blocked    PID:  11 Used:   4000000ns
+761  : OSS: PID:  11 -> Blocked queue
+762  : OSS: Unblocked. PID:  11 TIME: 13s737828000ns
+763  : OSS: PID:  11 -> Queue 1
+764  : OSS: Dispatch   PID:  11 Queue: 1 TIME: 13s738829000ns
+765  : OSS: Full Slice PID:  11 Used:  20000000ns
+766  : OSS: PID:  11 -> Queue 2
+767  : OSS: Dispatch   PID:  11 Queue: 2 TIME: 13s758830000ns
+768  : OSS: Full Slice PID:  11 Used:  40000000ns
+769  : OSS: PID:  11 -> Queue 3
+770  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 13s798831000ns
+771  : OSS: Full Slice PID:   2 Used:  80000000ns
+772  : OSS: PID:   2 -> Queue 3
+773  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 13s878832000ns
+774  : OSS: Full Slice PID:   5 Used:  80000000ns
+775  : OSS: PID:   5 -> Queue 3
+776  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 13s958833000ns
+777  : OSS: Full Slice PID:   8 Used:  80000000ns
+778  : OSS: PID:   8 -> Queue 3
+779  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 14s038834000ns
+780  : OSS: Full Slice PID:   1 Used:  80000000ns
+781  : OSS: PID:   1 -> Queue 3
+782  : OSS: Generating process PID 6 in queue 1 at 14s118834000ns
+783  : OSS: Dispatch   PID:   6 Queue: 1 TIME: 14s118845000ns
+784  : OSS: Full Slice PID:   6 Used:  20000000ns
+785  : OSS: PID:   6 -> Queue 2
+786  : OSS: Dispatch   PID:   6 Queue: 2 TIME: 14s138846000ns
+787  : OSS: Full Slice PID:   6 Used:  40000000ns
+788  : OSS: PID:   6 -> Queue 3
+789  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 14s178847000ns
+790  : OSS: Full Slice PID:   3 Used:  80000000ns
+791  : OSS: PID:   3 -> Queue 3
+792  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 14s258848000ns
+793  : OSS: Terminated PID:   7 Used:  15200000ns
+794  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 14s274049000ns
+795  : OSS: Full Slice PID:   0 Used:  80000000ns
+796  : OSS: PID:   0 -> Queue 3
+797  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 14s354050000ns
+798  : OSS: Full Slice PID:   4 Used:  80000000ns
+799  : OSS: PID:   4 -> Queue 3
+800  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 14s434051000ns
+801  : OSS: Full Slice PID:   9 Used:  80000000ns
+802  : OSS: PID:   9 -> Queue 3
+803  : OSS: Generating process PID 7 in queue 0 at 14s514051000ns
+804  : OSS: Dispatch   PID:   7 Queue: 0 TIME: 14s514062000ns
+805  : OSS: Full Slice PID:   7 Used:  10000000ns
+806  : OSS: PID:   7 -> Round Robin
+807  : OSS: Dispatch   PID:   7 Queue: 0 TIME: 14s524063000ns
+808  : OSS: Full Slice PID:   7 Used:  10000000ns
+809  : OSS: PID:   7 -> Round Robin
+810  : OSS: Dispatch   PID:   7 Queue: 0 TIME: 14s534064000ns
+811  : OSS: Full Slice PID:   7 Used:  10000000ns
+812  : OSS: PID:   7 -> Round Robin
+813  : OSS: Dispatch   PID:   7 Queue: 0 TIME: 14s544065000ns
+814  : OSS: Full Slice PID:   7 Used:  10000000ns
+815  : OSS: PID:   7 -> Round Robin
+816  : OSS: Dispatch   PID:   7 Queue: 0 TIME: 14s554066000ns
+817  : OSS: Terminated PID:   7 Used:   1900000ns
+818  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 14s555967000ns
+819  : OSS: Full Slice PID:  11 Used:  80000000ns
+820  : OSS: PID:  11 -> Queue 3
+821  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 14s635968000ns
+822  : OSS: Full Slice PID:   2 Used:  80000000ns
+823  : OSS: PID:   2 -> Queue 3
+824  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 14s715969000ns
+825  : OSS: Full Slice PID:   5 Used:  80000000ns
+826  : OSS: PID:   5 -> Queue 3
+827  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 14s795970000ns
+828  : OSS: Full Slice PID:   8 Used:  80000000ns
+829  : OSS: PID:   8 -> Queue 3
+830  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 14s875971000ns
+831  : OSS: Full Slice PID:   1 Used:  80000000ns
+832  : OSS: PID:   1 -> Queue 3
+833  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 14s955972000ns
+834  : OSS: Full Slice PID:   6 Used:  80000000ns
+835  : OSS: PID:   6 -> Queue 3
+836  : OSS: Generating process PID 7 in queue 1 at 15s035972000ns
+837  : OSS: Dispatch   PID:   7 Queue: 1 TIME: 15s035983000ns
+838  : OSS: Full Slice PID:   7 Used:  20000000ns
+839  : OSS: PID:   7 -> Queue 2
+840  : OSS: Dispatch   PID:   7 Queue: 2 TIME: 15s055984000ns
+841  : OSS: Full Slice PID:   7 Used:  40000000ns
+842  : OSS: PID:   7 -> Queue 3
+843  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 15s095985000ns
+844  : OSS: Terminated PID:   3 Used:  40800000ns
+845  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 15s136786000ns
+846  : OSS: Terminated PID:   0 Used:  57600000ns
+847  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 15s194387000ns
+848  : OSS: Terminated PID:   4 Used:  52000000ns
+849  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 15s246388000ns
+850  : OSS: Full Slice PID:   9 Used:  80000000ns
+851  : OSS: PID:   9 -> Queue 3
+852  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 15s326389000ns
+853  : OSS: Full Slice PID:  11 Used:  80000000ns
+854  : OSS: PID:  11 -> Queue 3
+855  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 15s406390000ns
+856  : OSS: Full Slice PID:   2 Used:  80000000ns
+857  : OSS: PID:   2 -> Queue 3
+858  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 15s486391000ns
+859  : OSS: Full Slice PID:   5 Used:  80000000ns
+860  : OSS: PID:   5 -> Queue 3
+861  : OSS: Generating process PID 0 in queue 1 at 15s566391000ns
+862  : OSS: Dispatch   PID:   0 Queue: 1 TIME: 15s566402000ns
+863  : OSS: Full Slice PID:   0 Used:  20000000ns
+864  : OSS: PID:   0 -> Queue 2
+865  : OSS: Dispatch   PID:   0 Queue: 2 TIME: 15s586403000ns
+866  : OSS: Full Slice PID:   0 Used:  40000000ns
+867  : OSS: PID:   0 -> Queue 3
+868  : OSS: Generating process PID 3 in queue 1 at 15s626403000ns
+869  : OSS: Dispatch   PID:   3 Queue: 1 TIME: 15s626414000ns
+870  : OSS: Full Slice PID:   3 Used:  20000000ns
+871  : OSS: PID:   3 -> Queue 2
+872  : OSS: Dispatch   PID:   3 Queue: 2 TIME: 15s646415000ns
+873  : OSS: Full Slice PID:   3 Used:  40000000ns
+874  : OSS: PID:   3 -> Queue 3
+875  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 15s686416000ns
+876  : OSS: Full Slice PID:   8 Used:  80000000ns
+877  : OSS: PID:   8 -> Queue 3
+878  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 15s766417000ns
+879  : OSS: Full Slice PID:   1 Used:  80000000ns
+880  : OSS: PID:   1 -> Queue 3
+881  : OSS: Generating process PID 4 in queue 1 at 15s846417000ns
+882  : OSS: Dispatch   PID:   4 Queue: 1 TIME: 15s846428000ns
+883  : OSS: Full Slice PID:   4 Used:  20000000ns
+884  : OSS: PID:   4 -> Queue 2
+885  : OSS: Dispatch   PID:   4 Queue: 2 TIME: 15s866429000ns
+886  : OSS: Full Slice PID:   4 Used:  40000000ns
+887  : OSS: PID:   4 -> Queue 3
+888  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 15s906430000ns
+889  : OSS: Full Slice PID:   6 Used:  80000000ns
+890  : OSS: PID:   6 -> Queue 3
+891  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 15s986431000ns
+892  : OSS: Full Slice PID:   7 Used:  80000000ns
+893  : OSS: PID:   7 -> Queue 3
+894  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 16s066432000ns
+895  : OSS: Full Slice PID:   9 Used:  80000000ns
+896  : OSS: PID:   9 -> Queue 3
+897  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 16s146433000ns
+898  : OSS: Full Slice PID:  11 Used:  80000000ns
+899  : OSS: PID:  11 -> Queue 3
+900  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 16s226434000ns
+901  : OSS: Terminated PID:   2 Used:  40000000ns
+902  : OSS: Generating process PID 2 in queue 1 at 16s266434000ns
+903  : OSS: Dispatch   PID:   2 Queue: 1 TIME: 16s266445000ns
+904  : OSS: Full Slice PID:   2 Used:  20000000ns
+905  : OSS: PID:   2 -> Queue 2
+906  : OSS: Dispatch   PID:   2 Queue: 2 TIME: 16s286446000ns
+907  : OSS: Blocked    PID:   2 Used:  12400000ns
+908  : OSS: PID:   2 -> Blocked queue
+909  : OSS: Unblocked. PID:   2 TIME: 16s298846000ns
+910  : OSS: PID:   2 -> Queue 1
+911  : OSS: Dispatch   PID:   2 Queue: 1 TIME: 16s299847000ns
+912  : OSS: Full Slice PID:   2 Used:  20000000ns
+913  : OSS: PID:   2 -> Queue 2
+914  : OSS: Dispatch   PID:   2 Queue: 2 TIME: 16s319848000ns
+915  : OSS: Full Slice PID:   2 Used:  40000000ns
+916  : OSS: PID:   2 -> Queue 3
+917  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 16s359849000ns
+918  : OSS: Full Slice PID:   5 Used:  80000000ns
+919  : OSS: PID:   5 -> Queue 3
+920  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 16s439850000ns
+921  : OSS: Full Slice PID:   0 Used:  80000000ns
+922  : OSS: PID:   0 -> Queue 3
+923  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 16s519851000ns
+924  : OSS: Full Slice PID:   3 Used:  80000000ns
+925  : OSS: PID:   3 -> Queue 3
+926  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 16s599852000ns
+927  : OSS: Full Slice PID:   8 Used:  80000000ns
+928  : OSS: PID:   8 -> Queue 3
+929  : OSS: Dispatch   PID:   1 Queue: 3 TIME: 16s679853000ns
+930  : OSS: Full Slice PID:   1 Used:  80000000ns
+931  : OSS: PID:   1 -> Queue 3
+932  : OSS: Generating process PID 10 in queue 1 at 16s759853000ns
+933  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 16s759864000ns
+934  : OSS: Full Slice PID:  10 Used:  20000000ns
+935  : OSS: PID:  10 -> Queue 2
+936  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 16s779865000ns
+937  : OSS: Terminated PID:  10 Used:  21200000ns
+938  : OSS: Dispatch   PID:   4 Queue: 3 TIME: 16s801066000ns
+939  : OSS: Full Slice PID:   4 Used:  80000000ns
+940  : OSS: PID:   4 -> Queue 3
+941  : OSS: Dispatch   PID:   6 Queue: 3 TIME: 16s881067000ns
+942  : OSS: Full Slice PID:   6 Used:  80000000ns
+943  : OSS: PID:   6 -> Queue 3
+944  : OSS: Dispatch   PID:   7 Queue: 3 TIME: 16s961068000ns
+945  : OSS: Full Slice PID:   7 Used:  80000000ns
+946  : OSS: PID:   7 -> Queue 3
+947  : OSS: Generating process PID 10 in queue 1 at 17s041068000ns
+948  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 17s041079000ns
+949  : OSS: Full Slice PID:  10 Used:  20000000ns
+950  : OSS: PID:  10 -> Queue 2
+951  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 17s061080000ns
+952  : OSS: Terminated PID:  10 Used:  21200000ns
+953  : OSS: Dispatch   PID:   9 Queue: 3 TIME: 17s082281000ns
+954  : OSS: Full Slice PID:   9 Used:  80000000ns
+955  : OSS: PID:   9 -> Queue 3
+956  : OSS: Generating process PID 10 in queue 1 at 17s162281000ns
+957  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 17s162292000ns
+958  : OSS: Full Slice PID:  10 Used:  20000000ns
+959  : OSS: PID:  10 -> Queue 2
+960  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 17s182293000ns
+961  : OSS: Terminated PID:  10 Used:  21200000ns
+962  : OSS: Dispatch   PID:  11 Queue: 3 TIME: 17s203494000ns
+963  : OSS: Full Slice PID:  11 Used:  80000000ns
+964  : OSS: PID:  11 -> Queue 3
+965  : OSS: Dispatch   PID:   2 Queue: 3 TIME: 17s283495000ns
+966  : OSS: Full Slice PID:   2 Used:  80000000ns
+967  : OSS: PID:   2 -> Queue 3
+968  : OSS: Dispatch   PID:   5 Queue: 3 TIME: 17s363496000ns
+969  : OSS: Blocked    PID:   5 Used:  28000000ns
+970  : OSS: PID:   5 -> Blocked queue
+971  : OSS: Unblocked. PID:   5 TIME: 17s391496000ns
+972  : OSS: PID:   5 -> Queue 1
+973  : OSS: Dispatch   PID:   5 Queue: 1 TIME: 17s392497000ns
+974  : OSS: Full Slice PID:   5 Used:  20000000ns
+975  : OSS: PID:   5 -> Queue 2
+976  : OSS: Dispatch   PID:   5 Queue: 2 TIME: 17s412498000ns
+977  : OSS: Full Slice PID:   5 Used:  40000000ns
+978  : OSS: PID:   5 -> Queue 3
+979  : OSS: Dispatch   PID:   0 Queue: 3 TIME: 17s452499000ns
+980  : OSS: Full Slice PID:   0 Used:  80000000ns
+981  : OSS: PID:   0 -> Queue 3
+982  : OSS: Generating process PID 10 in queue 0 at 17s532499000ns
+983  : OSS: Dispatch   PID:  10 Queue: 0 TIME: 17s532510000ns
+984  : OSS: Full Slice PID:  10 Used:  10000000ns
+985  : OSS: PID:  10 -> Round Robin
+986  : OSS: Dispatch   PID:  10 Queue: 0 TIME: 17s542511000ns
+987  : OSS: Terminated PID:  10 Used:   5300000ns
+988  : OSS: Dispatch   PID:   3 Queue: 3 TIME: 17s547812000ns
+989  : OSS: Full Slice PID:   3 Used:  80000000ns
+990  : OSS: PID:   3 -> Queue 3
+991  : OSS: Dispatch   PID:   8 Queue: 3 TIME: 17s627813000ns
+992  : OSS: Full Slice PID:   8 Used:  80000000ns
+993  : OSS: PID:   8 -> Queue 3
+994  : OSS: Generating process PID 10 in queue 1 at 17s707813000ns
+995  : OSS: Dispatch   PID:  10 Queue: 1 TIME: 17s707824000ns
+996  : OSS: Full Slice PID:  10 Used:  20000000ns
+997  : OSS: PID:  10 -> Queue 2
+998  : OSS: Dispatch   PID:  10 Queue: 2 TIME: 17s727825000ns
+999  : OSS: Terminated PID:  10 Used:  21200000ns
+1000 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 17s749026000ns
+1001 : OSS: Full Slice PID:   1 Used:  80000000ns
+1002 : OSS: PID:   1 -> Queue 3
+1003 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 17s829027000ns
+1004 : OSS: Terminated PID:   4 Used:  52000000ns
+1005 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 17s881028000ns
+1006 : OSS: Full Slice PID:   6 Used:  80000000ns
+1007 : OSS: PID:   6 -> Queue 3
+1008 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 17s961029000ns
+1009 : OSS: Terminated PID:   7 Used:  15200000ns
+1010 : OSS: Generating process PID 4 in queue 1 at 17s976229000ns
+1011 : OSS: Dispatch   PID:   4 Queue: 1 TIME: 17s976240000ns
+1012 : OSS: Full Slice PID:   4 Used:  20000000ns
+1013 : OSS: PID:   4 -> Queue 2
+1014 : OSS: Dispatch   PID:   4 Queue: 2 TIME: 17s996241000ns
+1015 : OSS: Full Slice PID:   4 Used:  40000000ns
+1016 : OSS: PID:   4 -> Queue 3
+1017 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 18s036242000ns
+1018 : OSS: Terminated PID:   9 Used:  60800000ns
+1019 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 18s097043000ns
+1020 : OSS: Full Slice PID:  11 Used:  80000000ns
+1021 : OSS: PID:  11 -> Queue 3
+1022 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 18s177044000ns
+1023 : OSS: Full Slice PID:   2 Used:  80000000ns
+1024 : OSS: PID:   2 -> Queue 3
+1025 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 18s257045000ns
+1026 : OSS: Full Slice PID:   5 Used:  80000000ns
+1027 : OSS: PID:   5 -> Queue 3
+1028 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 18s337046000ns
+1029 : OSS: Full Slice PID:   0 Used:  80000000ns
+1030 : OSS: PID:   0 -> Queue 3
+1031 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 18s417047000ns
+1032 : OSS: Full Slice PID:   3 Used:  80000000ns
+1033 : OSS: PID:   3 -> Queue 3
+1034 : OSS: Generating process PID 7 in queue 1 at 18s497047000ns
+1035 : OSS: Dispatch   PID:   7 Queue: 1 TIME: 18s497058000ns
+1036 : OSS: Full Slice PID:   7 Used:  20000000ns
+1037 : OSS: PID:   7 -> Queue 2
+1038 : OSS: Dispatch   PID:   7 Queue: 2 TIME: 18s517059000ns
+1039 : OSS: Full Slice PID:   7 Used:  40000000ns
+1040 : OSS: PID:   7 -> Queue 3
+1041 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 18s557060000ns
+1042 : OSS: Full Slice PID:   8 Used:  80000000ns
+1043 : OSS: PID:   8 -> Queue 3
+1044 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 18s637061000ns
+1045 : OSS: Full Slice PID:   1 Used:  80000000ns
+1046 : OSS: PID:   1 -> Queue 3
+1047 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 18s717062000ns
+1048 : OSS: Full Slice PID:   6 Used:  80000000ns
+1049 : OSS: PID:   6 -> Queue 3
+1050 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 18s797063000ns
+1051 : OSS: Full Slice PID:   4 Used:  80000000ns
+1052 : OSS: PID:   4 -> Queue 3
+1053 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 18s877064000ns
+1054 : OSS: Full Slice PID:  11 Used:  80000000ns
+1055 : OSS: PID:  11 -> Queue 3
+1056 : OSS: Generating process PID 9 in queue 1 at 18s957064000ns
+1057 : OSS: Dispatch   PID:   9 Queue: 1 TIME: 18s957075000ns
+1058 : OSS: Full Slice PID:   9 Used:  20000000ns
+1059 : OSS: PID:   9 -> Queue 2
+1060 : OSS: Dispatch   PID:   9 Queue: 2 TIME: 18s977076000ns
+1061 : OSS: Full Slice PID:   9 Used:  40000000ns
+1062 : OSS: PID:   9 -> Queue 3
+1063 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 19s017077000ns
+1064 : OSS: Full Slice PID:   2 Used:  80000000ns
+1065 : OSS: PID:   2 -> Queue 3
+1066 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 19s097078000ns
+1067 : OSS: Terminated PID:   5 Used:  35200000ns
+1068 : OSS: Generating process PID 5 in queue 1 at 19s132278000ns
+1069 : OSS: Dispatch   PID:   5 Queue: 1 TIME: 19s132289000ns
+1070 : OSS: Full Slice PID:   5 Used:  20000000ns
+1071 : OSS: PID:   5 -> Queue 2
+1072 : OSS: Dispatch   PID:   5 Queue: 2 TIME: 19s152290000ns
+1073 : OSS: Full Slice PID:   5 Used:  40000000ns
+1074 : OSS: PID:   5 -> Queue 3
+1075 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 19s192291000ns
+1076 : OSS: Full Slice PID:   0 Used:  80000000ns
+1077 : OSS: PID:   0 -> Queue 3
+1078 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 19s272292000ns
+1079 : OSS: Full Slice PID:   3 Used:  80000000ns
+1080 : OSS: PID:   3 -> Queue 3
+1081 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 19s352293000ns
+1082 : OSS: Full Slice PID:   7 Used:  80000000ns
+1083 : OSS: PID:   7 -> Queue 3
+1084 : OSS: Generating process PID 10 in queue 1 at 19s432293000ns
+1085 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 19s432304000ns
+1086 : OSS: Full Slice PID:  10 Used:  20000000ns
+1087 : OSS: PID:  10 -> Queue 2
+1088 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 19s452305000ns
+1089 : OSS: Terminated PID:  10 Used:  21200000ns
+1090 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 19s473506000ns
+1091 : OSS: Full Slice PID:   8 Used:  80000000ns
+1092 : OSS: PID:   8 -> Queue 3
+1093 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 19s553507000ns
+1094 : OSS: Terminated PID:   1 Used:  16800000ns
+1095 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 19s570308000ns
+1096 : OSS: Full Slice PID:   6 Used:  80000000ns
+1097 : OSS: PID:   6 -> Queue 3
+1098 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 19s650309000ns
+1099 : OSS: Terminated PID:   4 Used:  52000000ns
+1100 : OSS: Generating process PID 1 in queue 1 at 19s702309000ns
+1101 : OSS: Dispatch   PID:   1 Queue: 1 TIME: 19s702320000ns
+1102 : OSS: Full Slice PID:   1 Used:  20000000ns
+1103 : OSS: PID:   1 -> Queue 2
+1104 : OSS: Dispatch   PID:   1 Queue: 2 TIME: 19s722321000ns
+1105 : OSS: Full Slice PID:   1 Used:  40000000ns
+1106 : OSS: PID:   1 -> Queue 3
+1107 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 19s762322000ns
+1108 : OSS: Full Slice PID:  11 Used:  80000000ns
+1109 : OSS: PID:  11 -> Queue 3
+1110 : OSS: Generating process PID 4 in queue 1 at 19s842322000ns
+1111 : OSS: Dispatch   PID:   4 Queue: 1 TIME: 19s842333000ns
+1112 : OSS: Full Slice PID:   4 Used:  20000000ns
+1113 : OSS: PID:   4 -> Queue 2
+1114 : OSS: Dispatch   PID:   4 Queue: 2 TIME: 19s862334000ns
+1115 : OSS: Full Slice PID:   4 Used:  40000000ns
+1116 : OSS: PID:   4 -> Queue 3
+1117 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 19s902335000ns
+1118 : OSS: Full Slice PID:   9 Used:  80000000ns
+1119 : OSS: PID:   9 -> Queue 3
+1120 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 19s982336000ns
+1121 : OSS: Full Slice PID:   2 Used:  80000000ns
+1122 : OSS: PID:   2 -> Queue 3
+1123 : OSS: Generating process PID 10 in queue 1 at 20s062336000ns
+1124 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 20s062347000ns
+1125 : OSS: Full Slice PID:  10 Used:  20000000ns
+1126 : OSS: PID:  10 -> Queue 2
+1127 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 20s082348000ns
+1128 : OSS: Terminated PID:  10 Used:  21200000ns
+1129 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 20s103549000ns
+1130 : OSS: Full Slice PID:   5 Used:  80000000ns
+1131 : OSS: PID:   5 -> Queue 3
+1132 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 20s183550000ns
+1133 : OSS: Full Slice PID:   0 Used:  80000000ns
+1134 : OSS: PID:   0 -> Queue 3
+1135 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 20s263551000ns
+1136 : OSS: Full Slice PID:   3 Used:  80000000ns
+1137 : OSS: PID:   3 -> Queue 3
+1138 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 20s343552000ns
+1139 : OSS: Full Slice PID:   7 Used:  80000000ns
+1140 : OSS: PID:   7 -> Queue 3
+1141 : OSS: Generating process PID 10 in queue 1 at 20s423552000ns
+1142 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 20s423563000ns
+1143 : OSS: Full Slice PID:  10 Used:  20000000ns
+1144 : OSS: PID:  10 -> Queue 2
+1145 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 20s443564000ns
+1146 : OSS: Terminated PID:  10 Used:  21200000ns
+1147 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 20s464765000ns
+1148 : OSS: Full Slice PID:   8 Used:  80000000ns
+1149 : OSS: PID:   8 -> Queue 3
+1150 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 20s544766000ns
+1151 : OSS: Full Slice PID:   6 Used:  80000000ns
+1152 : OSS: PID:   6 -> Queue 3
+1153 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 20s624767000ns
+1154 : OSS: Full Slice PID:   1 Used:  80000000ns
+1155 : OSS: PID:   1 -> Queue 3
+1156 : OSS: Generating process PID 10 in queue 1 at 20s704767000ns
+1157 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 20s704778000ns
+1158 : OSS: Full Slice PID:  10 Used:  20000000ns
+1159 : OSS: PID:  10 -> Queue 2
+1160 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 20s724779000ns
+1161 : OSS: Terminated PID:  10 Used:  21200000ns
+1162 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 20s745980000ns
+1163 : OSS: Full Slice PID:  11 Used:  80000000ns
+1164 : OSS: PID:  11 -> Queue 3
+1165 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 20s825981000ns
+1166 : OSS: Full Slice PID:   4 Used:  80000000ns
+1167 : OSS: PID:   4 -> Queue 3
+1168 : OSS: Generating process PID 10 in queue 1 at 20s905981000ns
+1169 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 20s905992000ns
+1170 : OSS: Full Slice PID:  10 Used:  20000000ns
+1171 : OSS: PID:  10 -> Queue 2
+1172 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 20s925993000ns
+1173 : OSS: Terminated PID:  10 Used:  21200000ns
+1174 : OSS: Generating process PID 10 in queue 1 at 20s947193000ns
+1175 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 20s947204000ns
+1176 : OSS: Full Slice PID:  10 Used:  20000000ns
+1177 : OSS: PID:  10 -> Queue 2
+1178 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 20s967205000ns
+1179 : OSS: Terminated PID:  10 Used:  21200000ns
+1180 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 20s988406000ns
+1181 : OSS: Full Slice PID:   9 Used:  80000000ns
+1182 : OSS: PID:   9 -> Queue 3
+1183 : OSS: Generating process PID 10 in queue 1 at 21s068406000ns
+1184 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 21s068417000ns
+1185 : OSS: Full Slice PID:  10 Used:  20000000ns
+1186 : OSS: PID:  10 -> Queue 2
+1187 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 21s088418000ns
+1188 : OSS: Terminated PID:  10 Used:  21200000ns
+1189 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 21s109619000ns
+1190 : OSS: Full Slice PID:   2 Used:  80000000ns
+1191 : OSS: PID:   2 -> Queue 3
+1192 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 21s189620000ns
+1193 : OSS: Full Slice PID:   5 Used:  80000000ns
+1194 : OSS: PID:   5 -> Queue 3
+1195 : OSS: Generating process PID 10 in queue 1 at 21s269620000ns
+1196 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 21s269631000ns
+1197 : OSS: Full Slice PID:  10 Used:  20000000ns
+1198 : OSS: PID:  10 -> Queue 2
+1199 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 21s289632000ns
+1200 : OSS: Terminated PID:  10 Used:  21200000ns
+1201 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 21s310833000ns
+1202 : OSS: Full Slice PID:   0 Used:  80000000ns
+1203 : OSS: PID:   0 -> Queue 3
+1204 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 21s390834000ns
+1205 : OSS: Full Slice PID:   3 Used:  80000000ns
+1206 : OSS: PID:   3 -> Queue 3
+1207 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 21s470835000ns
+1208 : OSS: Terminated PID:   7 Used:  15200000ns
+1209 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 21s486036000ns
+1210 : OSS: Full Slice PID:   8 Used:  80000000ns
+1211 : OSS: PID:   8 -> Queue 3
+1212 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 21s566037000ns
+1213 : OSS: Blocked    PID:   6 Used:  24800000ns
+1214 : OSS: PID:   6 -> Blocked queue
+1215 : OSS: Unblocked. PID:   6 TIME: 21s590837000ns
+1216 : OSS: PID:   6 -> Queue 1
+1217 : OSS: Dispatch   PID:   6 Queue: 1 TIME: 21s591838000ns
+1218 : OSS: Full Slice PID:   6 Used:  20000000ns
+1219 : OSS: PID:   6 -> Queue 2
+1220 : OSS: Dispatch   PID:   6 Queue: 2 TIME: 21s611839000ns
+1221 : OSS: Full Slice PID:   6 Used:  40000000ns
+1222 : OSS: PID:   6 -> Queue 3
+1223 : OSS: Generating process PID 7 in queue 1 at 21s651839000ns
+1224 : OSS: Dispatch   PID:   7 Queue: 1 TIME: 21s651850000ns
+1225 : OSS: Full Slice PID:   7 Used:  20000000ns
+1226 : OSS: PID:   7 -> Queue 2
+1227 : OSS: Dispatch   PID:   7 Queue: 2 TIME: 21s671851000ns
+1228 : OSS: Full Slice PID:   7 Used:  40000000ns
+1229 : OSS: PID:   7 -> Queue 3
+1230 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 21s711852000ns
+1231 : OSS: Full Slice PID:   1 Used:  80000000ns
+1232 : OSS: PID:   1 -> Queue 3
+1233 : OSS: Generating process PID 10 in queue 1 at 21s791852000ns
+1234 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 21s791863000ns
+1235 : OSS: Full Slice PID:  10 Used:  20000000ns
+1236 : OSS: PID:  10 -> Queue 2
+1237 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 21s811864000ns
+1238 : OSS: Terminated PID:  10 Used:  21200000ns
+1239 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 21s833065000ns
+1240 : OSS: Full Slice PID:  11 Used:  80000000ns
+1241 : OSS: PID:  11 -> Queue 3
+1242 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 21s913066000ns
+1243 : OSS: Terminated PID:   4 Used:  52000000ns
+1244 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 21s965067000ns
+1245 : OSS: Full Slice PID:   9 Used:  80000000ns
+1246 : OSS: PID:   9 -> Queue 3
+1247 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 22s045068000ns
+1248 : OSS: Full Slice PID:   2 Used:  80000000ns
+1249 : OSS: PID:   2 -> Queue 3
+1250 : OSS: Generating process PID 4 in queue 1 at 22s125068000ns
+1251 : OSS: Dispatch   PID:   4 Queue: 1 TIME: 22s125079000ns
+1252 : OSS: Full Slice PID:   4 Used:  20000000ns
+1253 : OSS: PID:   4 -> Queue 2
+1254 : OSS: Dispatch   PID:   4 Queue: 2 TIME: 22s145080000ns
+1255 : OSS: Full Slice PID:   4 Used:  40000000ns
+1256 : OSS: PID:   4 -> Queue 3
+1257 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 22s185081000ns
+1258 : OSS: Full Slice PID:   5 Used:  80000000ns
+1259 : OSS: PID:   5 -> Queue 3
+1260 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 22s265082000ns
+1261 : OSS: Full Slice PID:   0 Used:  80000000ns
+1262 : OSS: PID:   0 -> Queue 3
+1263 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 22s345083000ns
+1264 : OSS: Full Slice PID:   3 Used:  80000000ns
+1265 : OSS: PID:   3 -> Queue 3
+1266 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 22s425084000ns
+1267 : OSS: Full Slice PID:   8 Used:  80000000ns
+1268 : OSS: PID:   8 -> Queue 3
+1269 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 22s505085000ns
+1270 : OSS: Full Slice PID:   6 Used:  80000000ns
+1271 : OSS: PID:   6 -> Queue 3
+1272 : OSS: Generating process PID 10 in queue 1 at 22s585085000ns
+1273 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 22s585096000ns
+1274 : OSS: Full Slice PID:  10 Used:  20000000ns
+1275 : OSS: PID:  10 -> Queue 2
+1276 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 22s605097000ns
+1277 : OSS: Terminated PID:  10 Used:  21200000ns
+1278 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 22s626298000ns
+1279 : OSS: Full Slice PID:   7 Used:  80000000ns
+1280 : OSS: PID:   7 -> Queue 3
+1281 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 22s706299000ns
+1282 : OSS: Full Slice PID:   1 Used:  80000000ns
+1283 : OSS: PID:   1 -> Queue 3
+1284 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 22s786300000ns
+1285 : OSS: Full Slice PID:  11 Used:  80000000ns
+1286 : OSS: PID:  11 -> Queue 3
+1287 : OSS: Generating process PID 10 in queue 1 at 22s866300000ns
+1288 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 22s866311000ns
+1289 : OSS: Full Slice PID:  10 Used:  20000000ns
+1290 : OSS: PID:  10 -> Queue 2
+1291 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 22s886312000ns
+1292 : OSS: Terminated PID:  10 Used:  21200000ns
+1293 : OSS: Generating process PID 10 in queue 0 at 22s907512000ns
+1294 : OSS: Dispatch   PID:  10 Queue: 0 TIME: 22s907523000ns
+1295 : OSS: Full Slice PID:  10 Used:  10000000ns
+1296 : OSS: PID:  10 -> Round Robin
+1297 : OSS: Dispatch   PID:  10 Queue: 0 TIME: 22s917524000ns
+1298 : OSS: Terminated PID:  10 Used:   5300000ns
+1299 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 22s922825000ns
+1300 : OSS: Full Slice PID:   9 Used:  80000000ns
+1301 : OSS: PID:   9 -> Queue 3
+1302 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 23s002826000ns
+1303 : OSS: Full Slice PID:   2 Used:  80000000ns
+1304 : OSS: PID:   2 -> Queue 3
+1305 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 23s082827000ns
+1306 : OSS: Full Slice PID:   4 Used:  80000000ns
+1307 : OSS: PID:   4 -> Queue 3
+1308 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 23s162828000ns
+1309 : OSS: Full Slice PID:   5 Used:  80000000ns
+1310 : OSS: PID:   5 -> Queue 3
+1311 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 23s242829000ns
+1312 : OSS: Full Slice PID:   0 Used:  80000000ns
+1313 : OSS: PID:   0 -> Queue 3
+1314 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 23s322830000ns
+1315 : OSS: Terminated PID:   3 Used:  40800000ns
+1316 : OSS: Generating process PID 3 in queue 1 at 23s363630000ns
+1317 : OSS: Dispatch   PID:   3 Queue: 1 TIME: 23s363641000ns
+1318 : OSS: Full Slice PID:   3 Used:  20000000ns
+1319 : OSS: PID:   3 -> Queue 2
+1320 : OSS: Dispatch   PID:   3 Queue: 2 TIME: 23s383642000ns
+1321 : OSS: Full Slice PID:   3 Used:  40000000ns
+1322 : OSS: PID:   3 -> Queue 3
+1323 : OSS: Generating process PID 10 in queue 1 at 23s423642000ns
+1324 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 23s423653000ns
+1325 : OSS: Full Slice PID:  10 Used:  20000000ns
+1326 : OSS: PID:  10 -> Queue 2
+1327 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 23s443654000ns
+1328 : OSS: Terminated PID:  10 Used:  21200000ns
+1329 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 23s464855000ns
+1330 : OSS: Full Slice PID:   8 Used:  80000000ns
+1331 : OSS: PID:   8 -> Queue 3
+1332 : OSS: Generating process PID 10 in queue 1 at 23s544855000ns
+1333 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 23s544866000ns
+1334 : OSS: Full Slice PID:  10 Used:  20000000ns
+1335 : OSS: PID:  10 -> Queue 2
+1336 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 23s564867000ns
+1337 : OSS: Terminated PID:  10 Used:  21200000ns
+1338 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 23s586068000ns
+1339 : OSS: Full Slice PID:   6 Used:  80000000ns
+1340 : OSS: PID:   6 -> Queue 3
+1341 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 23s666069000ns
+1342 : OSS: Full Slice PID:   7 Used:  80000000ns
+1343 : OSS: PID:   7 -> Queue 3
+1344 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 23s746070000ns
+1345 : OSS: Full Slice PID:   1 Used:  80000000ns
+1346 : OSS: PID:   1 -> Queue 3
+1347 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 23s826071000ns
+1348 : OSS: Full Slice PID:  11 Used:  80000000ns
+1349 : OSS: PID:  11 -> Queue 3
+1350 : OSS: Generating process PID 10 in queue 1 at 23s906071000ns
+1351 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 23s906082000ns
+1352 : OSS: Full Slice PID:  10 Used:  20000000ns
+1353 : OSS: PID:  10 -> Queue 2
+1354 : OSS: Generating process PID 12 in queue 0 at 23s926082000ns
+1355 : OSS: Dispatch   PID:  12 Queue: 0 TIME: 23s926093000ns
+1356 : OSS: Terminated PID:  12 Used:   4100000ns
+1357 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 23s930194000ns
+1358 : OSS: Terminated PID:  10 Used:  21200000ns
+1359 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 23s951395000ns
+1360 : OSS: Full Slice PID:   9 Used:  80000000ns
+1361 : OSS: PID:   9 -> Queue 3
+1362 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 24s031396000ns
+1363 : OSS: Full Slice PID:   2 Used:  80000000ns
+1364 : OSS: PID:   2 -> Queue 3
+1365 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 24s111397000ns
+1366 : OSS: Terminated PID:   4 Used:  52000000ns
+1367 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 24s163398000ns
+1368 : OSS: Full Slice PID:   5 Used:  80000000ns
+1369 : OSS: PID:   5 -> Queue 3
+1370 : OSS: Generating process PID 4 in queue 1 at 24s243398000ns
+1371 : OSS: Dispatch   PID:   4 Queue: 1 TIME: 24s243409000ns
+1372 : OSS: Full Slice PID:   4 Used:  20000000ns
+1373 : OSS: PID:   4 -> Queue 2
+1374 : OSS: Dispatch   PID:   4 Queue: 2 TIME: 24s263410000ns
+1375 : OSS: Full Slice PID:   4 Used:  40000000ns
+1376 : OSS: PID:   4 -> Queue 3
+1377 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 24s303411000ns
+1378 : OSS: Full Slice PID:   0 Used:  80000000ns
+1379 : OSS: PID:   0 -> Queue 3
+1380 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 24s383412000ns
+1381 : OSS: Full Slice PID:   3 Used:  80000000ns
+1382 : OSS: PID:   3 -> Queue 3
+1383 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 24s463413000ns
+1384 : OSS: Full Slice PID:   8 Used:  80000000ns
+1385 : OSS: PID:   8 -> Queue 3
+1386 : OSS: Generating process PID 10 in queue 1 at 24s543413000ns
+1387 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 24s543424000ns
+1388 : OSS: Full Slice PID:  10 Used:  20000000ns
+1389 : OSS: PID:  10 -> Queue 2
+1390 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 24s563425000ns
+1391 : OSS: Terminated PID:  10 Used:  21200000ns
+1392 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 24s584626000ns
+1393 : OSS: Full Slice PID:   6 Used:  80000000ns
+1394 : OSS: PID:   6 -> Queue 3
+1395 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 24s664627000ns
+1396 : OSS: Terminated PID:   7 Used:  15200000ns
+1397 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 24s679828000ns
+1398 : OSS: Full Slice PID:   1 Used:  80000000ns
+1399 : OSS: PID:   1 -> Queue 3
+1400 : OSS: Generating process PID 7 in queue 1 at 24s759828000ns
+1401 : OSS: Dispatch   PID:   7 Queue: 1 TIME: 24s759839000ns
+1402 : OSS: Full Slice PID:   7 Used:  20000000ns
+1403 : OSS: PID:   7 -> Queue 2
+1404 : OSS: Dispatch   PID:   7 Queue: 2 TIME: 24s779840000ns
+1405 : OSS: Full Slice PID:   7 Used:  40000000ns
+1406 : OSS: PID:   7 -> Queue 3
+1407 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 24s819841000ns
+1408 : OSS: Full Slice PID:  11 Used:  80000000ns
+1409 : OSS: PID:  11 -> Queue 3
+1410 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 24s899842000ns
+1411 : OSS: Full Slice PID:   9 Used:  80000000ns
+1412 : OSS: PID:   9 -> Queue 3
+1413 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 24s979843000ns
+1414 : OSS: Full Slice PID:   2 Used:  80000000ns
+1415 : OSS: PID:   2 -> Queue 3
+1416 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 25s059844000ns
+1417 : OSS: Full Slice PID:   5 Used:  80000000ns
+1418 : OSS: PID:   5 -> Queue 3
+1419 : OSS: Generating process PID 10 in queue 1 at 25s139844000ns
+1420 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 25s139855000ns
+1421 : OSS: Full Slice PID:  10 Used:  20000000ns
+1422 : OSS: PID:  10 -> Queue 2
+1423 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 25s159856000ns
+1424 : OSS: Terminated PID:  10 Used:  21200000ns
+1425 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 25s181057000ns
+1426 : OSS: Full Slice PID:   4 Used:  80000000ns
+1427 : OSS: PID:   4 -> Queue 3
+1428 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 25s261058000ns
+1429 : OSS: Full Slice PID:   0 Used:  80000000ns
+1430 : OSS: PID:   0 -> Queue 3
+1431 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 25s341059000ns
+1432 : OSS: Full Slice PID:   3 Used:  80000000ns
+1433 : OSS: PID:   3 -> Queue 3
+1434 : OSS: Generating process PID 10 in queue 1 at 25s421059000ns
+1435 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 25s421070000ns
+1436 : OSS: Full Slice PID:  10 Used:  20000000ns
+1437 : OSS: PID:  10 -> Queue 2
+1438 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 25s441071000ns
+1439 : OSS: Terminated PID:  10 Used:  21200000ns
+1440 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 25s462272000ns
+1441 : OSS: Full Slice PID:   8 Used:  80000000ns
+1442 : OSS: PID:   8 -> Queue 3
+1443 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 25s542273000ns
+1444 : OSS: Terminated PID:   6 Used:  28000000ns
+1445 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 25s570274000ns
+1446 : OSS: Full Slice PID:   1 Used:  80000000ns
+1447 : OSS: PID:   1 -> Queue 3
+1448 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 25s650275000ns
+1449 : OSS: Full Slice PID:   7 Used:  80000000ns
+1450 : OSS: PID:   7 -> Queue 3
+1451 : OSS: Generating process PID 6 in queue 1 at 25s730275000ns
+1452 : OSS: Dispatch   PID:   6 Queue: 1 TIME: 25s730286000ns
+1453 : OSS: Full Slice PID:   6 Used:  20000000ns
+1454 : OSS: PID:   6 -> Queue 2
+1455 : OSS: Dispatch   PID:   6 Queue: 2 TIME: 25s750287000ns
+1456 : OSS: Full Slice PID:   6 Used:  40000000ns
+1457 : OSS: PID:   6 -> Queue 3
+1458 : OSS: Generating process PID 10 in queue 1 at 25s790287000ns
+1459 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 25s790298000ns
+1460 : OSS: Full Slice PID:  10 Used:  20000000ns
+1461 : OSS: PID:  10 -> Queue 2
+1462 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 25s810299000ns
+1463 : OSS: Terminated PID:  10 Used:  21200000ns
+1464 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 25s831500000ns
+1465 : OSS: Full Slice PID:  11 Used:  80000000ns
+1466 : OSS: PID:  11 -> Queue 3
+1467 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 25s911501000ns
+1468 : OSS: Full Slice PID:   9 Used:  80000000ns
+1469 : OSS: PID:   9 -> Queue 3
+1470 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 25s991502000ns
+1471 : OSS: Full Slice PID:   2 Used:  80000000ns
+1472 : OSS: PID:   2 -> Queue 3
+1473 : OSS: Generating process PID 10 in queue 1 at 26s071502000ns
+1474 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 26s071513000ns
+1475 : OSS: Full Slice PID:  10 Used:  20000000ns
+1476 : OSS: PID:  10 -> Queue 2
+1477 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 26s091514000ns
+1478 : OSS: Terminated PID:  10 Used:  21200000ns
+1479 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 26s112715000ns
+1480 : OSS: Full Slice PID:   5 Used:  80000000ns
+1481 : OSS: PID:   5 -> Queue 3
+1482 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 26s192716000ns
+1483 : OSS: Terminated PID:   4 Used:  52000000ns
+1484 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 26s244717000ns
+1485 : OSS: Full Slice PID:   0 Used:  80000000ns
+1486 : OSS: PID:   0 -> Queue 3
+1487 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 26s324718000ns
+1488 : OSS: Full Slice PID:   3 Used:  80000000ns
+1489 : OSS: PID:   3 -> Queue 3
+1490 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 26s404719000ns
+1491 : OSS: Full Slice PID:   8 Used:  80000000ns
+1492 : OSS: PID:   8 -> Queue 3
+1493 : OSS: Generating process PID 4 in queue 1 at 26s484719000ns
+1494 : OSS: Dispatch   PID:   4 Queue: 1 TIME: 26s484730000ns
+1495 : OSS: Full Slice PID:   4 Used:  20000000ns
+1496 : OSS: PID:   4 -> Queue 2
+1497 : OSS: Dispatch   PID:   4 Queue: 2 TIME: 26s504731000ns
+1498 : OSS: Full Slice PID:   4 Used:  40000000ns
+1499 : OSS: PID:   4 -> Queue 3
+1500 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 26s544732000ns
+1501 : OSS: Full Slice PID:   1 Used:  80000000ns
+1502 : OSS: PID:   1 -> Queue 3
+1503 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 26s624733000ns
+1504 : OSS: Full Slice PID:   7 Used:  80000000ns
+1505 : OSS: PID:   7 -> Queue 3
+1506 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 26s704734000ns
+1507 : OSS: Full Slice PID:   6 Used:  80000000ns
+1508 : OSS: PID:   6 -> Queue 3
+1509 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 26s784735000ns
+1510 : OSS: Full Slice PID:  11 Used:  80000000ns
+1511 : OSS: PID:  11 -> Queue 3
+1512 : OSS: Generating process PID 10 in queue 1 at 26s864735000ns
+1513 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 26s864746000ns
+1514 : OSS: Full Slice PID:  10 Used:  20000000ns
+1515 : OSS: PID:  10 -> Queue 2
+1516 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 26s884747000ns
+1517 : OSS: Terminated PID:  10 Used:  21200000ns
+1518 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 26s905948000ns
+1519 : OSS: Full Slice PID:   9 Used:  80000000ns
+1520 : OSS: PID:   9 -> Queue 3
+1521 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 26s985949000ns
+1522 : OSS: Full Slice PID:   2 Used:  80000000ns
+1523 : OSS: PID:   2 -> Queue 3
+1524 : OSS: Generating process PID 10 in queue 1 at 27s065949000ns
+1525 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 27s065960000ns
+1526 : OSS: Full Slice PID:  10 Used:  20000000ns
+1527 : OSS: PID:  10 -> Queue 2
+1528 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 27s085961000ns
+1529 : OSS: Terminated PID:  10 Used:  21200000ns
+1530 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 27s107162000ns
+1531 : OSS: Full Slice PID:   5 Used:  80000000ns
+1532 : OSS: PID:   5 -> Queue 3
+1533 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 27s187163000ns
+1534 : OSS: Full Slice PID:   0 Used:  80000000ns
+1535 : OSS: PID:   0 -> Queue 3
+1536 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 27s267164000ns
+1537 : OSS: Full Slice PID:   3 Used:  80000000ns
+1538 : OSS: PID:   3 -> Queue 3
+1539 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 27s347165000ns
+1540 : OSS: Full Slice PID:   8 Used:  80000000ns
+1541 : OSS: PID:   8 -> Queue 3
+1542 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 27s427166000ns
+1543 : OSS: Full Slice PID:   4 Used:  80000000ns
+1544 : OSS: PID:   4 -> Queue 3
+1545 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 27s507167000ns
+1546 : OSS: Full Slice PID:   1 Used:  80000000ns
+1547 : OSS: PID:   1 -> Queue 3
+1548 : OSS: Generating process PID 10 in queue 1 at 27s587167000ns
+1549 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 27s587178000ns
+1550 : OSS: Full Slice PID:  10 Used:  20000000ns
+1551 : OSS: PID:  10 -> Queue 2
+1552 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 27s607179000ns
+1553 : OSS: Terminated PID:  10 Used:  21200000ns
+1554 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 27s628380000ns
+1555 : OSS: Terminated PID:   7 Used:  15200000ns
+1556 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 27s643581000ns
+1557 : OSS: Full Slice PID:   6 Used:  80000000ns
+1558 : OSS: PID:   6 -> Queue 3
+1559 : OSS: Dispatch   PID:  11 Queue: 3 TIME: 27s723582000ns
+1560 : OSS: Terminated PID:  11 Used:  60000000ns
+1561 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 27s783583000ns
+1562 : OSS: Full Slice PID:   9 Used:  80000000ns
+1563 : OSS: PID:   9 -> Queue 3
+1564 : OSS: Generating process PID 7 in queue 1 at 27s863583000ns
+1565 : OSS: Dispatch   PID:   7 Queue: 1 TIME: 27s863594000ns
+1566 : OSS: Full Slice PID:   7 Used:  20000000ns
+1567 : OSS: PID:   7 -> Queue 2
+1568 : OSS: Dispatch   PID:   7 Queue: 2 TIME: 27s883595000ns
+1569 : OSS: Full Slice PID:   7 Used:  40000000ns
+1570 : OSS: PID:   7 -> Queue 3
+1571 : OSS: Generating process PID 10 in queue 1 at 27s923595000ns
+1572 : OSS: Dispatch   PID:  10 Queue: 1 TIME: 27s923606000ns
+1573 : OSS: Full Slice PID:  10 Used:  20000000ns
+1574 : OSS: PID:  10 -> Queue 2
+1575 : OSS: Dispatch   PID:  10 Queue: 2 TIME: 27s943607000ns
+1576 : OSS: Terminated PID:  10 Used:  21200000ns
+1577 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 27s964808000ns
+1578 : OSS: Full Slice PID:   2 Used:  80000000ns
+1579 : OSS: PID:   2 -> Queue 3
+1580 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 28s044809000ns
+1581 : OSS: Full Slice PID:   5 Used:  80000000ns
+1582 : OSS: PID:   5 -> Queue 3
+1583 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 28s124810000ns
+1584 : OSS: Terminated PID:   0 Used:  57600000ns
+1585 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 28s182411000ns
+1586 : OSS: Full Slice PID:   3 Used:  80000000ns
+1587 : OSS: PID:   3 -> Queue 3
+1588 : OSS: Generating process PID 0 in queue 1 at 28s262411000ns
+1589 : OSS: Dispatch   PID:   0 Queue: 1 TIME: 28s262422000ns
+1590 : OSS: Full Slice PID:   0 Used:  20000000ns
+1591 : OSS: PID:   0 -> Queue 2
+1592 : OSS: Dispatch   PID:   0 Queue: 2 TIME: 28s282423000ns
+1593 : OSS: Full Slice PID:   0 Used:  40000000ns
+1594 : OSS: PID:   0 -> Queue 3
+1595 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 28s322424000ns
+1596 : OSS: Blocked    PID:   8 Used:  40800000ns
+1597 : OSS: PID:   8 -> Blocked queue
+1598 : OSS: Unblocked. PID:   8 TIME: 28s363224000ns
+1599 : OSS: PID:   8 -> Queue 1
+1600 : OSS: Dispatch   PID:   8 Queue: 1 TIME: 28s364225000ns
+1601 : OSS: Full Slice PID:   8 Used:  20000000ns
+1602 : OSS: PID:   8 -> Queue 2
+1603 : OSS: Dispatch   PID:   8 Queue: 2 TIME: 28s384226000ns
+1604 : OSS: Full Slice PID:   8 Used:  40000000ns
+1605 : OSS: PID:   8 -> Queue 3
+1606 : OSS: Dispatch   PID:   4 Queue: 3 TIME: 28s424227000ns
+1607 : OSS: Terminated PID:   4 Used:  52000000ns
+1608 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 28s476228000ns
+1609 : OSS: Full Slice PID:   1 Used:  80000000ns
+1610 : OSS: PID:   1 -> Queue 3
+1611 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 28s556229000ns
+1612 : OSS: Full Slice PID:   6 Used:  80000000ns
+1613 : OSS: PID:   6 -> Queue 3
+1614 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 28s636230000ns
+1615 : OSS: Full Slice PID:   9 Used:  80000000ns
+1616 : OSS: PID:   9 -> Queue 3
+1617 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 28s716231000ns
+1618 : OSS: Full Slice PID:   7 Used:  80000000ns
+1619 : OSS: PID:   7 -> Queue 3
+1620 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 28s796232000ns
+1621 : OSS: Full Slice PID:   2 Used:  80000000ns
+1622 : OSS: PID:   2 -> Queue 3
+1623 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 28s876233000ns
+1624 : OSS: Full Slice PID:   5 Used:  80000000ns
+1625 : OSS: PID:   5 -> Queue 3
+1626 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 28s956234000ns
+1627 : OSS: Full Slice PID:   3 Used:  80000000ns
+1628 : OSS: PID:   3 -> Queue 3
+1629 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 29s036235000ns
+1630 : OSS: Full Slice PID:   0 Used:  80000000ns
+1631 : OSS: PID:   0 -> Queue 3
+1632 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 29s116236000ns
+1633 : OSS: Full Slice PID:   8 Used:  80000000ns
+1634 : OSS: PID:   8 -> Queue 3
+1635 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 29s196237000ns
+1636 : OSS: Full Slice PID:   1 Used:  80000000ns
+1637 : OSS: PID:   1 -> Queue 3
+1638 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 29s276238000ns
+1639 : OSS: Full Slice PID:   6 Used:  80000000ns
+1640 : OSS: PID:   6 -> Queue 3
+1641 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 29s356239000ns
+1642 : OSS: Full Slice PID:   9 Used:  80000000ns
+1643 : OSS: PID:   9 -> Queue 3
+1644 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 29s436240000ns
+1645 : OSS: Full Slice PID:   7 Used:  80000000ns
+1646 : OSS: PID:   7 -> Queue 3
+1647 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 29s516241000ns
+1648 : OSS: Full Slice PID:   2 Used:  80000000ns
+1649 : OSS: PID:   2 -> Queue 3
+1650 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 29s596242000ns
+1651 : OSS: Full Slice PID:   5 Used:  80000000ns
+1652 : OSS: PID:   5 -> Queue 3
+1653 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 29s676243000ns
+1654 : OSS: Full Slice PID:   3 Used:  80000000ns
+1655 : OSS: PID:   3 -> Queue 3
+1656 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 29s756244000ns
+1657 : OSS: Full Slice PID:   0 Used:  80000000ns
+1658 : OSS: PID:   0 -> Queue 3
+1659 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 29s836245000ns
+1660 : OSS: Full Slice PID:   8 Used:  80000000ns
+1661 : OSS: PID:   8 -> Queue 3
+1662 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 29s916246000ns
+1663 : OSS: Full Slice PID:   1 Used:  80000000ns
+1664 : OSS: PID:   1 -> Queue 3
+1665 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 29s996247000ns
+1666 : OSS: Full Slice PID:   6 Used:  80000000ns
+1667 : OSS: PID:   6 -> Queue 3
+1668 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 30s076248000ns
+1669 : OSS: Full Slice PID:   9 Used:  80000000ns
+1670 : OSS: PID:   9 -> Queue 3
+1671 : OSS: Dispatch   PID:   7 Queue: 3 TIME: 30s156249000ns
+1672 : OSS: Terminated PID:   7 Used:  15200000ns
+1673 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 30s171450000ns
+1674 : OSS: Full Slice PID:   2 Used:  80000000ns
+1675 : OSS: PID:   2 -> Queue 3
+1676 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 30s251451000ns
+1677 : OSS: Full Slice PID:   5 Used:  80000000ns
+1678 : OSS: PID:   5 -> Queue 3
+1679 : OSS: Dispatch   PID:   3 Queue: 3 TIME: 30s331452000ns
+1680 : OSS: Terminated PID:   3 Used:  40800000ns
+1681 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 30s372253000ns
+1682 : OSS: Full Slice PID:   0 Used:  80000000ns
+1683 : OSS: PID:   0 -> Queue 3
+1684 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 30s452254000ns
+1685 : OSS: Full Slice PID:   8 Used:  80000000ns
+1686 : OSS: PID:   8 -> Queue 3
+1687 : OSS: Dispatch   PID:   1 Queue: 3 TIME: 30s532255000ns
+1688 : OSS: Terminated PID:   1 Used:  16800000ns
+1689 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 30s549056000ns
+1690 : OSS: Full Slice PID:   6 Used:  80000000ns
+1691 : OSS: PID:   6 -> Queue 3
+1692 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 30s629057000ns
+1693 : OSS: Full Slice PID:   9 Used:  80000000ns
+1694 : OSS: PID:   9 -> Queue 3
+1695 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 30s709058000ns
+1696 : OSS: Full Slice PID:   2 Used:  80000000ns
+1697 : OSS: PID:   2 -> Queue 3
+1698 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 30s789059000ns
+1699 : OSS: Full Slice PID:   5 Used:  80000000ns
+1700 : OSS: PID:   5 -> Queue 3
+1701 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 30s869060000ns
+1702 : OSS: Full Slice PID:   0 Used:  80000000ns
+1703 : OSS: PID:   0 -> Queue 3
+1704 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 30s949061000ns
+1705 : OSS: Full Slice PID:   8 Used:  80000000ns
+1706 : OSS: PID:   8 -> Queue 3
+1707 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 31s029062000ns
+1708 : OSS: Full Slice PID:   6 Used:  80000000ns
+1709 : OSS: PID:   6 -> Queue 3
+1710 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 31s109063000ns
+1711 : OSS: Full Slice PID:   9 Used:  80000000ns
+1712 : OSS: PID:   9 -> Queue 3
+1713 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 31s189064000ns
+1714 : OSS: Full Slice PID:   2 Used:  80000000ns
+1715 : OSS: PID:   2 -> Queue 3
+1716 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 31s269065000ns
+1717 : OSS: Full Slice PID:   5 Used:  80000000ns
+1718 : OSS: PID:   5 -> Queue 3
+1719 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 31s349066000ns
+1720 : OSS: Full Slice PID:   0 Used:  80000000ns
+1721 : OSS: PID:   0 -> Queue 3
+1722 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 31s429067000ns
+1723 : OSS: Full Slice PID:   8 Used:  80000000ns
+1724 : OSS: PID:   8 -> Queue 3
+1725 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 31s509068000ns
+1726 : OSS: Blocked    PID:   6 Used:  24800000ns
+1727 : OSS: PID:   6 -> Blocked queue
+1728 : OSS: Unblocked. PID:   6 TIME: 31s533868000ns
+1729 : OSS: PID:   6 -> Queue 1
+1730 : OSS: Dispatch   PID:   6 Queue: 1 TIME: 31s534869000ns
+1731 : OSS: Full Slice PID:   6 Used:  20000000ns
+1732 : OSS: PID:   6 -> Queue 2
+1733 : OSS: Dispatch   PID:   6 Queue: 2 TIME: 31s554870000ns
+1734 : OSS: Full Slice PID:   6 Used:  40000000ns
+1735 : OSS: PID:   6 -> Queue 3
+1736 : OSS: Dispatch   PID:   9 Queue: 3 TIME: 31s594871000ns
+1737 : OSS: Terminated PID:   9 Used:  60800000ns
+1738 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 31s655672000ns
+1739 : OSS: Full Slice PID:   2 Used:  80000000ns
+1740 : OSS: PID:   2 -> Queue 3
+1741 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 31s735673000ns
+1742 : OSS: Full Slice PID:   5 Used:  80000000ns
+1743 : OSS: PID:   5 -> Queue 3
+1744 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 31s815674000ns
+1745 : OSS: Full Slice PID:   0 Used:  80000000ns
+1746 : OSS: PID:   0 -> Queue 3
+1747 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 31s895675000ns
+1748 : OSS: Full Slice PID:   8 Used:  80000000ns
+1749 : OSS: PID:   8 -> Queue 3
+1750 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 31s975676000ns
+1751 : OSS: Full Slice PID:   6 Used:  80000000ns
+1752 : OSS: PID:   6 -> Queue 3
+1753 : OSS: Dispatch   PID:   2 Queue: 3 TIME: 32s055677000ns
+1754 : OSS: Terminated PID:   2 Used:  40000000ns
+1755 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 32s095678000ns
+1756 : OSS: Full Slice PID:   5 Used:  80000000ns
+1757 : OSS: PID:   5 -> Queue 3
+1758 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 32s175679000ns
+1759 : OSS: Full Slice PID:   0 Used:  80000000ns
+1760 : OSS: PID:   0 -> Queue 3
+1761 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 32s255680000ns
+1762 : OSS: Full Slice PID:   8 Used:  80000000ns
+1763 : OSS: PID:   8 -> Queue 3
+1764 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 32s335681000ns
+1765 : OSS: Full Slice PID:   6 Used:  80000000ns
+1766 : OSS: PID:   6 -> Queue 3
+1767 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 32s415682000ns
+1768 : OSS: Blocked    PID:   5 Used:  28000000ns
+1769 : OSS: PID:   5 -> Blocked queue
+1770 : OSS: Unblocked. PID:   5 TIME: 32s443682000ns
+1771 : OSS: PID:   5 -> Queue 1
+1772 : OSS: Dispatch   PID:   5 Queue: 1 TIME: 32s444683000ns
+1773 : OSS: Full Slice PID:   5 Used:  20000000ns
+1774 : OSS: PID:   5 -> Queue 2
+1775 : OSS: Dispatch   PID:   5 Queue: 2 TIME: 32s464684000ns
+1776 : OSS: Full Slice PID:   5 Used:  40000000ns
+1777 : OSS: PID:   5 -> Queue 3
+1778 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 32s504685000ns
+1779 : OSS: Full Slice PID:   0 Used:  80000000ns
+1780 : OSS: PID:   0 -> Queue 3
+1781 : OSS: Dispatch   PID:   8 Queue: 3 TIME: 32s584686000ns
+1782 : OSS: Terminated PID:   8 Used:  12000000ns
+1783 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 32s596687000ns
+1784 : OSS: Full Slice PID:   6 Used:  80000000ns
+1785 : OSS: PID:   6 -> Queue 3
+1786 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 32s676688000ns
+1787 : OSS: Full Slice PID:   5 Used:  80000000ns
+1788 : OSS: PID:   5 -> Queue 3
+1789 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 32s756689000ns
+1790 : OSS: Full Slice PID:   0 Used:  80000000ns
+1791 : OSS: PID:   0 -> Queue 3
+1792 : OSS: Dispatch   PID:   6 Queue: 3 TIME: 32s836690000ns
+1793 : OSS: Terminated PID:   6 Used:  28000000ns
+1794 : OSS: Dispatch   PID:   5 Queue: 3 TIME: 32s864691000ns
+1795 : OSS: Terminated PID:   5 Used:  35200000ns
+1796 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 32s899892000ns
+1797 : OSS: Full Slice PID:   0 Used:  80000000ns
+1798 : OSS: PID:   0 -> Queue 3
+1799 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 32s979893000ns
+1800 : OSS: Full Slice PID:   0 Used:  80000000ns
+1801 : OSS: PID:   0 -> Queue 3
+1802 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 33s059894000ns
+1803 : OSS: Full Slice PID:   0 Used:  80000000ns
+1804 : OSS: PID:   0 -> Queue 3
+1805 : OSS: Dispatch   PID:   0 Queue: 3 TIME: 33s139895000ns
+1806 : OSS: Terminated PID:   0 Used:  57600000ns
+
+Total Processes: 100
+Avg. Turnaround: 3.46s
+Avg. CPU Time:   0.33s
+Avg. Wait Time:  0.34s
+Avg. Sleep Time: 3.13s
+Total Idle Time: 0.27s
+Total Run Time:  33.19s
