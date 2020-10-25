@@ -13,7 +13,7 @@
 
 #define TRUE 1
 #define FALSE 0
-
+#define MAX_PCB = 18;                    // max amount of processes allowed in the system at one time
 
 //msg struct for msgqueue
 typedef struct {
@@ -67,9 +67,9 @@ queue_t* create_queue(int size) {
     queue->size = size;
     queue->data = (int*)malloc(size * sizeof(int));
     queue->items = 0;
-    int i;//loop iterator
+    int i;
     for (i = 0; i < size; i++)
-        queue->data[i] = -1;//set all elements to -1. no pids will be -1
+        queue->data[i] = -1;
     return queue;
 }
 
@@ -102,21 +102,15 @@ int msqid;//id for message queue
 // Prototypes
 void no_args_msg();
 void help_msg();
+void create_msqueue();
 FILE* open_file(char*, char*, char*);
 static void time_out();
 void cleanup();
 void remove_shm();
-
 pcb_t* create_table(int);
-
-void create_msqueue();
-
 int get_sim_pid(int*, int);
-
 int rand_priority(int);
-
 int check_blocked(int*, pcb_t*, int);
-
 void oss(int);
 int dispatch(int, int, int, simtime_t, int, int*);
 
@@ -183,8 +177,8 @@ pcb_t create_pcb(int priority, int pid, simtime_t currentTime) {
 
 int main(int argc, char* argv[]) {
     int opt;                       // getopt option
-    int n = 18;                    // max amount of processes allowed in the system at one time
-    char* logName = "ossLog.txt";  // name of the log file
+    
+    char* logName = "oss.log";  // log file
 
     if (argc < 2) {
         no_args_msg();
@@ -196,7 +190,7 @@ int main(int argc, char* argv[]) {
             help_msg();
             return 0;
         case 'n':
-            n = atoi(optarg);
+            MAX_PCB = atoi(optarg);
             break;
         case 'o':
             logName = optarg;
@@ -206,16 +200,16 @@ int main(int argc, char* argv[]) {
             break;
         }  // end switch
     }    // end while
-    if (n > 18) {
+    if (MAX_PCB > 18) {
         printf("n must be <= 18\n");
         return 0;
     }
-    else if (n <= 0) {
+    else if (MAX_PCB <= 0) {
         printf("n must be >= 1\n");
         return 0;
     }
     printf("Log File: %s\n", logName);
-    printf("       n: %d\n", n);
+    printf("       n: %d\n", MAX_PCB);
     // Open log file
     logFile = open_file(logName, "w", "./oss: Error: ");
     // Terminate after 3s
@@ -223,7 +217,7 @@ int main(int argc, char* argv[]) {
     alarm(20);
     srand(time(0));// seed rand
     printf("----------Starting Simulation----------\n");
-    oss(n);
+    oss(MAX_PCB);
     printf("----------Simulation Complete----------\n");
 
     // safe cleanup
@@ -715,6 +709,7 @@ void oss(int maxProcesses) {
         }
     }
     // easier to divide decimals than simtime_t
+    printf("Total Run Time:  %d.%ds\n", simClock->s, simClock->ns / 10000000);
     avgCPU = (totalCPU.s + (0.000000001 * totalCPU.ns)) / ((double)generated);
     avgSYS = (totalSYS.s + (0.000000001 * totalSYS.ns)) / ((double)generated);
     avgWait = (totalWait.s + (0.000000001 * totalWait.ns)) / ((double)generated);
@@ -731,6 +726,5 @@ void oss(int maxProcesses) {
     printf("Avg. Wait Time:  %.2fs\n", avgWait);
     printf("Avg. Sleep Time: %.2fs\n", (avgSYS - avgCPU));
     printf("Total Idle Time: %d.%ds\n", totalIdle.s, totalIdle.ns / 10000000);
-    printf("Total Run Time:  %d.%ds\n", simClock->s, simClock->ns / 10000000);
     return;
 }
