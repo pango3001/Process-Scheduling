@@ -1,3 +1,9 @@
+// Jesse McCarville-Schueths
+// Oct 25, 2020
+// Assignment 4
+// Scheduled Processes
+
+
 #include <math.h>
 #include <signal.h>
 #include <stdio.h>
@@ -32,11 +38,8 @@ typedef struct {
 //pseudo-process control block
 //used for PCB Table
 typedef struct {
-    //simulated process id, range is [0,18]
-    int pid;
-    //Process priority
+    int pid;  // max is 18
     int priority;
-    //if the process is ready to run
     int isReady;
     //Arrivial time
     simtime_t arrivalTime;
@@ -48,9 +51,7 @@ typedef struct {
     simtime_t burstTime;
     //Total sleep time. time waiting for an event
     simtime_t waitTime;
-
-
-} pcb_t;
+} process_table;
 
 typedef struct {
     unsigned int head;
@@ -107,10 +108,10 @@ FILE* open_file(char*, char*, char*);
 static void time_out();
 void cleanup();
 void remove_shm();
-pcb_t* create_table(int);
+process_table* create_table(int);
 int get_sim_pid(int*, int);
 int rand_priority(int);
-int check_blocked(int*, pcb_t*, int);
+int check_blocked(int*, process_table*, int);
 void oss(int);
 int dispatch(int, int, int, simtime_t, int, int*);
 
@@ -159,8 +160,8 @@ simtime_t divide_sim_time(simtime_t simTime, int divisor) {
     return quotient;
 }
 
-pcb_t create_pcb(int priority, int pid, simtime_t currentTime) {
-    pcb_t pcb = { .pid = pid,
+process_table create_pcb(int priority, int pid, simtime_t currentTime) {
+    process_table pcb = { .pid = pid,
                   .priority = priority,
                   .isReady = TRUE,
                   .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
@@ -184,16 +185,11 @@ int main(int argc, char* argv[]) {
         no_args_msg();
     }
 
-    while ((opt = getopt(argc, argv, "hn:o:")) != -1) {
+    while ((opt = getopt(argc, argv, "h")) != -1) {
         switch (opt) {
         case 'h':
             help_msg();
             return 0;
-        case 'n':
-            break;
-        case 'o':
-            logName = optarg;
-            break;
         default:
             no_args_msg();
             break;
@@ -276,9 +272,9 @@ void remove_shm() {
     return;
 }
 /*Create pcb table in shared memory for n processes*/
-pcb_t* create_table(int n) {
-    pcb_t* table;
-    pcbTableId = shmget(PCB_TABLE_KEY, sizeof(pcb_t) * n, IPC_CREAT | 0777);
+process_table* create_table(int n) {
+    process_table* table;
+    pcbTableId = shmget(PCB_TABLE_KEY, sizeof(process_table) * n, IPC_CREAT | 0777);
     if (pcbTableId < 0) {  // error
         perror("./oss: Error: shmget ");
         cleanup();
@@ -367,7 +363,7 @@ int should_spawn(int pid, simtime_t next, simtime_t now, int generated,
     return TRUE;
 }
 
-int check_blocked(int* blocked, pcb_t* table, int count) {
+int check_blocked(int* blocked, process_table* table, int count) {
     int i; //loop iterator
     for (i = 0; i < count; i++) {
         if (blocked[i] == TRUE) {
@@ -403,7 +399,7 @@ int dispatch(int pid, int priority, int msqid, simtime_t currentTime, int quantu
 /**OSS: Operating System Simulator**/
 void oss(int maxProcesses) {
     /*Scheduling structures*/
-    pcb_t* table;// Process control block table
+    process_table* table;// Process control block table
     simtime_t* simClock;// simulated system clock
     queue_t* rrQueue; // round robin queue
     queue_t* queue1; // highest level of mlfq
@@ -492,7 +488,7 @@ void oss(int maxProcesses) {
             availablePids[simPid] = FALSE;     // set pid to unavailable
             // get random priority(0:real time or 1:user)
             priority = rand_priority(5);
-            fprintf(logFile, "%-5d: OSS: Generating process PID %d in queue %d at %ds%09dns\n",
+            fprintf(logFile, "%-5d: OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
                 lines++, simPid, priority, simClock->s, simClock->ns);
             // create pcb for new process at available pid
             table[simPid] = create_pcb(priority, simPid, (*simClock));
