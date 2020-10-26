@@ -430,7 +430,7 @@ void oss(int maxProcesses) {
 
     int i = 0;  // loop iterator
     int pid;    // holds wait() and fork() return values
-	printf("here 1 \n");
+	
     /*Statistics*/
     simtime_t totalCPU = { .s = 0, .ns = 0 };
     simtime_t totalSYS = { .s = 0, .ns = 0 };
