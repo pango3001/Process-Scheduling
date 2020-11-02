@@ -168,7 +168,7 @@ simu_time* create_sim_clock() {
         perror("./user: Error: shmat ");
         cleanup();
     }
-    simClock->s = 0;
+    simClock->simu_seconds= 0;
     simClock->simu_nanosecs = 0;
     return simClock;
 }
@@ -242,21 +242,21 @@ int check_blocked(int* blocked, process_table* table, int count) {
 int dispatch(int pid, int priority, int messageID, simu_time currentTime, int quantum, int* lines) {
     message msg;                                     // message to be sent
     quantum = quantum * pow(2.0, (double)priority);  // i = queue #, slice = 2^i * quantum
-    msg.mtype = pid + 1;                             // pids recieve messages of type (their pid) + 1
-    msg.mvalue = quantum;
+    msg.mess_ID = pid + 1;                             // pids recieve messages of type (their pid) + 1
+    msg.mess_quant = quantum;
     fprintf(logFile, "OSS: Dispatching process with PID: %3d Queue: %d TIME: %ds%09dns\n", pid, priority, currentTime.s, currentTime.ns);
     *lines += 1;
     // send the message
-    if (msgsnd(messageID, &msg, sizeof(msg.mvalue), 0) == -1) {
+    if (msgsnd(messageID, &msg, sizeof(msg.mess_quant), 0) == -1) {
         perror("./oss: Error: msgsnd ");
         cleanup();
     }
     // immediately wait for the response
-    if ((msgrcv(messageID, &msg, sizeof(msg.mvalue), pid + 100, 0)) == -1) {
+    if ((msgrcv(messageID, &msg, sizeof(msg.mess_quant), pid + 100, 0)) == -1) {
         perror("./oss: Error: msgrcv ");
         cleanup();
     }
-    return msg.mvalue;
+    return msg.mess_quant;
 }
 /**OSS: Operating System Simulator**/
 void oss(int maxProcesses) {
@@ -571,7 +571,7 @@ void increment_sim_time(simu_time* simTime, int increment) {
     simTime->simu_nanosecs += increment;
     if (simTime->simu_nanosecs >= 1000000000) {
         simTime->simu_nanosecs -= 1000000000;
-        simTime->s += 1;
+        simTime->simu_seconds+= 1;
     }
 }
 
@@ -634,7 +634,7 @@ simu_time divide_sim_time(simu_time simTime, int divisor) {
 process_table create_pcb(int priority, int pid, simu_time currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
-                  .isReady = 1,
+                  .onDeck = 1,
                   .arrivalTime = {.simu_seconds = currentTime.simu_seconds, .simu_nanosecs = currentTime.simu_nanosecs},
                   .cpuTime = {.simu_seconds = 0, .simu_nanosecs = 0},
                   .sysTime = {.simu_seconds= 0, .simu_nanosecs = 0},
