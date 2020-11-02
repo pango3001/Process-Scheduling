@@ -67,7 +67,6 @@ int clockId;//shmid for simulated clock
 int msqid;//id for message queue
 
 // Prototypes
-void no_args_msg();
 void help_msg();
 void create_msqueue();
 FILE* open_file(char*, char*, char*);
@@ -86,45 +85,16 @@ int should_spawn(int, simtime_t, simtime_t, int, int);
 void increment_sim_time(simtime_t* simTime, int increment);
 queue_t* create_queue(int size);
 simtime_t subtract_sim_times(simtime_t a, simtime_t b);
+simtime_t add_sim_times(simtime_t a, simtime_t b);
+simtime_t divide_sim_time(simtime_t simTime, int divisor);
+process_table create_pcb(int priority, int pid, simtime_t currentTime);
 
-//returns a + b
-simtime_t add_sim_times(simtime_t a, simtime_t b) {
-    simtime_t sum = { .s = a.s + b.s,
-                      .ns = a.ns + b.ns };
-    if (sum.ns >= 1000000000) {
-        sum.ns -= 1000000000;
-        sum.s += 1;
-    }
-    return sum;
-}
 
-//returns simtime / divisor
-simtime_t divide_sim_time(simtime_t simTime, int divisor) {
-    simtime_t quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
-    return quotient;
-}
-
-process_table create_pcb(int priority, int pid, simtime_t currentTime) {
-    process_table pcb = { .pid = pid,
-                  .priority = priority,
-                  .isReady = TRUE,
-                  .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
-                  .cpuTime = {.s = 0, .ns = 0},
-                  .sysTime = {.s = 0, .ns = 0},
-                  .burstTime = {.s = 0, .ns = 0},
-                  .waitTime = {.s = 0, .ns = 0} };
-    return pcb;
-}
 
 
 int main(int argc, char* argv[]) {
-    int opt;                       // getopt option
-    
-    char* logName = "oss.log";  // log file
-
-    if (argc < 2) {
-        no_args_msg();
-    }
+    int opt; // getopt option
+    char* logFile = "oss.log";  // log file
 
     while ((opt = getopt(argc, argv, "h")) != -1) {
         switch (opt) {
@@ -144,10 +114,10 @@ int main(int argc, char* argv[]) {
         printf("n must be >= 1\n");
         return 0;
     }
-    printf("Log File: %s\n", logName);
+    printf("Log File: %s\n", logFile);
     printf("       n: %d\n", MAX_PCB);
     // Open log file
-    logFile = open_file(logName, "w", "./oss: Error: ");
+    logFile = open_file(logFile, "w", "./oss: Error: ");
     // Terminate after 3s
     signal(SIGALRM, time_out);
     alarm(20);
@@ -163,12 +133,7 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-/*Display that no arguments were provided*/
-void no_args_msg() {
-    printf("No arguments given\n");
-    printf("Using default values\n");
-    return;
-}
+
 /*Display help message*/
 void help_msg() {
     printf("This program takes the following possible arguments\n");
@@ -684,4 +649,33 @@ simtime_t subtract_sim_times(simtime_t a, simtime_t b) {
         diff.s -= 1;
     }
     return diff;
+}
+
+//returns a + b
+simtime_t add_sim_times(simtime_t a, simtime_t b) {
+    simtime_t sum = { .s = a.s + b.s,
+                      .ns = a.ns + b.ns };
+    if (sum.ns >= 1000000000) {
+        sum.ns -= 1000000000;
+        sum.s += 1;
+    }
+    return sum;
+}
+
+//returns simtime / divisor
+simtime_t divide_sim_time(simtime_t simTime, int divisor) {
+    simtime_t quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
+    return quotient;
+}
+
+process_table create_pcb(int priority, int pid, simtime_t currentTime) {
+    process_table pcb = { .pid = pid,
+                  .priority = priority,
+                  .isReady = TRUE,
+                  .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
+                  .cpuTime = {.s = 0, .ns = 0},
+                  .sysTime = {.s = 0, .ns = 0},
+                  .burstTime = {.s = 0, .ns = 0},
+                  .waitTime = {.s = 0, .ns = 0} };
+    return pcb;
 }
