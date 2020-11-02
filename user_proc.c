@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
 
     // while loop to wait for messages from oss until we terminate.
     while (outcome != 1) {  // outcome == 1 means terminate
-        if ((msgrcv(msqid, &msg, sizeof(msg.mvalue), (pid + 1), 0)) == -1) {
+        if ((msgrcv(msqid, &msg, sizeof(msg.mess_quant), (pid + 1), 0)) == -1) {
             perror("./user: Error: msgrcv ");
             exit(EXIT_FAILURE);
         }
@@ -92,16 +92,16 @@ int main(int argc, char* argv[]) {
         outcome = get_outcome();
         switch (outcome) {
         case 0:  // full
-            msg.mvalue = 100;
+            msg.mess_quant = 100;
             break;
         case 1:  // term
-            msg.mvalue = (rand() % 99) + 1;
+            msg.mess_quant = (rand() % 99) + 1;
             break;
         case 2:  // block
-            msg.mvalue = ((rand() % 99) + 1) * -1;
+            msg.mess_quant = ((rand() % 99) + 1) * -1;
             timeBlocked.simu_seconds= simClock->simu_seconds;
             timeBlocked.simu_nanosecs = simClock->ns;
-            burst = msg.mvalue * (quantum / 100) * pow(2.0, (double)table[pid].priority);
+            burst = msg.mess_quant * (quantum / 100) * pow(2.0, (double)table[pid].priority);
             event.simu_seconds= (rand() % 4) + 1;//generating r [0,5]
             event.simu_nanosecs = (rand() % 1000) * 1000000; //generating s [0, 999]. * 1000000 to convert to ns
             // add to wait time total
@@ -111,30 +111,30 @@ int main(int argc, char* argv[]) {
             // set status to blocked before telling oss to avoid race
             // condition. OSS is waiting for a message response so it
             // cant possibly check our isReady variable yet
-            table[pid].isReady = 0;
+            table[pid].onDeck = 0;
             break;
         default:
             break;
         }                       // end switch
-        msg.mtype = pid + 100;  // oss is waiting for a msg w/ type pid+100
-        //printf("USER: sending type: %ld from pid: %d", msg.mtype, pid);
-        if (msgsnd(msqid, &msg, sizeof(msg.mvalue), 0) == -1) {
+        msg.mess_ID = pid + 100;  // oss is waiting for a msg w/ type pid+100
+        //printf("USER: sending type: %ld from pid: %d", msg.mess_ID, pid);
+        if (msgsnd(msqid, &msg, sizeof(msg.mess_quant), 0) == -1) {
             perror("./user: Error: msgsnd ");
             exit(EXIT_FAILURE);
         }
-        //printf(", sent type: %ld from pid: %d\n", msg.mtype, pid);
+        //printf(", sent type: %ld from pid: %d\n", msg.mess_ID, pid);
         // BLocked Outcome
         // already sent message to oss that we are blocked
         // set to
         if (outcome == 2) {
             // while loop to wait for event time to pass
-            while (table[pid].isReady == 0) {
+            while (table[pid].onDeck == 0) {
                 //printf("waiting %ds%9dns\n", event.s, event.ns);
                 if (event.simu_seconds > simClock->simu_seconds) {
-                    table[pid].isReady = 1;
+                    table[pid].onDeck = 1;
                 }
                 else if (event.simu_nanosecs >= simClock->ns && event.simu_seconds >= simClock->simu_seconds) {
-                    table[pid].isReady = 1;
+                    table[pid].onDeck = 1;
                 }
             }
         }
@@ -231,7 +231,7 @@ simu_time divide_sim_time(simu_time simTime, int divisor) {
 process_table create_pcb(int priority, int pid, simu_time currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
-                  .isReady = 1,
+                  .onDeck = 1,
                   .arrivalTime = {.simu_seconds = currentTime.s, .simu_nanosecs = currentTime.ns},
                   .cpuTime = {.simu_seconds = 0, .simu_nanosecs = 0},
                   .sysTime = {.simu_seconds= 0, .simu_nanosecs = 0},
