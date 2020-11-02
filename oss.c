@@ -555,7 +555,7 @@ void oss(int maxProcesses) {
     avgCPU = (totalCPU.simu_seconds+ (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
     avgSYS = (totalSYS.simu_seconds+ (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
     avgWait = (totalWait.simu_seconds+ (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
-    printf("\n\tStats about simulation...\n")
+    printf("\n\tStats about simulation...\n");
     printf("\tTotal Processes: %d\n", generated);
     printf("\tAvg. Turnaround: %.2fs\n", avgSYS);
     printf("\tAvg. CPU Time:   %.2fs\n", avgCPU);
