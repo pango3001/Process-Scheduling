@@ -550,12 +550,15 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, idleInc);
         }
     }
-    // easier to divide decimals than simtime_t
-    printf("Total Run Time:  %d.%ds\n", simClock->simu_seconds, simClock->simu_nanosecs / 10000000);
-    avgCPU = (totalCPU.simu_seconds+ (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
-    avgSYS = (totalSYS.simu_seconds+ (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
-    avgWait = (totalWait.simu_seconds+ (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
+
+    avgCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
+    avgSYS = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
+    avgWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
+
+
+    // Stats
     printf("\n\tStats about simulation...\n");
+    printf("\tTotal Run Time:  %d.%ds\n", simClock->simu_seconds, simClock->simu_nanosecs / 10000000);
     printf("\tTotal Processes: %d\n", generated);
     printf("\tAvg. Turnaround: %.2fs\n", avgSYS);
     printf("\tAvg. CPU Time:   %.2fs\n", avgCPU);
