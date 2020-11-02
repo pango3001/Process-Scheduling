@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
     if (argc < 2) {
         no_args_msg();
     }
-
+    /*
     while ((opt = getopt(argc, argv, "h")) != -1) {
         switch (opt) {
         case 'h':
@@ -120,8 +120,8 @@ int main(int argc, char* argv[]) {
         printf("n must be >= 1\n");
         return 0;
     }
-    printf("Log File: %s\n", log);
-    printf("       n: %d\n", MAX_PCB);
+
+    */
     // Open log file
     logFile = open_file(log, "w", "./oss: Error: ");
     // Terminate after 3s
