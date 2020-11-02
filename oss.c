@@ -3,16 +3,15 @@
 // Assignment 4
 // Scheduled Processes
 
-
-#include <math.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <math.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -39,7 +38,7 @@ typedef struct {
     simu_time cpuTime;
     simu_time sysTime; //Time in the system
     simu_time burstTime;  //Time used in the last burst
-    simu_time waitTime;  //Total sleep time. time waiting for an event
+    simu_time waitTime;  //Total wait time
 } process_table;
 
 // Queue
@@ -54,9 +53,9 @@ typedef struct {
 
 
 FILE* logFile;//log file
-const key_t PCB_TABLE_KEY = 110594;//key for shared PCB Table
-const key_t CLOCK_KEY = 110197;//key for shared simulated clock 
-const key_t MSG_KEY = 052455;//key for message queue
+const key_t PCB_TABLE_KEY = 110667;//key for shared PCB Table
+const key_t CLOCK_KEY = 110626;//key for shared simulated clock 
+const key_t MSG_KEY = 052644;//key for message queue
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
 int messageID;//id for message queue
@@ -67,7 +66,7 @@ void create_msqueue();
 FILE* open_file(char*, char*, char*);
 static void time_out();
 void cleanup();
-void remove_shm();
+void delete_shar_mem();
 process_table* create_table(int);
 int get_sim_pid(int*, int);
 int rand_priority(int);
@@ -91,10 +90,8 @@ int dequeue(queue_t* queue);
 int main(int argc, char* argv[]) {
     system("clear");  // clear screen
     char* log = "oss.log";  // log file
-    // Open log file
-    logFile = open_file(log, "w", "./oss: Error: ");
-    // Terminate after 3s
-    signal(SIGALRM, time_out);
+    logFile = open_file(log, "w", "./oss: Error: "); // Open log file
+    signal(SIGALRM, time_out); // Terminate after 3s
     alarm(20);
     srand(time(0));// seed rand
     printf("Running sim...\n");
@@ -102,40 +99,40 @@ int main(int argc, char* argv[]) {
     printf("Ending sim and cleaned up!\n");
     printf("Please use the command 'cat oss.log' to view log. \n");
 
-    // safe cleanup
+    // cleaning up
     msgctl(messageID, IPC_RMID, NULL);  //delete msgqueue
-    remove_shm();
+    delete_shar_mem();
     fclose(logFile);  // close log
 
     return 0;
 }
 
-/*fopen with simple error check*/
+// Open file
 FILE* open_file(char* fname, char* opts, char* error) {
     FILE* fp = fopen(fname, opts);
-    if (fp == NULL) {  // error opening file
+    if (fp == NULL) {  // cannot open file
         perror(error);
         cleanup();
     }
     return fp;
 }
-/*SIGALRM handler*/
+// 3 second timeout
 static void time_out() {
-    fprintf(stderr, "3 second timeout\n");
-    fprintf(stderr, "Killing user/child processes\n");
+    fprintf(stderr, "3 second timeout!\n");
+    fprintf(stderr, "Terminating user processes\n");
     cleanup();
     exit(EXIT_SUCCESS);
 }
-/*delete shared memory, terminate children*/
+// remove shared memory and user processes
 void cleanup() {
     fclose(logFile);
-    remove_shm();                   // remove shared memory
-    msgctl(messageID, IPC_RMID, NULL);  // delete msgqueue
-    kill(0, SIGTERM);               // terminate users/children
+    delete_shar_mem();                   // delete shared memory
+    msgctl(messageID, IPC_RMID, NULL);  // deletes msgqueue
+    kill(0, SIGTERM);               // terminates users process
     return;
 }
 /*Remove the simulated clock and pcb table from shared memory*/
-void remove_shm() {
+void delete_shar_mem() {
     shmctl(clockId, IPC_RMID, NULL);
     shmctl(pcbTableId, IPC_RMID, NULL);
     return;

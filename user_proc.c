@@ -1,12 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
+// Jesse McCarville-Schueths
+// Oct 25, 2020
+// Assignment 4
+// Scheduled Processes
+
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <math.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-#include <math.h>
+
+
+//msg struct for msgqueue
+typedef struct {
+    long mess_ID;
+    int mess_quant;
+} message;
 
 // for simulated clock
 typedef struct {
@@ -16,26 +30,22 @@ typedef struct {
 
 // PCB Table
 typedef struct {
-    unsigned int pid;  // max is 18
+    unsigned int pid;
     int priority;
     int onDeck;
     simu_time arrivalTime;
     simu_time cpuTime;
     simu_time sysTime; //Time in the system
     simu_time burstTime;  //Time used in the last burst
-    simu_time waitTime;  //Total sleep time. time waiting for an event
+    simu_time waitTime;  //Total wait time
 } process_table;
 
-//msg struct for msgqueue
-typedef struct {
-    long mess_ID;
-    int mess_quant;
-} message;
+
 
 FILE* logFile;//log file
-const key_t PCB_TABLE_KEY = 110594;//key for shared PCB Table
-const key_t CLOCK_KEY = 110197;//key for shared simulated clock 
-const key_t MSG_KEY = 052455;//key for message queue
+const key_t PCB_TABLE_KEY = 110667;//key for shared PCB Table
+const key_t CLOCK_KEY = 110626;//key for shared simulated clock 
+const key_t MSG_KEY = 052644;//key for message queue
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
 int msqid;//id for message queue
@@ -67,8 +77,7 @@ int main(int argc, char* argv[]) {
     pid = atoi(argv[1]);
     msqid = atoi(argv[2]);
     quantum = atoi(argv[3]);
-    srand(time(0) + (pid + 1));  // seeding rand. seeding w/ time(0) caused
-                                 // processes spawned too close to have same seed
+    srand(time(0) + (pid + 1));  // seeding srand
     process_table* table;
     simu_time* simClock;
     simu_time timeBlocked;//holds the time that the process was blocked at
@@ -84,11 +93,6 @@ int main(int argc, char* argv[]) {
             perror("./user: Error: msgrcv ");
             exit(EXIT_FAILURE);
         }
-        /* message response based on if terminating, blocked or neither
-         * oss will know process is blocked if mvalue < 0
-         *                       is terminating if 0 <= mvalue < 100
-         *                       is using full quantum if mvalue == 100
-         * */
         outcome = get_outcome();
         switch (outcome) {
         case 0:  // full
@@ -108,9 +112,6 @@ int main(int argc, char* argv[]) {
             table[pid].waitTime = add_sim_times(table[pid].waitTime, event);
             event = add_sim_times(event, timeBlocked);//event time = current time + r.s
             increment_sim_time(&event, (burst * -1));
-            // set status to blocked before telling oss to avoid race
-            // condition. OSS is waiting for a message response so it
-            // cant possibly check our isReady variable yet
             table[pid].onDeck = 0;
             break;
         default:
