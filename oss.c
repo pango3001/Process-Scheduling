@@ -409,7 +409,7 @@ void oss(int maxProcesses) {
                 // update totals
                 totalCPU = add(totalCPU, table[simPid].cpuTime);
                 totalSYS = add(totalSYS, table[simPid].sysTime);
-                totalWait = add(totalWait, table[simPid].waitTime);
+                totalWait = add(totalWait, table[simPid].totalWaitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated process counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -453,7 +453,7 @@ void oss(int maxProcesses) {
                 // update totals
                 totalCPU = add(totalCPU, table[simPid].cpuTime);
                 totalSYS = add(totalSYS, table[simPid].sysTime);
-                totalWait = add(totalWait, table[simPid].waitTime);
+                totalWait = add(totalWait, table[simPid].totalWaitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -496,7 +496,7 @@ void oss(int maxProcesses) {
                 // update totals
                 totalCPU = add(totalCPU, table[simPid].cpuTime);
                 totalSYS = add(totalSYS, table[simPid].sysTime);
-                totalWait = add(totalWait, table[simPid].waitTime);
+                totalWait = add(totalWait, table[simPid].totalWaitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -537,7 +537,7 @@ void oss(int maxProcesses) {
                 // update totals
                 totalCPU = add(totalCPU, table[simPid].cpuTime);
                 totalSYS = add(totalSYS, table[simPid].sysTime);
-                totalWait = add(totalWait, table[simPid].waitTime);
+                totalWait = add(totalWait, table[simPid].totalWaitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -640,6 +640,6 @@ process_table create_pcb(int priority, int pid, simu_time currentTime) {
                   .cpuTime = {.simu_seconds = 0, .simu_nanosecs = 0},
                   .sysTime = {.simu_seconds= 0, .simu_nanosecs = 0},
                   .burstTime = {.simu_seconds= 0, .simu_nanosecs = 0},
-                  .waitTime = {.simu_seconds= 0, .simu_nanosecs = 0} };
+                  .totalWaitTime = {.simu_seconds= 0, .simu_nanosecs = 0} };
     return pcb;
 }
