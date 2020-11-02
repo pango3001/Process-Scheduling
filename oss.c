@@ -282,6 +282,9 @@ void oss(int maxProcesses) {
 
     int i = 0;  // index
     int pid;
+    double avgCPU = 0.0;
+    double avgSYS = 0.0;
+    double avgWait = 0.0
 	
     // initialize to 0
     simu_time totalCPU = { .simu_seconds= 0, .simu_nanosecs = 0 };
