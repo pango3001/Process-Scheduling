@@ -15,6 +15,7 @@
 #include <time.h>
 #include <unistd.h>
 
+#define MAX_LINES 10000 // max lines to be written
 #define MAX_PCB 18 // max amount of processes in the system at once
 #define NANOSEC 1000000000 //nanosecond is 1/1000000000
 
@@ -133,13 +134,13 @@ void cleanup() {
     kill(0, SIGTERM);               // terminates users process
     return;
 }
-/*Remove the simulated clock and pcb table from shared memory*/
+// Delete simulated clock and pcb table
 void delete_shar_mem() {
     shmctl(clockId, IPC_RMID, NULL);
     shmctl(pcbTableId, IPC_RMID, NULL);
     return;
 }
-/*Create pcb table in shared memory for n processes*/
+// Make pcb table
 process_table* create_table(int n) {
     process_table* table;
     pcbTableId = shmget(PCB_TABLE_KEY, sizeof(process_table) * n, IPC_CREAT | 0777);
@@ -154,7 +155,7 @@ process_table* create_table(int n) {
     }
     return table;
 }
-/*Create a simulated clock in shared memory initialized to 0s0ns*/
+// Make simulated clock
 simu_time* create_sim_clock() {
     simu_time* simClock;
     clockId = shmget(CLOCK_KEY, sizeof(simu_time), IPC_CREAT | 0777);
@@ -171,7 +172,7 @@ simu_time* create_sim_clock() {
     simClock->simu_nanosecs = 0;
     return simClock;
 }
-/*Create a message queue*/
+// creates message queue
 void create_msqueue() {
     messageID = msgget(MSG_KEY, 0666 | IPC_CREAT);
     if (messageID < 0) {
@@ -180,7 +181,7 @@ void create_msqueue() {
     }
     return;
 }
-/*Return a pid if there is one available, returns -1 otherwise*/
+// gets pid (-1 if none available)
 int get_sim_pid(int* pids, int pidsCount) {
     int i;
     for (i = 0; i < pidsCount; i++) {
@@ -190,7 +191,7 @@ int get_sim_pid(int* pids, int pidsCount) {
     }
     return -1;  // no available pids
 }
-/*return a random simtime in range [0, max] + current time*/
+//make random simtime
 simu_time get_next_process_time(simu_time max, simu_time currentTime) {
     simu_time nextTime = { .simu_nanosecs = (rand() % (max.simu_nanosecs + 1)) + currentTime.simu_nanosecs,
                           .simu_seconds= (rand() % (max.simu_seconds+ 1)) + currentTime.simu_seconds};
@@ -208,25 +209,14 @@ int set_priority(int pri) {
         return 1;
 }
 
-int should_spawn(int pid, simu_time next, simu_time now, int currentAmount,
-    int max) {
+int should_spawn(int pid, simu_time next, simu_time now, int currentAmount, int max) {
     if ((currentAmount >= max) || (pid < 0) || (next.simu_seconds > now.simu_seconds) || (next.simu_seconds >= now.simu_seconds && next.simu_nanosecs > now.simu_nanosecs))
         return 0;
-   /*
-    if (pid < 0)
-        return 0;
-    
-    if (next.simu_seconds> now.simu_seconds) // waits
-        return 0;
-    // more specific not time for next process
-    if (next.simu_seconds>= now.simu_seconds && next.simu_nanosecs > now.simu_nanosecs)
-        return 0;
-        */
     return 1; // make new process
 }
 
 int check_blocked(int* blocked, process_table* table, int count) {
-    int i; //loop iterator
+    int i;
     for (i = 0; i < count; i++) {
         if (blocked[i] == 1) {
             if (table[i].onDeck == 1) {
@@ -290,17 +280,14 @@ void oss(int maxProcesses) {
     char quantumArg[10];
     sprintf(quantumArg, "%d", quantum);
 
-    int i = 0;  // loop iterator
-    int pid;    // holds wait() and fork() return values
+    int i = 0;  // index
+    int pid;
 	
-    /*Statistics*/
+    // initialize to 0
     simu_time totalCPU = { .simu_seconds= 0, .simu_nanosecs = 0 };
     simu_time totalSYS = { .simu_seconds= 0, .simu_nanosecs = 0 };
     simu_time totalIdle = { .simu_seconds= 0, .simu_nanosecs = 0 };
     simu_time totalWait = { .simu_seconds= 0, .simu_nanosecs = 0 };
-    double avgCPU = 0.0;
-    double avgSYS = 0.0;
-    double avgWait = 0.0;
 
     /*Setup*/
     table = create_table(maxProcesses);         // setup shared pcb table
@@ -335,7 +322,7 @@ void oss(int maxProcesses) {
             availablePids[simPid] = 0;     // set pid to unavailable
             // get random priority(0:real time or 1:user)
             priority = set_priority(5);
-            fprintf(logFile, "OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
+            fprintf(logFile, "OSS: Generating process PID %d in queue %d at %ds%09dns\n",
                 simPid, priority, simClock->simu_seconds, simClock->simu_nanosecs);
             // create pcb for new process at available pid
             table[simPid] = create_pcb(priority, simPid, (*simClock));
@@ -367,7 +354,7 @@ void oss(int maxProcesses) {
                 enter_queue(rrQueue, simPid);
             }
             else {
-                fprintf(logFile, "OSS: PID: %3d -> Queue 1\n", simPid);
+                fprintf(logFile, "OSS: PID: %3d goes to Queue 1\n", simPid);
                 enter_queue(queue1, simPid);
             }
             increment_sim_time(simClock, blockedInc);  // and blocked queue overhead to the clock
@@ -512,7 +499,7 @@ void oss(int maxProcesses) {
             if (response == 100) {
                 increment_sim_time(simClock, burst);
                 fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
-                fprintf(logFile, "OSS: PID: %3d -> Queue 3\n", simPid);
+                fprintf(logFile, "OSS: PID: %3d goes to Queue 3\n", simPid);
                 
                 increment_sim_time(&table[simPid].cpuTime, burst);  // updates table
                 table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
@@ -549,20 +536,26 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, idleInc);
         }
     }
-
-    avgCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
-    avgSYS = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
-    avgWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
+    double totCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs));
+    double totSys = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs));
+    double totWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs));
+    double avgCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
+    double avgSYS = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
+    double avgWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
 
 
     // Stats
     printf("Stats about simulation...\n");
     printf("\tTotal Run Time:  %d.%ds\n", simClock->simu_seconds, simClock->simu_nanosecs / 10000000);
     printf("\tTotal Processes: %d\n", generated);
-    printf("\tAvg. Turnaround: %.2fs\n", avgSYS);
-    printf("\tAvg. CPU Time:   %.2fs\n", avgCPU);
-    printf("\tAvg. Wait Time:  %.2fs\n", avgWait);
-    printf("\tAvg. Sleep Time: %.2fs\n", (avgSYS - avgCPU));
+    printf("\tTotal System Time: %.2fs\n", totSys);
+    printf("\tTotal CPU Time:   %.2fs\n", totCPU);
+    printf("\tTotal Wait Time:  %.2fs\n", totWait);
+    printf("\tAverage Sleep Time: %.2fs\n", (avgSYS - avgCPU));
+    printf("\tAverage System Time: %.2fs\n", avgSYS);
+    printf("\tAverage CPU Time:   %.2fs\n", avgCPU);
+    printf("\tAverage Wait Time:  %.2fs\n", avgWait);
+    printf("\tAverage Sleep Time: %.2fs\n", (avgSYS - avgCPU));
     printf("\tTotal Idle Time: %d.%ds\n", totalIdle.simu_seconds, totalIdle.simu_nanosecs / 10000000);
     return;
 }
