@@ -213,11 +213,11 @@ simu_time subtract_sim_times(simu_time a, simu_time b) {
 }
 //returns a + b
 simu_time add_sim_times(simu_time a, simu_time b) {
-    simu_time sum = { .simu_seconds= a.simu_seconds + b.simu_seconds,
+    simu_time sum = { .simu_seconds = a.simu_seconds + b.simu_seconds,
                       .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
     if (sum.simu_nanosecs >= 1000000000) {
         sum.simu_nanosecs -= 1000000000;
-        sum.simu_seconds+= 1;
+        sum.simu_seconds += 1;
     }
     return sum;
 }
