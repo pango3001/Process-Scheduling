@@ -229,7 +229,7 @@ int check_blocked(int* blocked, process_table* table, int count) {
     int i; //loop iterator
     for (i = 0; i < count; i++) {
         if (blocked[i] == 1) {
-            if (table[i].isReady == 1) {
+            if (table[i].onDeck == 1) {
                 return i;
             }
         }
@@ -244,7 +244,7 @@ int dispatch(int pid, int priority, int messageID, simu_time currentTime, int qu
     quantum = quantum * pow(2.0, (double)priority);  // i = queue #, slice = 2^i * quantum
     msg.mess_ID = pid + 1;                             // pids recieve messages of type (their pid) + 1
     msg.mess_quant = quantum;
-    fprintf(logFile, "OSS: Dispatching process with PID: %3d Queue: %d TIME: %ds%09dns\n", pid, priority, currentTime.s, currentTime.ns);
+    fprintf(logFile, "OSS: Dispatching process with PID: %3d Queue: %d TIME: %ds%09dns\n", pid, priority, currentTime.simu_seconds, currentTime.simu_nanosecs);
     *lines += 1;
     // send the message
     if (msgsnd(messageID, &msg, sizeof(msg.mess_quant), 0) == -1) {
@@ -336,7 +336,7 @@ void oss(int maxProcesses) {
             // get random priority(0:real time or 1:user)
             priority = rand_priority(5);
             fprintf(logFile, "OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
-                simPid, priority, simClock->s, simClock->simu_nanosecs);
+                simPid, priority, simClock->simu_seconds, simClock->simu_nanosecs);
             // create pcb for new process at available pid
             table[simPid] = create_pcb(priority, simPid, (*simClock));
             // queue in round robin if real-time(priority == 0)
@@ -551,7 +551,7 @@ void oss(int maxProcesses) {
         }
     }
     // easier to divide decimals than simtime_t
-    printf("Total Run Time:  %d.%ds\n", simClock->s, simClock->simu_nanosecs / 10000000);
+    printf("Total Run Time:  %d.%ds\n", simClock->simu_seconds, simClock->simu_nanosecs / 10000000);
     avgCPU = (totalCPU.simu_seconds+ (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
     avgSYS = (totalSYS.simu_seconds+ (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
     avgWait = (totalWait.simu_seconds+ (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
