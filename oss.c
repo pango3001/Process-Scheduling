@@ -16,10 +16,9 @@
 #include <time.h>
 #include <unistd.h>
 
-
 #define TRUE 1
 #define FALSE 0
-#define MAX_PCB 18                    // max amount of processes allowed in the system at one time
+#define MAX_PCB 18 // max amount of processes allowed in the system at one time
 
 //msg struct for msgqueue
 typedef struct {
@@ -38,19 +37,14 @@ typedef struct {
 //pseudo-process control block
 //used for PCB Table
 typedef struct {
-    int pid;  // max is 18
+    unsigned int pid;  // max is 18
     int priority;
     int isReady;
-    //Arrivial time
     simtime_t arrivalTime;
-    //CPU time used
     simtime_t cpuTime;
-    //Time in the system
-    simtime_t sysTime;
-    //Time used in the last burst
-    simtime_t burstTime;
-    //Total sleep time. time waiting for an event
-    simtime_t waitTime;
+    simtime_t sysTime; //Time in the system
+    simtime_t burstTime;  //Time used in the last burst
+    simtime_t waitTime;  //Total sleep time. time waiting for an event
 } process_table;
 
 typedef struct {
@@ -61,32 +55,8 @@ typedef struct {
     int* data;
 } queue_t;
 
-queue_t* create_queue(int size) {
-    queue_t* queue = (queue_t*)malloc(sizeof(queue_t));
-    queue->head = 0;
-    queue->tail = 0;
-    queue->size = size;
-    queue->data = (int*)malloc(size * sizeof(int));
-    queue->items = 0;
-    int i;
-    for (i = 0; i < size; i++)
-        queue->data[i] = -1;
-    return queue;
-}
-
-void enqueue(queue_t* queue, int pid) {
-    queue->data[queue->tail] = pid;//add pid to queue
-    queue->tail = (queue->tail + 1) % queue->size;
-    queue->items += 1;
-    return;
-}
-
-int dequeue(queue_t* queue) {
-    int pid = queue->data[queue->head];
-    queue->head = (queue->head + 1) % queue->size;
-    queue->items -= 1;
-    return pid;
-}
+void enqueue(queue_t* queue, int pid);
+int dequeue(queue_t* queue);
 
 FILE* logFile;//log file
 const key_t PCB_TABLE_KEY = 110594;//key for shared PCB Table
@@ -95,10 +65,6 @@ const key_t MSG_KEY = 052455;//key for message queue
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
 int msqid;//id for message queue
-
-
-
-
 
 // Prototypes
 void no_args_msg();
@@ -114,35 +80,13 @@ int rand_priority(int);
 int check_blocked(int*, process_table*, int);
 void oss(int);
 int dispatch(int, int, int, simtime_t, int, int*);
-
-
 simtime_t* create_sim_clock();
 simtime_t get_next_process_time(simtime_t, simtime_t);
 int should_spawn(int, simtime_t, simtime_t, int, int);
+void increment_sim_time(simtime_t* simTime, int increment);
+queue_t* create_queue(int size);
+simtime_t subtract_sim_times(simtime_t a, simtime_t b);
 
-
-
-
-
-
-//increment given simulated time by given increment
-void increment_sim_time(simtime_t* simTime, int increment) {
-    simTime->ns += increment;
-    if (simTime->ns >= 1000000000) {
-        simTime->ns -= 1000000000;
-        simTime->s += 1;
-    }
-}
-// returns a - b
-simtime_t subtract_sim_times(simtime_t a, simtime_t b) {
-    simtime_t diff = { .s = a.s - b.s,
-                      .ns = a.ns - b.ns };
-    if (diff.ns < 0) {
-        diff.ns += 1000000000;
-        diff.s -= 1;
-    }
-    return diff;
-}
 //returns a + b
 simtime_t add_sim_times(simtime_t a, simtime_t b) {
     simtime_t sum = { .s = a.s + b.s,
@@ -171,9 +115,6 @@ process_table create_pcb(int priority, int pid, simtime_t currentTime) {
                   .waitTime = {.s = 0, .ns = 0} };
     return pcb;
 }
-
-
-
 
 
 int main(int argc, char* argv[]) {
@@ -339,14 +280,7 @@ int rand_priority(int chance) {
     else
         return 1;
 }
-/* Takes in generation criteria
- * returns 0 if any of the generation criteria fail
- * returns 1 otherwise
- * note: 2 ifs for time because of an edge case where next process spawns at
- * at a high ns value. It would be rare for the s and ns to of the sim clock
- * to be higher than the next process time
- * eg with just s >= s and ns >= ns, 2s0ns >= 1s9ns is false
- * with also checking s > s 2s0ns >= 1s9ns is true*/
+
 int should_spawn(int pid, simtime_t next, simtime_t now, int generated,
     int max) {
     if (generated >= max)  // generated enough/too many processes
@@ -464,26 +398,11 @@ void oss(int maxProcesses) {
         if (lines >= 9000)
             maxTotalProcesses = generated;
 
-        /* Uncomment to easily show that all queues are occupied at some point */
-        // if (queue3->items > 0 && queue1->items > 0 && queue2->items > 0)
-        //   printf("3 queues occupied\n");
-        // if (queue3->items > 0 && queue1->items > 0)
-        //   printf("3 & 1 occupied\n");
-        // if (queue3->items > 0 && queue2->items > 0)
-        //   printf("3 & 2 occupied\n");
-        // if (queue2->items > 0 && queue1->items > 0)
-        //   printf("2 & 1 occupied\n");
-
-
         // check for an available pid
         simPid = get_sim_pid(availablePids, maxProcesses);
 
-        // if we have not generated 100 processes and it is time for the next one
-        // printf("%d <= %d && %d <= %d\n", nextProcess.s, simClock->s,
-        // nextProcess.ns, simClock->ns);
+        // if less than 100 processes create a new one
         if (should_spawn(simPid, nextProcess, (*simClock), generated, maxTotalProcesses)) {
-            // printf("spawn\n");
-            // pid was returned so spawn a new process
             sprintf(simPidArg, "%d", simPid);  // write simpid to simpid string arg
             availablePids[simPid] = FALSE;     // set pid to unavailable
             // get random priority(0:real time or 1:user)
@@ -525,7 +444,7 @@ void oss(int maxProcesses) {
             }
             increment_sim_time(simClock, blockedInc);  // and blocked queue overhead to the clock
         }
-        /*Check Round Robin*/
+        // Round Robin
         else if (rrQueue->items > 0) {
             increment_sim_time(simClock, schedInc);  // increment for scheduling overhead
             simPid = dequeue(rrQueue);               // get pid at head of the queue
@@ -655,7 +574,7 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
             }  // end response ifs
         }    // end queue 2 check
-        /* Queue 3 */
+        // 3rd Queue
         else if (queue3->items > 0) {
             increment_sim_time(simClock, schedInc);
             simPid = dequeue(queue3);
@@ -708,13 +627,7 @@ void oss(int maxProcesses) {
     avgCPU = (totalCPU.s + (0.000000001 * totalCPU.ns)) / ((double)generated);
     avgSYS = (totalSYS.s + (0.000000001 * totalSYS.ns)) / ((double)generated);
     avgWait = (totalWait.s + (0.000000001 * totalWait.ns)) / ((double)generated);
-    fprintf(logFile, "\nTotal Processes: %d\n", generated);
-    fprintf(logFile, "Avg. Turnaround: %.2fs\n", avgSYS);
-    fprintf(logFile, "Avg. CPU Time:   %.2fs\n", avgCPU);
-    fprintf(logFile, "Avg. Wait Time:  %.2fs\n", avgWait);
-    fprintf(logFile, "Avg. Sleep Time: %.2fs\n", (avgSYS - avgCPU));
-    fprintf(logFile, "Total Idle Time: %d.%ds\n", totalIdle.s, totalIdle.ns / 10000000);
-    fprintf(logFile, "Total Run Time:  %d.%ds\n", simClock->s, simClock->ns / 10000000);
+
     printf("Total Processes: %d\n", generated);
     printf("Avg. Turnaround: %.2fs\n", avgSYS);
     printf("Avg. CPU Time:   %.2fs\n", avgCPU);
@@ -722,4 +635,53 @@ void oss(int maxProcesses) {
     printf("Avg. Sleep Time: %.2fs\n", (avgSYS - avgCPU));
     printf("Total Idle Time: %d.%ds\n", totalIdle.s, totalIdle.ns / 10000000);
     return;
+}
+
+
+//increment given simulated time by given increment
+void increment_sim_time(simtime_t* simTime, int increment) {
+    simTime->ns += increment;
+    if (simTime->ns >= 1000000000) {
+        simTime->ns -= 1000000000;
+        simTime->s += 1;
+    }
+}
+
+queue_t* create_queue(int size) {
+    queue_t* queue = (queue_t*)malloc(sizeof(queue_t));
+    queue->head = 0;
+    queue->tail = 0;
+    queue->size = size;
+    queue->data = (int*)malloc(size * sizeof(int));
+    queue->items = 0;
+    int i;
+    for (i = 0; i < size; i++)
+        queue->data[i] = -1;
+    return queue;
+}
+
+void enqueue(queue_t* queue, int pid) {
+    queue->data[queue->tail] = pid;//add pid to queue
+    queue->tail = (queue->tail + 1) % queue->size;
+    queue->items += 1;
+    return;
+}
+
+int dequeue(queue_t* queue) {
+    int pid = queue->data[queue->head];
+    queue->head = (queue->head + 1) % queue->size;
+    queue->items -= 1;
+    return pid;
+}
+
+
+// returns a - b
+simtime_t subtract_sim_times(simtime_t a, simtime_t b) {
+    simtime_t diff = { .s = a.s - b.s,
+                      .ns = a.ns - b.ns };
+    if (diff.ns < 0) {
+        diff.ns += 1000000000;
+        diff.s -= 1;
+    }
+    return diff;
 }
