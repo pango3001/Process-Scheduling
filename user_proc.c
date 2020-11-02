@@ -99,11 +99,11 @@ int main(int argc, char* argv[]) {
             break;
         case 2:  // block
             msg.mvalue = ((rand() % 99) + 1) * -1;
-            timeBlocked.s = simClock->s;
-            timeBlocked.ns = simClock->ns;
+            timeBlocked.simu_seconds= simClock->simu_seconds;
+            timeBlocked.simu_nanosecs = simClock->ns;
             burst = msg.mvalue * (quantum / 100) * pow(2.0, (double)table[pid].priority);
-            event.s = (rand() % 4) + 1;//generating r [0,5]
-            event.ns = (rand() % 1000) * 1000000; //generating s [0, 999]. * 1000000 to convert to ns
+            event.simu_seconds= (rand() % 4) + 1;//generating r [0,5]
+            event.simu_nanosecs = (rand() % 1000) * 1000000; //generating s [0, 999]. * 1000000 to convert to ns
             // add to wait time total
             table[pid].waitTime = add_sim_times(table[pid].waitTime, event);
             event = add_sim_times(event, timeBlocked);//event time = current time + r.s
@@ -130,10 +130,10 @@ int main(int argc, char* argv[]) {
             // while loop to wait for event time to pass
             while (table[pid].isReady == 0) {
                 //printf("waiting %ds%9dns\n", event.s, event.ns);
-                if (event.s > simClock->s) {
+                if (event.simu_seconds > simClock->simu_seconds) {
                     table[pid].isReady = 1;
                 }
-                else if (event.ns >= simClock->ns && event.s >= simClock->s) {
+                else if (event.simu_nanosecs >= simClock->ns && event.simu_seconds >= simClock->simu_seconds) {
                     table[pid].isReady = 1;
                 }
             }
@@ -203,28 +203,28 @@ void increment_sim_time(simu_time* simTime, int increment) {
 }
 // returns a - b
 simu_time subtract_sim_times(simu_time a, simu_time b) {
-    simu_time diff = { .s = a.s - b.s,
-                      .ns = a.ns - b.ns };
-    if (diff.ns < 0) {
-        diff.ns += 1000000000;
-        diff.s -= 1;
+    simu_time diff = { .simu_seconds= a.simu_seconds- b.simu_seconds,
+                      .simu_nanosecs = a.simu_nanosecs - b.simu_nanosecs };
+    if (diff.simu_nanosecs < 0) {
+        diff.simu_nanosecs += 1000000000;
+        diff.simu_seconds-= 1;
     }
     return diff;
 }
 //returns a + b
 simu_time add_sim_times(simu_time a, simu_time b) {
-    simu_time sum = { .s = a.s + b.s,
-                      .ns = a.ns + b.ns };
-    if (sum.ns >= 1000000000) {
-        sum.ns -= 1000000000;
-        sum.s += 1;
+    simu_time sum = { .simu_seconds= a.simu_seconds + b.simu_seconds,
+                      .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
+    if (sum.simu_nanosecs >= 1000000000) {
+        sum.simu_nanosecs -= 1000000000;
+        sum.simu_seconds+= 1;
     }
     return sum;
 }
 
 //returns simtime / divisor
 simu_time divide_sim_time(simu_time simTime, int divisor) {
-    simu_time quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
+    simu_time quotient = { .simu_seconds= simTime.simu_seconds / divisor, .simu_nanosecs = simTime.simu_nanosecs / divisor };
     return quotient;
 }
 
@@ -232,10 +232,10 @@ process_table create_pcb(int priority, int pid, simu_time currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
                   .isReady = 1,
-                  .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
-                  .cpuTime = {.s = 0, .ns = 0},
-                  .sysTime = {.s = 0, .ns = 0},
-                  .burstTime = {.s = 0, .ns = 0},
-                  .waitTime = {.s = 0, .ns = 0} };
+                  .arrivalTime = {.simu_seconds = currentTime.s, .simu_nanosecs = currentTime.ns},
+                  .cpuTime = {.simu_seconds = 0, .simu_nanosecs = 0},
+                  .sysTime = {.simu_seconds= 0, .simu_nanosecs = 0},
+                  .burstTime = {.simu_seconds= 0, .simu_nanosecs = 0},
+                  .waitTime = {.simu_seconds= 0, .simu_nanosecs = 0} };
     return pcb;
 }

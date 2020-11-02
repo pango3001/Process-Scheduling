@@ -169,7 +169,7 @@ simu_time* create_sim_clock() {
         cleanup();
     }
     simClock->s = 0;
-    simClock->ns = 0;
+    simClock->simu_nanosecs = 0;
     return simClock;
 }
 /*Create a message queue*/
@@ -193,11 +193,11 @@ int get_sim_pid(int* pids, int pidsCount) {
 }
 /*return a random simtime in range [0, max] + current time*/
 simu_time get_next_process_time(simu_time max, simu_time currentTime) {
-    simu_time nextTime = { .ns = (rand() % (max.ns + 1)) + currentTime.ns,
-                          .s = (rand() % (max.s + 1)) + currentTime.s };
-    if (nextTime.ns >= 1000000000) {
-        nextTime.s += 1;
-        nextTime.ns -= 1000000000;
+    simu_time nextTime = { .simu_nanosecs = (rand() % (max.simu_nanosecs + 1)) + currentTime.simu_nanosecs,
+                          .simu_seconds= (rand() % (max.simu_seconds+ 1)) + currentTime.simu_seconds};
+    if (nextTime.simu_nanosecs >= 1000000000) {
+        nextTime.simu_seconds+= 1;
+        nextTime.simu_nanosecs -= 1000000000;
     }
     return nextTime;
 }
@@ -216,10 +216,10 @@ int should_spawn(int pid, simu_time next, simu_time now, int generated,
     if (pid < 0)  // no available pids
         return 0;
     // not time for next process
-    if (next.s > now.s)
+    if (next.simu_seconds> now.s)
         return 0;
     // more specific not time for next process
-    if (next.s >= now.s && next.ns > now.ns)
+    if (next.simu_seconds>= now.simu_seconds&& next.simu_nanosecs > now.simu_nanosecs)
         return 0;
 
     return 1; // return true (should spawn new process)
@@ -277,7 +277,7 @@ void oss(int maxProcesses) {
     int burst; // actual time used by the process
     int response; // response from process. will be percentage of quantum used
 
-    simu_time maxTimeBetweenNewProcesses = { .s = 0, .ns = 500000000 };
+    simu_time maxTimeBetweenNewProcesses = { .simu_seconds= 0, .simu_nanosecs = 500000000 };
     simu_time nextProcess; // holds the time we should spawn the next process
     int terminated = 0; // counter of terminated processes
     int generated = 0; // counter of generated processes
@@ -294,10 +294,10 @@ void oss(int maxProcesses) {
     int pid;    // holds wait() and fork() return values
 	
     /*Statistics*/
-    simu_time totalCPU = { .s = 0, .ns = 0 };
-    simu_time totalSYS = { .s = 0, .ns = 0 };
-    simu_time totalIdle = { .s = 0, .ns = 0 };
-    simu_time totalWait = { .s = 0, .ns = 0 };
+    simu_time totalCPU = { .simu_seconds= 0, .simu_nanosecs = 0 };
+    simu_time totalSYS = { .simu_seconds= 0, .simu_nanosecs = 0 };
+    simu_time totalIdle = { .simu_seconds= 0, .simu_nanosecs = 0 };
+    simu_time totalWait = { .simu_seconds= 0, .simu_nanosecs = 0 };
     double avgCPU = 0.0;
     double avgSYS = 0.0;
     double avgWait = 0.0;
@@ -336,7 +336,7 @@ void oss(int maxProcesses) {
             // get random priority(0:real time or 1:user)
             priority = rand_priority(5);
             fprintf(logFile, "OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
-                simPid, priority, simClock->s, simClock->ns);
+                simPid, priority, simClock->s, simClock->simu_nanosecs);
             // create pcb for new process at available pid
             table[simPid] = create_pcb(priority, simPid, (*simClock));
             // queue in round robin if real-time(priority == 0)
@@ -361,7 +361,7 @@ void oss(int maxProcesses) {
         /* Check blocked queue */
         else if ((simPid = check_blocked(blockedPids, table, maxProcesses)) >= 0) {
             blockedPids[simPid] = 0;//remove from blocked "queue"
-            fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->s, simClock->ns);
+            fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->s, simClock->simu_nanosecs);
             if (table[simPid].priority == 0) {
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 enqueue(rrQueue, simPid);
@@ -551,26 +551,26 @@ void oss(int maxProcesses) {
         }
     }
     // easier to divide decimals than simtime_t
-    printf("Total Run Time:  %d.%ds\n", simClock->s, simClock->ns / 10000000);
-    avgCPU = (totalCPU.s + (0.000000001 * totalCPU.ns)) / ((double)generated);
-    avgSYS = (totalSYS.s + (0.000000001 * totalSYS.ns)) / ((double)generated);
-    avgWait = (totalWait.s + (0.000000001 * totalWait.ns)) / ((double)generated);
+    printf("Total Run Time:  %d.%ds\n", simClock->s, simClock->simu_nanosecs / 10000000);
+    avgCPU = (totalCPU.simu_seconds+ (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
+    avgSYS = (totalSYS.simu_seconds+ (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
+    avgWait = (totalWait.simu_seconds+ (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
 
     printf("Total Processes: %d\n", generated);
     printf("Avg. Turnaround: %.2fs\n", avgSYS);
     printf("Avg. CPU Time:   %.2fs\n", avgCPU);
     printf("Avg. Wait Time:  %.2fs\n", avgWait);
     printf("Avg. Sleep Time: %.2fs\n", (avgSYS - avgCPU));
-    printf("Total Idle Time: %d.%ds\n", totalIdle.s, totalIdle.ns / 10000000);
+    printf("Total Idle Time: %d.%ds\n", totalIdle.s, totalIdle.simu_nanosecs / 10000000);
     return;
 }
 
 
 //increment given simulated time by given increment
 void increment_sim_time(simu_time* simTime, int increment) {
-    simTime->ns += increment;
-    if (simTime->ns >= 1000000000) {
-        simTime->ns -= 1000000000;
+    simTime->simu_nanosecs += increment;
+    if (simTime->simu_nanosecs >= 1000000000) {
+        simTime->simu_nanosecs -= 1000000000;
         simTime->s += 1;
     }
 }
@@ -605,29 +605,29 @@ int dequeue(queue_t* queue) {
 
 // returns a - b
 simu_time subtract_sim_times(simu_time a, simu_time b) {
-    simu_time diff = { .s = a.s - b.s,
-                      .ns = a.ns - b.ns };
-    if (diff.ns < 0) {
-        diff.ns += 1000000000;
-        diff.s -= 1;
+    simu_time diff = { .simu_seconds= a.simu_seconds- b.simu_seconds,
+                      .simu_nanosecs = a.simu_nanosecs - b.simu_nanosecs };
+    if (diff.simu_nanosecs < 0) {
+        diff.simu_nanosecs += 1000000000;
+        diff.simu_seconds-= 1;
     }
     return diff;
 }
 
 //returns a + b
 simu_time add_sim_times(simu_time a, simu_time b) {
-    simu_time sum = { .s = a.s + b.s,
-                      .ns = a.ns + b.ns };
-    if (sum.ns >= 1000000000) {
-        sum.ns -= 1000000000;
-        sum.s += 1;
+    simu_time sum = { .simu_seconds= a.simu_seconds+ b.simu_seconds
+                      .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
+    if (sum.simu_nanosecs >= 1000000000) {
+        sum.simu_nanosecs -= 1000000000;
+        sum.simu_seconds += 1;
     }
     return sum;
 }
 
 //returns simtime / divisor
 simu_time divide_sim_time(simu_time simTime, int divisor) {
-    simu_time quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
+    simu_time quotient = { .simu_seconds = simTime.simu_seconds / divisor, .simu_nanosecs = simTime.simu_nanosecs / divisor };
     return quotient;
 }
 
@@ -635,10 +635,10 @@ process_table create_pcb(int priority, int pid, simu_time currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
                   .isReady = 1,
-                  .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
-                  .cpuTime = {.s = 0, .ns = 0},
-                  .sysTime = {.s = 0, .ns = 0},
-                  .burstTime = {.s = 0, .ns = 0},
-                  .waitTime = {.s = 0, .ns = 0} };
+                  .arrivalTime = {.simu_seconds = currentTime.simu_seconds, .simu_nanosecs = currentTime.simu_nanosecs},
+                  .cpuTime = {.simu_seconds = 0, .simu_nanosecs = 0},
+                  .sysTime = {.simu_seconds= 0, .simu_nanosecs = 0},
+                  .burstTime = {.simu_seconds= 0, .simu_nanosecs = 0},
+                  .waitTime = {.simu_seconds= 0, .simu_nanosecs = 0} };
     return pcb;
 }
