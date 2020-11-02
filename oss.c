@@ -246,7 +246,7 @@ int dispatch(int pid, int priority, int messageID, simtime_t currentTime, int qu
     quantum = quantum * pow(2.0, (double)priority);  // i = queue #, slice = 2^i * quantum
     msg.mtype = pid + 1;                             // pids recieve messages of type (their pid) + 1
     msg.mvalue = quantum;
-    fprintf(logFile, "OSS: Dispatch   PID: %3d Queue: %d TIME: %ds%09dns\n", pid, priority, currentTime.s, currentTime.ns);
+    fprintf(logFile, "OSS: Dispatching process with PID: %3d Queue: %d TIME: %ds%09dns\n", pid, priority, currentTime.s, currentTime.ns);
     *lines += 1;
     // send the message
     if (msgsnd(messageID, &msg, sizeof(msg.mvalue), 0) == -1) {
