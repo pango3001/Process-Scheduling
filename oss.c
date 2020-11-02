@@ -67,6 +67,7 @@ int clockId;//shmid for simulated clock
 int msqid;//id for message queue
 
 // Prototypes
+void no_args_msg();
 void help_msg();
 void create_msqueue();
 FILE* open_file(char*, char*, char*);
@@ -93,8 +94,13 @@ process_table create_pcb(int priority, int pid, simtime_t currentTime);
 
 
 int main(int argc, char* argv[]) {
-    int opt; // getopt option
-    char* logFile = "oss.log";  // log file
+    int opt;                       // getopt option
+    
+    char* logName = "oss.log";  // log file
+
+    if (argc < 2) {
+        no_args_msg();
+    }
 
     while ((opt = getopt(argc, argv, "h")) != -1) {
         switch (opt) {
@@ -102,6 +108,7 @@ int main(int argc, char* argv[]) {
             help_msg();
             return 0;
         default:
+            no_args_msg();
             break;
         }  // end switch
     }    // end while
@@ -113,10 +120,10 @@ int main(int argc, char* argv[]) {
         printf("n must be >= 1\n");
         return 0;
     }
-    printf("Log File: %s\n", logFile);
+    printf("Log File: %s\n", logName);
     printf("       n: %d\n", MAX_PCB);
     // Open log file
-    logFile = open_file(logFile, "w", "./oss: Error: ");
+    logFile = open_file(logName, "w", "./oss: Error: ");
     // Terminate after 3s
     signal(SIGALRM, time_out);
     alarm(20);
@@ -132,7 +139,12 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-
+/*Display that no arguments were provided*/
+void no_args_msg() {
+    printf("No arguments given\n");
+    printf("Using default values\n");
+    return;
+}
 /*Display help message*/
 void help_msg() {
     printf("This program takes the following possible arguments\n");
