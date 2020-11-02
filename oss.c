@@ -16,7 +16,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define MAX_PCB 18 // max amount of processes allowed in the system at one time
+#define MAX_PCB 18 // max amount of processes in the system at once
 
 //msg struct for msgqueue
 typedef struct {
@@ -61,7 +61,7 @@ const key_t CLOCK_KEY = 110197;//key for shared simulated clock
 const key_t MSG_KEY = 052455;//key for message queue
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
-int msqid;//id for message queue
+int messageID;//id for message queue
 
 // Prototypes
 
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
     printf("Please use the command 'cat oss.log' to view log. \n");
 
     // safe cleanup
-    msgctl(msqid, IPC_RMID, NULL);  //delete msgqueue
+    msgctl(messageID, IPC_RMID, NULL);  //delete msgqueue
     remove_shm();
     fclose(logFile);  // close log
 
@@ -130,9 +130,9 @@ static void time_out() {
 }
 /*delete shared memory, terminate children*/
 void cleanup() {
-    fclose(logFile);                // close log file
+    fclose(logFile);
     remove_shm();                   // remove shared memory
-    msgctl(msqid, IPC_RMID, NULL);  // this deletes msgqueue
+    msgctl(messageID, IPC_RMID, NULL);  // delete msgqueue
     kill(0, SIGTERM);               // terminate users/children
     return;
 }
@@ -176,8 +176,8 @@ simtime_t* create_sim_clock() {
 }
 /*Create a message queue*/
 void create_msqueue() {
-    msqid = msgget(MSG_KEY, 0666 | IPC_CREAT);
-    if (msqid < 0) {
+    messageID = msgget(MSG_KEY, 0666 | IPC_CREAT);
+    if (messageID < 0) {
         perror("./oss: Error: msgget ");
         cleanup();
     }
@@ -241,7 +241,7 @@ int check_blocked(int* blocked, process_table* table, int count) {
 /*Dispatches a process by sending a message witht he appropriate time quantum to
  * the given pid
  * waits to recieve a response and returns that response */
-int dispatch(int pid, int priority, int msqid, simtime_t currentTime, int quantum, int* lines) {
+int dispatch(int pid, int priority, int messageID, simtime_t currentTime, int quantum, int* lines) {
     mymsg_t msg;                                     // message to be sent
     quantum = quantum * pow(2.0, (double)priority);  // i = queue #, slice = 2^i * quantum
     msg.mtype = pid + 1;                             // pids recieve messages of type (their pid) + 1
@@ -249,12 +249,12 @@ int dispatch(int pid, int priority, int msqid, simtime_t currentTime, int quantu
     fprintf(logFile, "%-5d: OSS: Dispatch   PID: %3d Queue: %d TIME: %ds%09dns\n", *lines, pid, priority, currentTime.s, currentTime.ns);
     *lines += 1;
     // send the message
-    if (msgsnd(msqid, &msg, sizeof(msg.mvalue), 0) == -1) {
+    if (msgsnd(messageID, &msg, sizeof(msg.mvalue), 0) == -1) {
         perror("./oss: Error: msgsnd ");
         cleanup();
     }
     // immediately wait for the response
-    if ((msgrcv(msqid, &msg, sizeof(msg.mvalue), pid + 100, 0)) == -1) {
+    if ((msgrcv(messageID, &msg, sizeof(msg.mvalue), pid + 100, 0)) == -1) {
         perror("./oss: Error: msgrcv ");
         cleanup();
     }
@@ -288,7 +288,7 @@ void oss(int maxProcesses) {
     int simPid; // holds a simulated pid
     int priority;  // holds priority of a process
     char simPidArg[3]; // exec arg 2. simulated pid as a string
-    char msqidArg[10];// exec arg 3. msqid as string
+    char messageIDArg[10];// exec arg 3. messageID as string
     char quantumArg[10];
     sprintf(quantumArg, "%d", quantum);
 
@@ -311,8 +311,8 @@ void oss(int maxProcesses) {
     queue1 = create_queue(maxProcesses);        // setup MLFQ. highest level/priority
     queue2 = create_queue(maxProcesses);        // mid level/priority
     queue3 = create_queue(maxProcesses);        // lowest level/priority
-    create_msqueue();                           // set up message queue.sets global msqid variable
-    sprintf(msqidArg, "%d", msqid);             // write msqid to msqid string arg
+    create_msqueue();                           // set up message queue.sets global messageID variable
+    sprintf(messageIDArg, "%d", messageID);             // write messageID to messageID string arg
     // Loop through available pids to set all to 1(available)
     for (i = 0; i < maxProcesses; i++) {
         blockedPids[i] = 0;//set blocked "queue" to empty
@@ -337,8 +337,8 @@ void oss(int maxProcesses) {
             availablePids[simPid] = 0;     // set pid to unavailable
             // get random priority(0:real time or 1:user)
             priority = rand_priority(5);
-            fprintf(logFile, "%-5d: OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
-                lines++, simPid, priority, simClock->s, simClock->ns);
+            fprintf(logFile, "OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
+                simPid, priority, simClock->s, simClock->ns);
             // create pcb for new process at available pid
             table[simPid] = create_pcb(priority, simPid, (*simClock));
             // queue in round robin if real-time(priority == 0)
@@ -353,7 +353,7 @@ void oss(int maxProcesses) {
                 cleanup();
             }
             else if (pid == 0) {  // child
-                execl("./user_proc", "user_proc", simPidArg, msqidArg, quantumArg, (char*)NULL);
+                execl("./user_proc", "user_proc", simPidArg, messageIDArg, quantumArg, (char*)NULL);
             }
             // parent
             generated += 1;  // increment generated processes counter
@@ -363,13 +363,13 @@ void oss(int maxProcesses) {
         /* Check blocked queue */
         else if ((simPid = check_blocked(blockedPids, table, maxProcesses)) >= 0) {
             blockedPids[simPid] = 0;//remove from blocked "queue"
-            fprintf(logFile, "%-5d: OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", lines++, simPid, simClock->s, simClock->ns);
+            fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->s, simClock->ns);
             if (table[simPid].priority == 0) {
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Round Robin\n", lines++, simPid);
+                fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 enqueue(rrQueue, simPid);
             }
             else {
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Queue 1\n", lines++, simPid);
+                fprintf(logFile, "OSS: PID: %3d -> Queue 1\n", simPid);
                 enqueue(queue1, simPid);
             }
             increment_sim_time(simClock, blockedInc);  // and blocked queue overhead to the clock
@@ -380,7 +380,7 @@ void oss(int maxProcesses) {
             simPid = dequeue(rrQueue);               // get pid at head of the queue
             priority = table[simPid].priority;       // get stored priority
             // dispatch the process
-            response = dispatch(simPid, priority, msqid, (*simClock), quantum, &lines);
+            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             // calculate burst time
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {                  // Used full time slice
@@ -423,7 +423,7 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, schedInc);
             simPid = dequeue(queue1);
             priority = table[simPid].priority;
-            response = dispatch(simPid, priority, msqid, (*simClock), quantum, &lines);
+            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {
                 increment_sim_time(simClock, burst);
@@ -466,7 +466,7 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, schedInc);
             simPid = dequeue(queue2);
             priority = table[simPid].priority;
-            response = dispatch(simPid, priority, msqid, (*simClock), quantum, &lines);
+            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {
                 increment_sim_time(simClock, burst);
@@ -509,7 +509,7 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, schedInc);
             simPid = dequeue(queue3);
             priority = table[simPid].priority;
-            response = dispatch(simPid, priority, msqid, (*simClock), quantum, &lines);
+            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {
                 increment_sim_time(simClock, burst);
