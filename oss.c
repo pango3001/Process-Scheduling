@@ -96,7 +96,7 @@ process_table create_pcb(int priority, int pid, simtime_t currentTime);
 int main(int argc, char* argv[]) {
     int opt;                       // getopt option
     
-    char* logName = "oss.log";  // log file
+    char* log = "oss.log";  // log file
 
     if (argc < 2) {
         no_args_msg();
@@ -120,17 +120,18 @@ int main(int argc, char* argv[]) {
         printf("n must be >= 1\n");
         return 0;
     }
-    printf("Log File: %s\n", logName);
+    printf("Log File: %s\n", log);
     printf("       n: %d\n", MAX_PCB);
     // Open log file
-    logFile = open_file(logName, "w", "./oss: Error: ");
+    logFile = open_file(log, "w", "./oss: Error: ");
     // Terminate after 3s
     signal(SIGALRM, time_out);
     alarm(20);
     srand(time(0));// seed rand
-    printf("----------Starting Simulation----------\n");
+    printf("Running sim...\n");
     oss(MAX_PCB);
-    printf("----------Simulation Complete----------\n");
+    printf("Ending sim and cleaned up!\n");
+    printf("Please use the command 'cat oss.log' to view log. \n");
 
     // safe cleanup
     msgctl(msqid, IPC_RMID, NULL);  //delete msgqueue
