@@ -542,9 +542,9 @@ void oss(int maxProcesses) {
     double totCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs));
     double totSys = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs));
     double totWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs));
-    double avgCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
-    double avgSYS = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
-    double avgWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
+    avgCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs)) / ((double)generated);
+    avgSYS = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs)) / ((double)generated);
+    avgWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs)) / ((double)generated);
 
 
     // Stats
