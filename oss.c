@@ -385,8 +385,8 @@ void oss(int maxProcesses) {
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {                  // Used full time slice
                 increment_sim_time(simClock, burst);  // increment the clock
-                fprintf(logFile, "%-5d: OSS: Full Slice PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Round Robin\n", lines++, simPid);
+                fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
