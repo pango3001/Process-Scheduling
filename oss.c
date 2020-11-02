@@ -98,6 +98,21 @@ int main(int argc, char* argv[]) {
     alarm(20);
     srand(time(0));// seed rand
     printf("Running sim...\n");
+    usleep(5000);
+    printf(".");
+    usleep(5000);
+    printf(".");
+    usleep(5000);
+    printf(".");
+    usleep(5000);
+    printf(".");
+    usleep(5000);
+    printf(".");
+    usleep(5000);
+    printf(".");
+    usleep(5000);
+    printf(".");
+
     oss(MAX_PCB);
     printf("Ending sim and cleaned up!\n");
     printf("Please use the command 'cat oss.log' to view log. \n");
@@ -284,7 +299,7 @@ void oss(int maxProcesses) {
     int pid;
     double avgCPU = 0.0;
     double avgSYS = 0.0;
-    double avgWait = 0.0
+    double avgWait = 0.0;
 	
     // initialize to 0
     simu_time totalCPU = { .simu_seconds= 0, .simu_nanosecs = 0 };
@@ -351,7 +366,7 @@ void oss(int maxProcesses) {
         /* Check blocked queue */
         else if ((simPid = check_blocked(blockedPids, table, maxProcesses)) >= 0) {
             blockedPids[simPid] = 0;//remove from blocked "queue"
-            fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->simu_seconds, simClock->simu_nanosecs);
+            fprintf(logFile, "OSS: PID: %3d unblocked at %ds%09dns\n", simPid, simClock->simu_seconds, simClock->simu_nanosecs);
             if (table[simPid].priority == 0) {
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 enter_queue(rrQueue, simPid);
