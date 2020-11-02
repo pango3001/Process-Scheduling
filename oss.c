@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 #define MAX_PCB 18 // max amount of processes in the system at once
+#define NANOSEC 1000000000 //nanosecond is 1/1000000000
 
 // message queue
 typedef struct {
@@ -37,8 +38,9 @@ typedef struct {
     simu_time arrivalTime;
     simu_time cpuTime;
     simu_time sysTime; //Time in the system
-    simu_time burstTime;  //Time used in the last burst
-    simu_time waitTime;  //Total wait time
+    simu_time burstTime; 
+    simu_time maxWaitTime;
+    simu_time totalWaitTime;  //Total wait time
 } process_table;
 
 // Queue
@@ -69,7 +71,7 @@ void cleanup();
 void delete_shar_mem();
 process_table* create_table(int);
 int get_sim_pid(int*, int);
-int rand_priority(int);
+int set_priority(int);
 int check_blocked(int*, process_table*, int);
 void oss(int);
 int dispatch(int, int, int, simu_time, int, int*);
@@ -78,12 +80,12 @@ simu_time get_next_process_time(simu_time, simu_time);
 int should_spawn(int, simu_time, simu_time, int, int);
 void increment_sim_time(simu_time* simTime, int increment);
 queue_t* create_queue(int size);
-simu_time subtract_sim_times(simu_time a, simu_time b);
-simu_time add_sim_times(simu_time a, simu_time b);
-simu_time divide_sim_time(simu_time simTime, int divisor);
+simu_time minus(simu_time a, simu_time b);
+simu_time add(simu_time a, simu_time b);
+simu_time divide(simu_time simTime, int divisor);
 process_table create_pcb(int priority, int pid, simu_time currentTime);
-void enqueue(queue_t* queue, int pid);
-int dequeue(queue_t* queue);
+void enter_queue(queue_t* queue, int pid);
+int leave_queue(queue_t* queue);
 
 
 
@@ -192,34 +194,35 @@ int get_sim_pid(int* pids, int pidsCount) {
 simu_time get_next_process_time(simu_time max, simu_time currentTime) {
     simu_time nextTime = { .simu_nanosecs = (rand() % (max.simu_nanosecs + 1)) + currentTime.simu_nanosecs,
                           .simu_seconds= (rand() % (max.simu_seconds+ 1)) + currentTime.simu_seconds};
-    if (nextTime.simu_nanosecs >= 1000000000) {
+    if (nextTime.simu_nanosecs >= NANOSEC) {
         nextTime.simu_seconds+= 1;
-        nextTime.simu_nanosecs -= 1000000000;
+        nextTime.simu_nanosecs -= NANOSEC;
     }
     return nextTime;
 }
-/* Returns 0 chance % of the time on average. returns 1 otherwise*/
-int rand_priority(int chance) {
-    if ((rand() % 101) <= chance)
+// sets priority
+int set_priority(int pri) {
+    if ((rand() % 101) <= pri)
         return 0;
     else
         return 1;
 }
 
-int should_spawn(int pid, simu_time next, simu_time now, int generated,
+int should_spawn(int pid, simu_time next, simu_time now, int currentAmount,
     int max) {
-    if (generated >= max)  // generated enough/too many processes
+    if ((currentAmount >= max) || (pid < 0) || (next.simu_seconds > now.simu_seconds) || (next.simu_seconds >= now.simu_seconds && next.simu_nanosecs > now.simu_nanosecs))
         return 0;
-    if (pid < 0)  // no available pids
+   /*
+    if (pid < 0)
         return 0;
-    // not time for next process
-    if (next.simu_seconds> now.simu_seconds)
+    
+    if (next.simu_seconds> now.simu_seconds) // waits
         return 0;
     // more specific not time for next process
-    if (next.simu_seconds>= now.simu_seconds&& next.simu_nanosecs > now.simu_nanosecs)
+    if (next.simu_seconds>= now.simu_seconds && next.simu_nanosecs > now.simu_nanosecs)
         return 0;
-
-    return 1; // return true (should spawn new process)
+        */
+    return 1; // make new process
 }
 
 int check_blocked(int* blocked, process_table* table, int count) {
@@ -331,16 +334,16 @@ void oss(int maxProcesses) {
             sprintf(simPidArg, "%d", simPid);  // write simpid to simpid string arg
             availablePids[simPid] = 0;     // set pid to unavailable
             // get random priority(0:real time or 1:user)
-            priority = rand_priority(5);
+            priority = set_priority(5);
             fprintf(logFile, "OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
                 simPid, priority, simClock->simu_seconds, simClock->simu_nanosecs);
             // create pcb for new process at available pid
             table[simPid] = create_pcb(priority, simPid, (*simClock));
             // queue in round robin if real-time(priority == 0)
             if (priority == 0)
-                enqueue(rrQueue, simPid);
+                enter_queue(rrQueue, simPid);
             else  // queue in MLFQ otherwise
-                enqueue(queue1, simPid);
+                enter_queue(queue1, simPid);
             // fork a new process
             pid = fork();
             if (pid < 0) {  // error
@@ -361,18 +364,18 @@ void oss(int maxProcesses) {
             fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->simu_seconds, simClock->simu_nanosecs);
             if (table[simPid].priority == 0) {
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
-                enqueue(rrQueue, simPid);
+                enter_queue(rrQueue, simPid);
             }
             else {
                 fprintf(logFile, "OSS: PID: %3d -> Queue 1\n", simPid);
-                enqueue(queue1, simPid);
+                enter_queue(queue1, simPid);
             }
             increment_sim_time(simClock, blockedInc);  // and blocked queue overhead to the clock
         }
         // Round Robin
         else if (rrQueue->items > 0) {
             increment_sim_time(simClock, schedInc);  // increment for scheduling overhead
-            simPid = dequeue(rrQueue);               // get pid at head of the queue
+            simPid = leave_queue(rrQueue);               // get pid at head of the queue
             priority = table[simPid].priority;       // get stored priority
             // dispatch the process
             response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
@@ -384,8 +387,8 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
-                enqueue(rrQueue, simPid);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
+                enter_queue(rrQueue, simPid);
             }
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
@@ -394,7 +397,7 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 blockedPids[simPid] = 1;//add to blocked "queue"
             }
             else {                                // Terminated
@@ -402,11 +405,11 @@ void oss(int maxProcesses) {
                 pid = wait(NULL);                     // wait for child to finish
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 // update totals
-                totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
-                totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
-                totalWait = add_sim_times(totalWait, table[simPid].waitTime);
+                totalCPU = add(totalCPU, table[simPid].cpuTime);
+                totalSYS = add(totalSYS, table[simPid].sysTime);
+                totalWait = add(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated process counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -416,7 +419,7 @@ void oss(int maxProcesses) {
          * Queue 1*/
         else if (queue1->items > 0) {
             increment_sim_time(simClock, schedInc);
-            simPid = dequeue(queue1);
+            simPid = leave_queue(queue1);
             priority = table[simPid].priority;
             response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
@@ -426,9 +429,9 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "OSS: PID: %3d -> Queue 2\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 2;
-                enqueue(queue2, simPid);
+                enter_queue(queue2, simPid);
             }
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
@@ -437,7 +440,7 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 1;  // set priority back to highest level
                 blockedPids[simPid] = 1;//add to blocked "queue"
             }
@@ -446,11 +449,11 @@ void oss(int maxProcesses) {
                 pid = wait(NULL);                     // wait for child to finish
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 // update totals
-                totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
-                totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
-                totalWait = add_sim_times(totalWait, table[simPid].waitTime);
+                totalCPU = add(totalCPU, table[simPid].cpuTime);
+                totalSYS = add(totalSYS, table[simPid].sysTime);
+                totalWait = add(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -459,7 +462,7 @@ void oss(int maxProcesses) {
         /* Queue 2 */
         else if (queue2->items > 0) {
             increment_sim_time(simClock, schedInc);
-            simPid = dequeue(queue2);
+            simPid = leave_queue(queue2);
             priority = table[simPid].priority;
             response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
@@ -469,9 +472,9 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "OSS: PID: %3d -> Queue 3\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 3;
-                enqueue(queue3, simPid);
+                enter_queue(queue3, simPid);
             }
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
@@ -480,7 +483,7 @@ void oss(int maxProcesses) {
                 fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 1;  // set priority back to highest level
                 blockedPids[simPid] = 1;//add to blocked "queue" 
             }
@@ -489,11 +492,11 @@ void oss(int maxProcesses) {
                 pid = wait(NULL);                     // wait for child to finish
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 // update totals
-                totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
-                totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
-                totalWait = add_sim_times(totalWait, table[simPid].waitTime);
+                totalCPU = add(totalCPU, table[simPid].cpuTime);
+                totalSYS = add(totalSYS, table[simPid].sysTime);
+                totalWait = add(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
@@ -502,7 +505,7 @@ void oss(int maxProcesses) {
         // 3rd Queue
         else if (queue3->items > 0) {
             increment_sim_time(simClock, schedInc);
-            simPid = dequeue(queue3);
+            simPid = leave_queue(queue3);
             priority = table[simPid].priority;
             response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
@@ -510,19 +513,18 @@ void oss(int maxProcesses) {
                 increment_sim_time(simClock, burst);
                 fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
                 fprintf(logFile, "OSS: PID: %3d -> Queue 3\n", simPid);
-                // updat pcb
-                increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
-                enqueue(queue3, simPid);
+                
+                increment_sim_time(&table[simPid].cpuTime, burst);  // updates table
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
+                enter_queue(queue3, simPid);
             }
-            else if (response < 0) {  // BLocked
+            else if (response < 0) {  // if blocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
                 fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
                 fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
-                // update pcb
-                increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                increment_sim_time(&table[simPid].cpuTime, burst); //update table
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 1;  // set priority back to highest level
                 blockedPids[simPid] = 1;//add to blocked "queue"
             }
@@ -531,16 +533,16 @@ void oss(int maxProcesses) {
                 pid = wait(NULL);                     // wait for child to finish
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
-                table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
+                table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 // update totals
-                totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
-                totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
-                totalWait = add_sim_times(totalWait, table[simPid].waitTime);
+                totalCPU = add(totalCPU, table[simPid].cpuTime);
+                totalSYS = add(totalSYS, table[simPid].sysTime);
+                totalWait = add(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
-            }  // end response ifs
-        }    // end queue 3 check
+            }
+        }
         /* IDLE: empty queues and nothing ready to spawn */
         else {
             increment_sim_time(&totalIdle, idleInc);
@@ -569,8 +571,8 @@ void oss(int maxProcesses) {
 //increment given simulated time by given increment
 void increment_sim_time(simu_time* simTime, int increment) {
     simTime->simu_nanosecs += increment;
-    if (simTime->simu_nanosecs >= 1000000000) {
-        simTime->simu_nanosecs -= 1000000000;
+    if (simTime->simu_nanosecs >= NANOSEC) {
+        simTime->simu_nanosecs -= NANOSEC;
         simTime->simu_seconds+= 1;
     }
 }
@@ -588,14 +590,14 @@ queue_t* create_queue(int size) {
     return queue;
 }
 
-void enqueue(queue_t* queue, int pid) {
+void enter_queue(queue_t* queue, int pid) {
     queue->data[queue->tail] = pid;//add pid to queue
     queue->tail = (queue->tail + 1) % queue->size;
     queue->items += 1;
     return;
 }
 
-int dequeue(queue_t* queue) {
+int leave_queue(queue_t* queue) {
     int pid = queue->data[queue->head];
     queue->head = (queue->head + 1) % queue->size;
     queue->items -= 1;
@@ -603,30 +605,29 @@ int dequeue(queue_t* queue) {
 }
 
 
-// returns a - b
-simu_time subtract_sim_times(simu_time a, simu_time b) {
-    simu_time diff = { .simu_seconds = a.simu_seconds - b.simu_seconds,
+// subtracts times
+simu_time minus(simu_time a, simu_time b) {
+    simu_time difference = { .simu_seconds = a.simu_seconds - b.simu_seconds,
                       .simu_nanosecs = a.simu_nanosecs - b.simu_nanosecs };
-    if (diff.simu_nanosecs < 0) {
-        diff.simu_nanosecs += 1000000000;
-        diff.simu_seconds -= 1;
+    if (difference.simu_nanosecs < 0) {
+        difference.simu_nanosecs += NANOSEC;
+        difference.simu_seconds -= 1;
     }
-    return diff;
+    return difference;
 }
 
-//returns a + b
-simu_time add_sim_times(simu_time a, simu_time b) {
-    simu_time sum = { .simu_seconds= a.simu_seconds + b.simu_seconds,
-                      .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
-    if (sum.simu_nanosecs >= 1000000000) {
-        sum.simu_nanosecs -= 1000000000;
+//adds times
+simu_time add(simu_time a, simu_time b) {
+    simu_time sum = { .simu_seconds= a.simu_seconds + b.simu_seconds, .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
+    if (sum.simu_nanosecs >= NANOSEC) {
+        sum.simu_nanosecs -= NANOSEC;
         sum.simu_seconds += 1;
     }
     return sum;
 }
 
 //returns simtime / divisor
-simu_time divide_sim_time(simu_time simTime, int divisor) {
+simu_time divide(simu_time simTime, int divisor) {
     simu_time quotient = { .simu_seconds = simTime.simu_seconds / divisor, .simu_nanosecs = simTime.simu_nanosecs / divisor };
     return quotient;
 }
