@@ -16,7 +16,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#define FALSE 0
 #define MAX_PCB 18 // max amount of processes allowed in the system at one time
 
 //msg struct for msgqueue
@@ -92,7 +91,7 @@ int dequeue(queue_t* queue);
 
 
 int main(int argc, char* argv[]) {
-    
+    system("clear");  // clear screen
     char* log = "oss.log";  // log file
     // Open log file
     logFile = open_file(log, "w", "./oss: Error: ");
@@ -215,15 +214,15 @@ int rand_priority(int chance) {
 int should_spawn(int pid, simtime_t next, simtime_t now, int generated,
     int max) {
     if (generated >= max)  // generated enough/too many processes
-        return FALSE;
+        return 0;
     if (pid < 0)  // no available pids
-        return FALSE;
+        return 0;
     // not time for next process
     if (next.s > now.s)
-        return FALSE;
+        return 0;
     // more specific not time for next process
     if (next.s >= now.s && next.ns > now.ns)
-        return FALSE;
+        return 0;
 
     return 1; // return true (should spawn new process)
 }
@@ -316,7 +315,7 @@ void oss(int maxProcesses) {
     sprintf(msqidArg, "%d", msqid);             // write msqid to msqid string arg
     // Loop through available pids to set all to 1(available)
     for (i = 0; i < maxProcesses; i++) {
-        blockedPids[i] = FALSE;//set blocked "queue" to empty
+        blockedPids[i] = 0;//set blocked "queue" to empty
         availablePids[i] = 1;
     }
     // get time to spawn next process
@@ -335,7 +334,7 @@ void oss(int maxProcesses) {
         // if less than 100 processes create a new one
         if (should_spawn(simPid, nextProcess, (*simClock), generated, maxTotalProcesses)) {
             sprintf(simPidArg, "%d", simPid);  // write simpid to simpid string arg
-            availablePids[simPid] = FALSE;     // set pid to unavailable
+            availablePids[simPid] = 0;     // set pid to unavailable
             // get random priority(0:real time or 1:user)
             priority = rand_priority(5);
             fprintf(logFile, "%-5d: OSS: Generating process PID %d in queue %d at %ds%09d nanoseconds\n",
@@ -363,7 +362,7 @@ void oss(int maxProcesses) {
         }
         /* Check blocked queue */
         else if ((simPid = check_blocked(blockedPids, table, maxProcesses)) >= 0) {
-            blockedPids[simPid] = FALSE;//remove from blocked "queue"
+            blockedPids[simPid] = 0;//remove from blocked "queue"
             fprintf(logFile, "%-5d: OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", lines++, simPid, simClock->s, simClock->ns);
             if (table[simPid].priority == 0) {
                 fprintf(logFile, "%-5d: OSS: PID: %3d -> Round Robin\n", lines++, simPid);
