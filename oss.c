@@ -102,7 +102,6 @@ int main(int argc, char* argv[]) {
             help_msg();
             return 0;
         default:
-            no_args_msg();
             break;
         }  // end switch
     }    // end while
