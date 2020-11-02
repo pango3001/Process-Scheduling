@@ -98,20 +98,18 @@ int main(int argc, char* argv[]) {
     alarm(20);
     srand(time(0));// seed rand
     printf("Running sim...\n");
-    usleep(5000);
+    useconds_t usec = 5;
+    usleep(usec);
     printf(".");
-    usleep(5000);
+    usleep(usec);
     printf(".");
-    usleep(5000);
+    usleep(usec);
     printf(".");
-    usleep(5000);
+    usleep(usec);
     printf(".");
-    usleep(5000);
+    usleep(usec);
     printf(".");
-    usleep(5000);
-    printf(".");
-    usleep(5000);
-    printf(".");
+
 
     oss(MAX_PCB);
     printf("Ending sim and cleaned up!\n");
