@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
         case 2:  // block
             msg.mess_quant = ((rand() % 99) + 1) * -1;
             timeBlocked.simu_seconds= simClock->simu_seconds;
-            timeBlocked.simu_nanosecs = simClock->ns;
+            timeBlocked.simu_nanosecs = simClock->simu_nanosecs;
             burst = msg.mess_quant * (quantum / 100) * pow(2.0, (double)table[pid].priority);
             event.simu_seconds= (rand() % 4) + 1;//generating r [0,5]
             event.simu_nanosecs = (rand() % 1000) * 1000000; //generating s [0, 999]. * 1000000 to convert to ns
@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
                 if (event.simu_seconds > simClock->simu_seconds) {
                     table[pid].onDeck = 1;
                 }
-                else if (event.simu_nanosecs >= simClock->ns && event.simu_seconds >= simClock->simu_seconds) {
+                else if (event.simu_nanosecs >= simClock->simu_nanosecs && event.simu_seconds >= simClock->simu_seconds) {
                     table[pid].onDeck = 1;
                 }
             }
@@ -195,10 +195,10 @@ int get_outcome() {
 
 //increment given simulated time by given increment
 void increment_sim_time(simu_time* simTime, int increment) {
-    simTime->ns += increment;
-    if (simTime->ns >= 1000000000) {
-        simTime->ns -= 1000000000;
-        simTime->s += 1;
+    simTime->simu_nanosecs += increment;
+    if (simTime->simu_nanosecs >= 1000000000) {
+        simTime->simu_nanosecs -= 1000000000;
+        simTime->simu_seconds += 1;
     }
 }
 // returns a - b
@@ -232,7 +232,7 @@ process_table create_pcb(int priority, int pid, simu_time currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
                   .onDeck = 1,
-                  .arrivalTime = {.simu_seconds = currentTime.s, .simu_nanosecs = currentTime.ns},
+                  .arrivalTime = {.simu_seconds = currentTime.simu_seconds, .simu_nanosecs = currentTime.simu_nanosecs},
                   .cpuTime = {.simu_seconds = 0, .simu_nanosecs = 0},
                   .sysTime = {.simu_seconds= 0, .simu_nanosecs = 0},
                   .burstTime = {.simu_seconds= 0, .simu_nanosecs = 0},
