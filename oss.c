@@ -557,7 +557,7 @@ void oss(int maxProcesses) {
 
 
     // Stats
-    printf("\n\tStats about simulation...\n");
+    printf("Stats about simulation...\n");
     printf("\tTotal Run Time:  %d.%ds\n", simClock->simu_seconds, simClock->simu_nanosecs / 10000000);
     printf("\tTotal Processes: %d\n", generated);
     printf("\tAvg. Turnaround: %.2fs\n", avgSYS);
