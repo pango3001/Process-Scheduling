@@ -605,11 +605,11 @@ int dequeue(queue_t* queue) {
 
 // returns a - b
 simu_time subtract_sim_times(simu_time a, simu_time b) {
-    simu_time diff = { .simu_seconds= a.simu_seconds- b.simu_seconds,
+    simu_time diff = { .simu_seconds = a.simu_seconds - b.simu_seconds,
                       .simu_nanosecs = a.simu_nanosecs - b.simu_nanosecs };
     if (diff.simu_nanosecs < 0) {
         diff.simu_nanosecs += 1000000000;
-        diff.simu_seconds-= 1;
+        diff.simu_seconds -= 1;
     }
     return diff;
 }
