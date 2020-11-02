@@ -8,8 +8,29 @@
 #include <unistd.h>
 #include <math.h>
 
-#define TRUE 1
-#define FALSE 0
+// for simulated clock
+typedef struct {
+    unsigned int simu_seconds;
+    unsigned int simu_nanosecs;
+} simu_time;
+
+// PCB Table
+typedef struct {
+    unsigned int pid;  // max is 18
+    int priority;
+    int onDeck;
+    simu_time arrivalTime;
+    simu_time cpuTime;
+    simu_time sysTime; //Time in the system
+    simu_time burstTime;  //Time used in the last burst
+    simu_time waitTime;  //Total sleep time. time waiting for an event
+} process_table;
+
+//msg struct for msgqueue
+typedef struct {
+    long mess_ID;
+    int mess_quant;
+} message;
 
 FILE* logFile;//log file
 const key_t PCB_TABLE_KEY = 110594;//key for shared PCB Table
@@ -19,91 +40,18 @@ int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
 int msqid;//id for message queue
 
-//simulated time value
-//used for the simulated clock
-typedef struct {
-    unsigned int s;
-    unsigned int ns;
-} simtime_t;
-
-//pseudo-process control block
-//used for PCB Table
-typedef struct {
-    //simulated process id, range is [0,18]
-    int pid;
-    //Process priority
-    int priority;
-    //if the process is ready to run
-    int isReady;
-    //Arrivial time
-    simtime_t arrivalTime;
-    //CPU time used
-    simtime_t cpuTime;
-    //Time in the system
-    simtime_t sysTime;
-    //Time used in the last burst
-    simtime_t burstTime;
-    //Total sleep time. time waiting for an event
-    simtime_t waitTime;
 
 
-} pcb_t;
+void increment_sim_time(simu_time* simTime, int increment);
+simu_time subtract_sim_times(simu_time a, simu_time b);
+simu_time add_sim_times(simu_time a, simu_time b)
+simu_time divide_sim_time(simu_time simTime, int divisor);
+process_table create_pcb(int priority, int pid, simu_time currentTime);
 
-//msg struct for msgqueue
-typedef struct {
-    long mtype;
-    int mvalue;
-} mymsg_t;
 
-//increment given simulated time by given increment
-void increment_sim_time(simtime_t* simTime, int increment) {
-    simTime->ns += increment;
-    if (simTime->ns >= 1000000000) {
-        simTime->ns -= 1000000000;
-        simTime->s += 1;
-    }
-}
-// returns a - b
-simtime_t subtract_sim_times(simtime_t a, simtime_t b) {
-    simtime_t diff = { .s = a.s - b.s,
-                      .ns = a.ns - b.ns };
-    if (diff.ns < 0) {
-        diff.ns += 1000000000;
-        diff.s -= 1;
-    }
-    return diff;
-}
-//returns a + b
-simtime_t add_sim_times(simtime_t a, simtime_t b) {
-    simtime_t sum = { .s = a.s + b.s,
-                      .ns = a.ns + b.ns };
-    if (sum.ns >= 1000000000) {
-        sum.ns -= 1000000000;
-        sum.s += 1;
-    }
-    return sum;
-}
 
-//returns simtime / divisor
-simtime_t divide_sim_time(simtime_t simTime, int divisor) {
-    simtime_t quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
-    return quotient;
-}
-
-pcb_t create_pcb(int priority, int pid, simtime_t currentTime) {
-    pcb_t pcb = { .pid = pid,
-                  .priority = priority,
-                  .isReady = TRUE,
-                  .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
-                  .cpuTime = {.s = 0, .ns = 0},
-                  .sysTime = {.s = 0, .ns = 0},
-                  .burstTime = {.s = 0, .ns = 0},
-                  .waitTime = {.s = 0, .ns = 0} };
-    return pcb;
-}
-
-pcb_t* attach_pcb_table();
-simtime_t* attach_sim_clock();
+process_table* attach_pcb_table();
+simu_time* attach_sim_clock();
 void get_clock_and_table(int n);
 int get_outcome();
 
@@ -113,7 +61,7 @@ int main(int argc, char* argv[]) {
         exit(EXIT_SUCCESS);
     }
     int pid;
-    mymsg_t msg;
+    message msg;
     int quantum;
     int outcome = 0;
     pid = atoi(argv[1]);
@@ -121,10 +69,10 @@ int main(int argc, char* argv[]) {
     quantum = atoi(argv[3]);
     srand(time(0) + (pid + 1));  // seeding rand. seeding w/ time(0) caused
                                  // processes spawned too close to have same seed
-    pcb_t* table;
-    simtime_t* simClock;
-    simtime_t timeBlocked;//holds the time that the process was blocked at
-    simtime_t event;  // time of the event that will unblock the process
+    process_table* table;
+    simu_time* simClock;
+    simu_time timeBlocked;//holds the time that the process was blocked at
+    simu_time event;  // time of the event that will unblock the process
     int burst;//burst to calculate unblock time
     get_clock_and_table(pid);
     table = attach_pcb_table();
@@ -163,7 +111,7 @@ int main(int argc, char* argv[]) {
             // set status to blocked before telling oss to avoid race
             // condition. OSS is waiting for a message response so it
             // cant possibly check our isReady variable yet
-            table[pid].isReady = FALSE;
+            table[pid].isReady = 0;
             break;
         default:
             break;
@@ -180,13 +128,13 @@ int main(int argc, char* argv[]) {
         // set to
         if (outcome == 2) {
             // while loop to wait for event time to pass
-            while (table[pid].isReady == FALSE) {
+            while (table[pid].isReady == 0) {
                 //printf("waiting %ds%9dns\n", event.s, event.ns);
                 if (event.s > simClock->s) {
-                    table[pid].isReady = TRUE;
+                    table[pid].isReady = 1;
                 }
                 else if (event.ns >= simClock->ns && event.s >= simClock->s) {
-                    table[pid].isReady = TRUE;
+                    table[pid].isReady = 1;
                 }
             }
         }
@@ -195,8 +143,8 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-pcb_t* attach_pcb_table() {
-    pcb_t* pcbTable;
+process_table* attach_pcb_table() {
+    process_table* pcbTable;
     pcbTable = shmat(pcbTableId, NULL, 0);
     if (pcbTableId < 0) {  // error
         perror("./user: Error: shmat ");
@@ -205,8 +153,8 @@ pcb_t* attach_pcb_table() {
     return pcbTable;
 }
 
-simtime_t* attach_sim_clock() {
-    simtime_t* simClock;
+simu_time* attach_sim_clock() {
+    simu_time* simClock;
     simClock = shmat(clockId, NULL, 0);
     if (clockId < 0) {  // error
         perror("./user: Error: shmat ");
@@ -217,13 +165,13 @@ simtime_t* attach_sim_clock() {
 
 void get_clock_and_table(int n) {
     // Getting shared memory for the simulated clock
-    clockId = shmget(CLOCK_KEY, sizeof(simtime_t), IPC_CREAT | 0777);
+    clockId = shmget(CLOCK_KEY, sizeof(simu_time), IPC_CREAT | 0777);
     if (clockId < 0) {  // error
         perror("./user: Error: shmget ");
         exit(EXIT_FAILURE);
     }
     // Getting shared memory for the pcb table
-    pcbTableId = shmget(PCB_TABLE_KEY, sizeof(pcb_t) * (n + 1), IPC_CREAT | 0777);
+    pcbTableId = shmget(PCB_TABLE_KEY, sizeof(process_table) * (n + 1), IPC_CREAT | 0777);
     if (pcbTableId < 0) {
         perror("./user: Error: shmget ");
         exit(EXIT_FAILURE);
@@ -235,12 +183,59 @@ void get_clock_and_table(int n) {
 int get_outcome() {
     int tPercent = 5;   //% chance of terminating
     int bPercent = 5;  //% chance of getting blocked
-    int terminating = ((rand() % 100) + 1) <= tPercent ? TRUE : FALSE;
-    int blocked = ((rand() % 100) + 1) <= bPercent ? TRUE : FALSE;
+    int terminating = ((rand() % 100) + 1) <= tPercent ? 1 : 0;
+    int blocked = ((rand() % 100) + 1) <= bPercent ? 1 : 0;
     if (terminating)
         return 1;
     if (blocked)
         return 2;
     // not blocked or terminating
     return 0;
+}
+
+//increment given simulated time by given increment
+void increment_sim_time(simu_time* simTime, int increment) {
+    simTime->ns += increment;
+    if (simTime->ns >= 1000000000) {
+        simTime->ns -= 1000000000;
+        simTime->s += 1;
+    }
+}
+// returns a - b
+simu_time subtract_sim_times(simu_time a, simu_time b) {
+    simu_time diff = { .s = a.s - b.s,
+                      .ns = a.ns - b.ns };
+    if (diff.ns < 0) {
+        diff.ns += 1000000000;
+        diff.s -= 1;
+    }
+    return diff;
+}
+//returns a + b
+simu_time add_sim_times(simu_time a, simu_time b) {
+    simu_time sum = { .s = a.s + b.s,
+                      .ns = a.ns + b.ns };
+    if (sum.ns >= 1000000000) {
+        sum.ns -= 1000000000;
+        sum.s += 1;
+    }
+    return sum;
+}
+
+//returns simtime / divisor
+simu_time divide_sim_time(simu_time simTime, int divisor) {
+    simu_time quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
+    return quotient;
+}
+
+process_table create_pcb(int priority, int pid, simu_time currentTime) {
+    process_table pcb = { .pid = pid,
+                  .priority = priority,
+                  .isReady = 1,
+                  .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
+                  .cpuTime = {.s = 0, .ns = 0},
+                  .sysTime = {.s = 0, .ns = 0},
+                  .burstTime = {.s = 0, .ns = 0},
+                  .waitTime = {.s = 0, .ns = 0} };
+    return pcb;
 }

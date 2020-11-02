@@ -18,30 +18,28 @@
 
 #define MAX_PCB 18 // max amount of processes in the system at once
 
-//msg struct for msgqueue
+// message queue
 typedef struct {
-    long mtype;
-    int mvalue;
-} mymsg_t;
+    long mess_ID;
+    int mess_quant;
+} message;
 
-//simulated time value
-//used for the simulated clock
+// for simulated clock
 typedef struct {
-    unsigned int s;
-    unsigned int ns;
-} simtime_t;
-
+    unsigned int simu_seconds;
+    unsigned int simu_nanosecs;
+} simu_time;
 
 // PCB Table
 typedef struct {
     unsigned int pid;  // max is 18
     int priority;
-    int isReady;
-    simtime_t arrivalTime;
-    simtime_t cpuTime;
-    simtime_t sysTime; //Time in the system
-    simtime_t burstTime;  //Time used in the last burst
-    simtime_t waitTime;  //Total sleep time. time waiting for an event
+    int onDeck;
+    simu_time arrivalTime;
+    simu_time cpuTime;
+    simu_time sysTime; //Time in the system
+    simu_time burstTime;  //Time used in the last burst
+    simu_time waitTime;  //Total sleep time. time waiting for an event
 } process_table;
 
 // Queue
@@ -75,16 +73,16 @@ int get_sim_pid(int*, int);
 int rand_priority(int);
 int check_blocked(int*, process_table*, int);
 void oss(int);
-int dispatch(int, int, int, simtime_t, int, int*);
-simtime_t* create_sim_clock();
-simtime_t get_next_process_time(simtime_t, simtime_t);
-int should_spawn(int, simtime_t, simtime_t, int, int);
-void increment_sim_time(simtime_t* simTime, int increment);
+int dispatch(int, int, int, simu_time, int, int*);
+simu_time* create_sim_clock();
+simu_time get_next_process_time(simu_time, simu_time);
+int should_spawn(int, simu_time, simu_time, int, int);
+void increment_sim_time(simu_time* simTime, int increment);
 queue_t* create_queue(int size);
-simtime_t subtract_sim_times(simtime_t a, simtime_t b);
-simtime_t add_sim_times(simtime_t a, simtime_t b);
-simtime_t divide_sim_time(simtime_t simTime, int divisor);
-process_table create_pcb(int priority, int pid, simtime_t currentTime);
+simu_time subtract_sim_times(simu_time a, simu_time b);
+simu_time add_sim_times(simu_time a, simu_time b);
+simu_time divide_sim_time(simu_time simTime, int divisor);
+process_table create_pcb(int priority, int pid, simu_time currentTime);
 void enqueue(queue_t* queue, int pid);
 int dequeue(queue_t* queue);
 
@@ -158,9 +156,9 @@ process_table* create_table(int n) {
     return table;
 }
 /*Create a simulated clock in shared memory initialized to 0s0ns*/
-simtime_t* create_sim_clock() {
-    simtime_t* simClock;
-    clockId = shmget(CLOCK_KEY, sizeof(simtime_t), IPC_CREAT | 0777);
+simu_time* create_sim_clock() {
+    simu_time* simClock;
+    clockId = shmget(CLOCK_KEY, sizeof(simu_time), IPC_CREAT | 0777);
     if (clockId < 0) {  // error
         perror("./oss: Error: shmget ");
         cleanup();
@@ -194,8 +192,8 @@ int get_sim_pid(int* pids, int pidsCount) {
     return -1;  // no available pids
 }
 /*return a random simtime in range [0, max] + current time*/
-simtime_t get_next_process_time(simtime_t max, simtime_t currentTime) {
-    simtime_t nextTime = { .ns = (rand() % (max.ns + 1)) + currentTime.ns,
+simu_time get_next_process_time(simu_time max, simu_time currentTime) {
+    simu_time nextTime = { .ns = (rand() % (max.ns + 1)) + currentTime.ns,
                           .s = (rand() % (max.s + 1)) + currentTime.s };
     if (nextTime.ns >= 1000000000) {
         nextTime.s += 1;
@@ -211,7 +209,7 @@ int rand_priority(int chance) {
         return 1;
 }
 
-int should_spawn(int pid, simtime_t next, simtime_t now, int generated,
+int should_spawn(int pid, simu_time next, simu_time now, int generated,
     int max) {
     if (generated >= max)  // generated enough/too many processes
         return 0;
@@ -241,8 +239,8 @@ int check_blocked(int* blocked, process_table* table, int count) {
 /*Dispatches a process by sending a message witht he appropriate time quantum to
  * the given pid
  * waits to recieve a response and returns that response */
-int dispatch(int pid, int priority, int messageID, simtime_t currentTime, int quantum, int* lines) {
-    mymsg_t msg;                                     // message to be sent
+int dispatch(int pid, int priority, int messageID, simu_time currentTime, int quantum, int* lines) {
+    message msg;                                     // message to be sent
     quantum = quantum * pow(2.0, (double)priority);  // i = queue #, slice = 2^i * quantum
     msg.mtype = pid + 1;                             // pids recieve messages of type (their pid) + 1
     msg.mvalue = quantum;
@@ -264,7 +262,7 @@ int dispatch(int pid, int priority, int messageID, simtime_t currentTime, int qu
 void oss(int maxProcesses) {
     /*Scheduling structures*/
     process_table* table;// Process control block table
-    simtime_t* simClock;// simulated system clock
+    simu_time* simClock;// simulated system clock
     queue_t* rrQueue; // round robin queue
     queue_t* queue1; // highest level of mlfq
     queue_t* queue2; // mid level
@@ -279,8 +277,8 @@ void oss(int maxProcesses) {
     int burst; // actual time used by the process
     int response; // response from process. will be percentage of quantum used
 
-    simtime_t maxTimeBetweenNewProcesses = { .s = 0, .ns = 500000000 };
-    simtime_t nextProcess; // holds the time we should spawn the next process
+    simu_time maxTimeBetweenNewProcesses = { .s = 0, .ns = 500000000 };
+    simu_time nextProcess; // holds the time we should spawn the next process
     int terminated = 0; // counter of terminated processes
     int generated = 0; // counter of generated processes
     int lines = 0;  // lines written to the file
@@ -296,10 +294,10 @@ void oss(int maxProcesses) {
     int pid;    // holds wait() and fork() return values
 	
     /*Statistics*/
-    simtime_t totalCPU = { .s = 0, .ns = 0 };
-    simtime_t totalSYS = { .s = 0, .ns = 0 };
-    simtime_t totalIdle = { .s = 0, .ns = 0 };
-    simtime_t totalWait = { .s = 0, .ns = 0 };
+    simu_time totalCPU = { .s = 0, .ns = 0 };
+    simu_time totalSYS = { .s = 0, .ns = 0 };
+    simu_time totalIdle = { .s = 0, .ns = 0 };
+    simu_time totalWait = { .s = 0, .ns = 0 };
     double avgCPU = 0.0;
     double avgSYS = 0.0;
     double avgWait = 0.0;
@@ -569,7 +567,7 @@ void oss(int maxProcesses) {
 
 
 //increment given simulated time by given increment
-void increment_sim_time(simtime_t* simTime, int increment) {
+void increment_sim_time(simu_time* simTime, int increment) {
     simTime->ns += increment;
     if (simTime->ns >= 1000000000) {
         simTime->ns -= 1000000000;
@@ -606,8 +604,8 @@ int dequeue(queue_t* queue) {
 
 
 // returns a - b
-simtime_t subtract_sim_times(simtime_t a, simtime_t b) {
-    simtime_t diff = { .s = a.s - b.s,
+simu_time subtract_sim_times(simu_time a, simu_time b) {
+    simu_time diff = { .s = a.s - b.s,
                       .ns = a.ns - b.ns };
     if (diff.ns < 0) {
         diff.ns += 1000000000;
@@ -617,8 +615,8 @@ simtime_t subtract_sim_times(simtime_t a, simtime_t b) {
 }
 
 //returns a + b
-simtime_t add_sim_times(simtime_t a, simtime_t b) {
-    simtime_t sum = { .s = a.s + b.s,
+simu_time add_sim_times(simu_time a, simu_time b) {
+    simu_time sum = { .s = a.s + b.s,
                       .ns = a.ns + b.ns };
     if (sum.ns >= 1000000000) {
         sum.ns -= 1000000000;
@@ -628,12 +626,12 @@ simtime_t add_sim_times(simtime_t a, simtime_t b) {
 }
 
 //returns simtime / divisor
-simtime_t divide_sim_time(simtime_t simTime, int divisor) {
-    simtime_t quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
+simu_time divide_sim_time(simu_time simTime, int divisor) {
+    simu_time quotient = { .s = simTime.s / divisor, .ns = simTime.ns / divisor };
     return quotient;
 }
 
-process_table create_pcb(int priority, int pid, simtime_t currentTime) {
+process_table create_pcb(int priority, int pid, simu_time currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
                   .isReady = 1,
