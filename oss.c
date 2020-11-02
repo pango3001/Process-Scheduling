@@ -216,7 +216,7 @@ int should_spawn(int pid, simu_time next, simu_time now, int generated,
     if (pid < 0)  // no available pids
         return 0;
     // not time for next process
-    if (next.simu_seconds> now.s)
+    if (next.simu_seconds> now.simu_seconds)
         return 0;
     // more specific not time for next process
     if (next.simu_seconds>= now.simu_seconds&& next.simu_nanosecs > now.simu_nanosecs)
@@ -361,7 +361,7 @@ void oss(int maxProcesses) {
         /* Check blocked queue */
         else if ((simPid = check_blocked(blockedPids, table, maxProcesses)) >= 0) {
             blockedPids[simPid] = 0;//remove from blocked "queue"
-            fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->s, simClock->simu_nanosecs);
+            fprintf(logFile, "OSS: Unblocked. PID: %3d TIME: %ds%09dns\n", simPid, simClock->simu_seconds, simClock->simu_nanosecs);
             if (table[simPid].priority == 0) {
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 enqueue(rrQueue, simPid);
@@ -561,7 +561,7 @@ void oss(int maxProcesses) {
     printf("Avg. CPU Time:   %.2fs\n", avgCPU);
     printf("Avg. Wait Time:  %.2fs\n", avgWait);
     printf("Avg. Sleep Time: %.2fs\n", (avgSYS - avgCPU));
-    printf("Total Idle Time: %d.%ds\n", totalIdle.s, totalIdle.simu_nanosecs / 10000000);
+    printf("Total Idle Time: %d.%ds\n", totalIdle.simu_seconds, totalIdle.simu_nanosecs / 10000000);
     return;
 }
 
@@ -616,7 +616,7 @@ simu_time subtract_sim_times(simu_time a, simu_time b) {
 
 //returns a + b
 simu_time add_sim_times(simu_time a, simu_time b) {
-    simu_time sum = { .simu_seconds= a.simu_seconds+ b.simu_seconds
+    simu_time sum = { .simu_seconds= a.simu_seconds + b.simu_seconds,
                       .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
     if (sum.simu_nanosecs >= 1000000000) {
         sum.simu_nanosecs -= 1000000000;
