@@ -395,8 +395,8 @@ void oss(int maxProcesses) {
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
-                fprintf(logFile, "%-5d: OSS: Blocked    PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Blocked queue\n", lines++, simPid);
+                fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -414,7 +414,7 @@ void oss(int maxProcesses) {
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated process counter
-                fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
+                fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
             }
         }
         /*MLFQ
@@ -427,8 +427,8 @@ void oss(int maxProcesses) {
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {
                 increment_sim_time(simClock, burst);
-                fprintf(logFile, "%-5d: OSS: Full Slice PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Queue 2\n", lines++, simPid);
+                fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Queue 2\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -438,8 +438,8 @@ void oss(int maxProcesses) {
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
-                fprintf(logFile, "%-5d: OSS: Blocked    PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Blocked queue\n", lines++, simPid);
+                fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -458,7 +458,7 @@ void oss(int maxProcesses) {
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
-                fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
+                fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
             }  // end response ifs
         }    // end queue 1 check
         /* Queue 2 */
@@ -470,8 +470,8 @@ void oss(int maxProcesses) {
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {
                 increment_sim_time(simClock, burst);
-                fprintf(logFile, "%-5d: OSS: Full Slice PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Queue 3\n", lines++, simPid);
+                fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Queue 3\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -481,8 +481,8 @@ void oss(int maxProcesses) {
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
-                fprintf(logFile, "%-5d: OSS: Blocked    PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Blocked queue\n", lines++, simPid);
+                fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -501,7 +501,7 @@ void oss(int maxProcesses) {
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
-                fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
+                fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
             }  // end response ifs
         }    // end queue 2 check
         // 3rd Queue
@@ -513,8 +513,8 @@ void oss(int maxProcesses) {
             burst = response * (quantum / 100) * pow(2.0, (double)priority);
             if (response == 100) {
                 increment_sim_time(simClock, burst);
-                fprintf(logFile, "%-5d: OSS: Full Slice PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Queue 3\n", lines++, simPid);
+                fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Queue 3\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -523,8 +523,8 @@ void oss(int maxProcesses) {
             else if (response < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
-                fprintf(logFile, "%-5d: OSS: Blocked    PID: %3d Used: %9dns\n", lines++, simPid, burst);
-                fprintf(logFile, "%-5d: OSS: PID: %3d -> Blocked queue\n", lines++, simPid);
+                fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: PID: %3d -> Blocked queue\n", simPid);
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
@@ -543,7 +543,7 @@ void oss(int maxProcesses) {
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
                 availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
-                fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
+                fprintf(logFile, "OSS: Terminated PID: %3d Used: %9dns\n", simPid, burst);
             }  // end response ifs
         }    // end queue 3 check
         /* IDLE: empty queues and nothing ready to spawn */
