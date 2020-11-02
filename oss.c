@@ -16,7 +16,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#define TRUE 1
 #define FALSE 0
 #define MAX_PCB 18 // max amount of processes allowed in the system at one time
 
@@ -34,8 +33,7 @@ typedef struct {
 } simtime_t;
 
 
-//pseudo-process control block
-//used for PCB Table
+// PCB Table
 typedef struct {
     unsigned int pid;  // max is 18
     int priority;
@@ -47,6 +45,7 @@ typedef struct {
     simtime_t waitTime;  //Total sleep time. time waiting for an event
 } process_table;
 
+// Queue
 typedef struct {
     unsigned int head;
     unsigned int tail;
@@ -55,8 +54,7 @@ typedef struct {
     int* data;
 } queue_t;
 
-void enqueue(queue_t* queue, int pid);
-int dequeue(queue_t* queue);
+
 
 FILE* logFile;//log file
 const key_t PCB_TABLE_KEY = 110594;//key for shared PCB Table
@@ -67,8 +65,7 @@ int clockId;//shmid for simulated clock
 int msqid;//id for message queue
 
 // Prototypes
-void no_args_msg();
-void help_msg();
+
 void create_msqueue();
 FILE* open_file(char*, char*, char*);
 static void time_out();
@@ -89,39 +86,14 @@ simtime_t subtract_sim_times(simtime_t a, simtime_t b);
 simtime_t add_sim_times(simtime_t a, simtime_t b);
 simtime_t divide_sim_time(simtime_t simTime, int divisor);
 process_table create_pcb(int priority, int pid, simtime_t currentTime);
-
+void enqueue(queue_t* queue, int pid);
+int dequeue(queue_t* queue);
 
 
 
 int main(int argc, char* argv[]) {
-    int opt;                       // getopt option
     
     char* log = "oss.log";  // log file
-
-    if (argc < 2) {
-        no_args_msg();
-    }
-    /*
-    while ((opt = getopt(argc, argv, "h")) != -1) {
-        switch (opt) {
-        case 'h':
-            help_msg();
-            return 0;
-        default:
-            no_args_msg();
-            break;
-        }  // end switch
-    }    // end while
-    if (MAX_PCB > 18) {
-        printf("n must be <= 18\n");
-        return 0;
-    }
-    else if (MAX_PCB <= 0) {
-        printf("n must be >= 1\n");
-        return 0;
-    }
-
-    */
     // Open log file
     logFile = open_file(log, "w", "./oss: Error: ");
     // Terminate after 3s
@@ -140,25 +112,7 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-/*Display that no arguments were provided*/
-void no_args_msg() {
-    printf("No arguments given\n");
-    printf("Using default values\n");
-    return;
-}
-/*Display help message*/
-void help_msg() {
-    printf("This program takes the following possible arguments\n");
-    printf("\n");
-    printf("  -h           : to display this help message\n");
-    printf("  -n x         : x = the amount of children allowed to exist at one time\n");
-    printf("  -o filename  : to specify log file\n");
-    printf("\n");
-    printf("Default Values:\n");
-    printf("  Log File: osslog.txt\n");
-    printf("         n: 18\n");
-    return;
-}
+
 /*fopen with simple error check*/
 FILE* open_file(char* fname, char* opts, char* error) {
     FILE* fp = fopen(fname, opts);
@@ -271,14 +225,14 @@ int should_spawn(int pid, simtime_t next, simtime_t now, int generated,
     if (next.s >= now.s && next.ns > now.ns)
         return FALSE;
 
-    return TRUE;
+    return 1; // return true (should spawn new process)
 }
 
 int check_blocked(int* blocked, process_table* table, int count) {
     int i; //loop iterator
     for (i = 0; i < count; i++) {
-        if (blocked[i] == TRUE) {
-            if (table[i].isReady == TRUE) {
+        if (blocked[i] == 1) {
+            if (table[i].isReady == 1) {
                 return i;
             }
         }
@@ -360,10 +314,10 @@ void oss(int maxProcesses) {
     queue3 = create_queue(maxProcesses);        // lowest level/priority
     create_msqueue();                           // set up message queue.sets global msqid variable
     sprintf(msqidArg, "%d", msqid);             // write msqid to msqid string arg
-    // Loop through available pids to set all to TRUE(available)
+    // Loop through available pids to set all to 1(available)
     for (i = 0; i < maxProcesses; i++) {
         blockedPids[i] = FALSE;//set blocked "queue" to empty
-        availablePids[i] = TRUE;
+        availablePids[i] = 1;
     }
     // get time to spawn next process
     nextProcess = get_next_process_time(maxTimeBetweenNewProcesses, (*simClock));
@@ -447,7 +401,7 @@ void oss(int maxProcesses) {
                 // update pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
-                blockedPids[simPid] = TRUE;//add to blocked "queue"
+                blockedPids[simPid] = 1;//add to blocked "queue"
             }
             else {                                // Terminated
                 increment_sim_time(simClock, burst);  // increment the clock
@@ -459,7 +413,7 @@ void oss(int maxProcesses) {
                 totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
                 totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
-                availablePids[simPid] = TRUE;  // set simpid to available
+                availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated process counter
                 fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
             }
@@ -491,7 +445,7 @@ void oss(int maxProcesses) {
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 1;  // set priority back to highest level
-                blockedPids[simPid] = TRUE;//add to blocked "queue"
+                blockedPids[simPid] = 1;//add to blocked "queue"
             }
             else {                                // Terminated
                 increment_sim_time(simClock, burst);  // increment the clock
@@ -503,7 +457,7 @@ void oss(int maxProcesses) {
                 totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
                 totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
-                availablePids[simPid] = TRUE;  // set simpid to available
+                availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
             }  // end response ifs
@@ -534,7 +488,7 @@ void oss(int maxProcesses) {
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 1;  // set priority back to highest level
-                blockedPids[simPid] = TRUE;//add to blocked "queue" 
+                blockedPids[simPid] = 1;//add to blocked "queue" 
             }
             else {                                // Terminated
                 increment_sim_time(simClock, burst);  // increment the clock
@@ -546,7 +500,7 @@ void oss(int maxProcesses) {
                 totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
                 totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
-                availablePids[simPid] = TRUE;  // set simpid to available
+                availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
             }  // end response ifs
@@ -576,7 +530,7 @@ void oss(int maxProcesses) {
                 increment_sim_time(&table[simPid].cpuTime, burst);
                 table[simPid].sysTime = subtract_sim_times((*simClock), table[simPid].arrivalTime);
                 table[simPid].priority = 1;  // set priority back to highest level
-                blockedPids[simPid] = TRUE;//add to blocked "queue"
+                blockedPids[simPid] = 1;//add to blocked "queue"
             }
             else {                                // Terminated
                 increment_sim_time(simClock, burst);  // increment the clock
@@ -588,7 +542,7 @@ void oss(int maxProcesses) {
                 totalCPU = add_sim_times(totalCPU, table[simPid].cpuTime);
                 totalSYS = add_sim_times(totalSYS, table[simPid].sysTime);
                 totalWait = add_sim_times(totalWait, table[simPid].waitTime);
-                availablePids[simPid] = TRUE;  // set simpid to available
+                availablePids[simPid] = 1;  // set simpid to available
                 terminated += 1;               // increment terminated processes counter
                 fprintf(logFile, "%-5d: OSS: Terminated PID: %3d Used: %9dns\n", lines++, simPid, burst);
             }  // end response ifs
@@ -683,7 +637,7 @@ simtime_t divide_sim_time(simtime_t simTime, int divisor) {
 process_table create_pcb(int priority, int pid, simtime_t currentTime) {
     process_table pcb = { .pid = pid,
                   .priority = priority,
-                  .isReady = TRUE,
+                  .isReady = 1,
                   .arrivalTime = {.s = currentTime.s, .ns = currentTime.ns},
                   .cpuTime = {.s = 0, .ns = 0},
                   .sysTime = {.s = 0, .ns = 0},
