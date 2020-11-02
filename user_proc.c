@@ -44,7 +44,7 @@ int msqid;//id for message queue
 
 void increment_sim_time(simu_time* simTime, int increment);
 simu_time subtract_sim_times(simu_time a, simu_time b);
-simu_time add_sim_times(simu_time a, simu_time b)
+simu_time add_sim_times(simu_time a, simu_time b);
 simu_time divide_sim_time(simu_time simTime, int divisor);
 process_table create_pcb(int priority, int pid, simu_time currentTime);
 
