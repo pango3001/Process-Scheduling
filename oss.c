@@ -27,7 +27,7 @@ typedef struct {
 
 // for simulated clock
 typedef struct {
-    unsigned int simu_seconds;
+    unsigned int simu_seconds; 
     unsigned int simu_nanosecs;
 } simu_time;
 
@@ -54,7 +54,8 @@ typedef struct {
 } queue_t;
 
 
-
+const double maxTimeBetweenNewProcsNS;
+const double maxTimeBetweenNewProcsSecs;
 FILE* logFile;//log file
 const key_t PCB_TABLE_KEY = 110667;//key for shared PCB Table
 const key_t CLOCK_KEY = 110626;//key for shared simulated clock 
