@@ -66,7 +66,7 @@ int get_outcome();
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        fprintf(stderr, "Usage: ./user pid msqid quantum\n");
+        fprintf(stderr, "Usage: ./user_proc pid msqid quantum\n");
         exit(EXIT_SUCCESS);
     }
     int pid;
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
     // while loop to wait for messages from oss until we terminate.
     while (outcome != 1) {  // outcome == 1 means terminate
         if ((msgrcv(messQid, &msg, sizeof(msg.mess_quant), (pid + 1), 0)) == -1) {
-            perror("./user: Error: msgrcv ");
+            perror("./user_proc: Error: msgrcv ");
             exit(EXIT_FAILURE);
         }
         outcome = get_outcome();
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
         msg.mess_ID = pid + 100;  // oss is waiting for a msg w/ type pid+100
 
         if (msgsnd(messQid, &msg, sizeof(msg.mess_quant), 0) == -1) {
-            perror("./user: Error: msgsnd ");
+            perror("./user_proc: Error: msgsnd ");
             exit(EXIT_FAILURE);
         }
 
@@ -143,7 +143,7 @@ process_table* attach_pcb_table() {
     process_table* pcbTable;
     pcbTable = shmat(pcbTableId, NULL, 0);
     if (pcbTableId < 0) {  // error
-        perror("./user: Error: shmat ");
+        perror("./user_proc: Error: shmat ");
         exit(EXIT_FAILURE);
     }
     return pcbTable;
@@ -153,7 +153,7 @@ simu_time* attach_sim_clock() {
     simu_time* simClock;
     simClock = shmat(clockId, NULL, 0);
     if (clockId < 0) {  // error
-        perror("./user: Error: shmat ");
+        perror("./user_proc: Error: shmat ");
         exit(EXIT_FAILURE);
     }
     return simClock;
@@ -164,14 +164,14 @@ void get_clock_and_table(int n) {
     unsigned int CLOCK_KEY = ftok("./oss", 'b');
     clockId = shmget(CLOCK_KEY, sizeof(simu_time), IPC_CREAT | 0777);
     if (clockId < 0) {  // error
-        perror("./user: Error: shmget ");
+        perror("./user_proc: Error: shmget ");
         exit(EXIT_FAILURE);
     }
     // Getting shared memory for the pcb table
     unsigned int PCB_TABLE_KEY = ftok("./oss", 'a');
     pcbTableId = shmget(PCB_TABLE_KEY, sizeof(process_table) * (n + 1), IPC_CREAT | 0777);
     if (pcbTableId < 0) {
-        perror("./user: Error: shmget ");
+        perror("./user_proc: Error: shmget ");
         exit(EXIT_FAILURE);
     }
     return;
