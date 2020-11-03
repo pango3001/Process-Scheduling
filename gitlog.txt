@@ -1,0 +1,433 @@
+commit 6b7260d7dbf03d8cdc41df9c79ac7f2d8d1b539d
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:52:25 2020 -0600
+
+    updates
+
+commit a82790912de0895b48d4f28fb513f0fe7a1b294c
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:51:29 2020 -0600
+
+    updates
+
+commit 7bd9b1655c0394c403f6d0011c9c75f60763acfa
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:49:51 2020 -0600
+
+    update
+
+commit 3fdb172834e1fcf5f4d007b6eee8c828e0cec47f
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:48:07 2020 -0600
+
+    Update user_proc.c
+
+commit bb5f06f7b7b939a7fe0d67def1d28d25eeceda1e
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:46:10 2020 -0600
+
+    Update oss.c
+
+commit 00e47278313bdeaab41a7ccfbca542fd564f2fdb
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:43:44 2020 -0600
+
+    Update oss.c
+
+commit e415720cb09c7256f42dffe66e328b99b5b96042
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:41:55 2020 -0600
+
+    updates
+
+commit 6c4167e817b173f4d4e504b630aa8e62cabf1209
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:39:17 2020 -0600
+
+    updates
+
+commit 9ab260f58b99a0bef414a4572f8dc46c3b811aa3
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:37:04 2020 -0600
+
+    updates
+
+commit e70ac34a07761ac8d3247bddd7a53a8d2baa0e6f
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:33:47 2020 -0600
+
+    Update oss.c
+
+commit 116f0e3176d7dc3c6006172ee545c6fbf3ff62c1
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:33:16 2020 -0600
+
+    Update user_proc.c
+
+commit 8edcdc7e863ffbf7c8ecaf540f3c6cdef2142961
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:32:20 2020 -0600
+
+    added ftok for keys
+
+commit 2f46544fb7056930348a10ab0e6cfeca9823f4ab
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:25:14 2020 -0600
+
+    Update oss.c
+
+commit 7a1cd3fe36c68afb96c7452150aa7a7689f9e1b2
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:21:52 2020 -0600
+
+    Update oss.c
+
+commit c18bc97b54726616ec95b01f8f21812c56105d4f
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:16:28 2020 -0600
+
+    Update oss.c
+
+commit d35ecad89d3dd7e28f13efddacf1234061e0ff50
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:15:03 2020 -0600
+
+    Update oss.c
+
+commit efffbae15484737b0a3e29ab0871be0c7e14aebf
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:06:41 2020 -0600
+
+    Update oss.c
+
+commit cdc40ee72f521ea8538354d1e961dcb66b47b138
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 19:05:00 2020 -0600
+
+    Update oss.c
+
+commit 286f4c85ff2e332a33d0cffd9d450284e3491bf4
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 18:59:14 2020 -0600
+
+    updates
+
+commit 1d8f1e9fb06a3dd2869f5a5c285fdff85ffc29a8
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 16:17:09 2020 -0600
+
+    Update oss.c
+
+commit 4db6c0fe85d6897222226eeda31f2e3b5170ff92
+Merge: c0e7366 176cac9
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 16:14:44 2020 -0600
+
+    Merge branch 'main' of https://github.com/pango3001/process_scheduling into main
+
+commit 176cac99e077da134b20fbef0291b3ba169e4ed3
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Mon Nov 2 16:13:42 2020 -0600
+
+    updates
+
+commit c0e7366be035290aa8fa412de804a0147952bb14
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 16:12:17 2020 -0600
+
+    Update oss.c
+
+commit 556d2832383fb0b5f16c3d86c68277dbc742ad15
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 14:07:11 2020 -0600
+
+    Update oss.c
+
+commit 5c972b1c91bcba3b517d11695f1131522cd81cfe
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 14:06:03 2020 -0600
+
+    Update oss.c
+
+commit fbbeb0de4dc17ad708a62e7fa79a295407c33838
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 14:01:20 2020 -0600
+
+    Update oss.c
+
+commit aab0f2f00f3c0297086f946c36b03c4e032afb2c
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 13:38:03 2020 -0600
+
+    Update oss.c
+
+commit 0edf9ffe31b46f2bfc18ba0f7562a43736ef5cea
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 13:34:46 2020 -0600
+
+    Update oss.c
+
+commit 16acad6cbc126069c8589818f4fdb05b14cf0ec2
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 08:45:17 2020 -0600
+
+    clean up and comments
+
+commit d983a199b95e673c2b8a2922a66e3c3a8e1f6ce5
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:51:12 2020 -0600
+
+    Update oss.c
+
+commit 84247d73d82cc19390dac756dc1e8b8063dae57b
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:50:17 2020 -0600
+
+    Update oss.c
+
+commit ed3fd1709e89d735f5447d6e900434966633d6be
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:47:40 2020 -0600
+
+    Update oss.c
+
+commit 4516945f752fda5f745ac1709973110d8c037c1a
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:46:57 2020 -0600
+
+    Update oss.c
+
+commit bfc2b3fcaf178a73e0f79305767ebd179d0e8257
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:44:39 2020 -0600
+
+    Update user_proc.c
+
+commit b7caa6061f6d298b997054e9c27408fd007d0b07
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:42:06 2020 -0600
+
+    Update user_proc.c
+
+commit 9ccafcc4b999214976404777747d0cb7ede660c0
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:38:11 2020 -0600
+
+    Update user_proc.c
+
+commit b38cd7284c0a8a33f31b0c0297e7a7057a2bbe1f
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:31:40 2020 -0600
+
+    Update user_proc.c
+
+commit dd9bafbad041158d6b234733cce46e4faa410823
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:26:14 2020 -0600
+
+    Update oss.c
+
+commit c2d8892202257f9e96ae3a760396220c7e266d4f
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:23:18 2020 -0600
+
+    Update oss.c
+
+commit 735cab47c5dc3e477a18b4a1ef0d129087a6cb7d
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:20:38 2020 -0600
+
+    Update oss.c
+
+commit c95d63e0d7ca65db538c6872028830d38a3c62b3
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:16:29 2020 -0600
+
+    Update oss.c
+
+commit 712852524dc23a37b63a2d999681afe81faaafe8
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:12:14 2020 -0600
+
+    updates
+
+commit 781615c82d126925b7b568648ff84e6c5edafa07
+Author: pango3001 <pango3001@gmail.com>
+Date:   Mon Nov 2 00:01:11 2020 -0600
+
+    updates
+
+commit 16086437b8ef088bbc4e1a519616af2b64073006
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 22:54:53 2020 -0600
+
+    Update oss.c
+
+commit bcdc82f05837f44a89d6cf861d14d8e09243a2c5
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 21:44:16 2020 -0600
+
+    Update oss.c
+
+commit 46c5495510f71dbc215be5322826210fd5aa2ad6
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 21:39:37 2020 -0600
+
+    Update oss.c
+
+commit 1ef7ae0b232aceaa26d90c69a4348b3b6c9f3ad5
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 21:36:57 2020 -0600
+
+    Update oss.c
+
+commit c6caeff82222612c220fa5214e96c911a35dd6e9
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 21:30:34 2020 -0600
+
+    updated outputs
+
+commit 8df68f138ca4c814bd19bd4bb39ec7a43f4b9010
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 20:16:45 2020 -0600
+
+    clear screen added
+
+commit 86de218d17fdb1e731d840703a8bf525d80b4194
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 20:13:24 2020 -0600
+
+    Update oss.c
+
+commit 687f8951f497e2a59c6be27b00129d9cb8b9edf1
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 20:07:05 2020 -0600
+
+    Update oss.c
+
+commit 7de595129b7c7175049df464cb04d11c203a0457
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 20:00:29 2020 -0600
+
+    fixed seg fault and clean up
+
+commit 3a6bdd4d05a7da4fb53a7a2840b9ffc14232a263
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 19:54:58 2020 -0600
+
+    Update oss.c
+
+commit cf6083bab9f8e3e31be7adada901103e45bd292c
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 19:52:34 2020 -0600
+
+    Update oss.c
+
+commit 830e49cba70041d4d1c5b4cf284d28714904252a
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 19:49:51 2020 -0600
+
+    Fixed key issue
+
+commit 7dd9b2c4a766e8a760709e19f19326247ec6bdd1
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Nov 1 19:35:41 2020 -0600
+
+    alot of cleanup
+
+commit 2dd9ff7d27fdbc1610c625b35da99a69dad80e54
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Oct 25 21:10:43 2020 -0500
+
+    Update oss.c
+
+commit d0705bd16c12b93a5722fb143b2d0f18c40b931d
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Oct 25 20:36:20 2020 -0500
+
+    Update oss.c
+
+commit eee01d24ac454355a97f54920e9feec5f7099999
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sun Oct 25 17:41:04 2020 -0500
+
+    fixed errors
+
+commit d65527356534bbcb538c4094397611965fbcfc13
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Oct 25 17:35:49 2020 -0500
+
+    Update oss.c
+
+commit e03778256c129bf3696591f225720213509afb59
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sun Oct 25 14:04:34 2020 -0500
+
+    fixed small issues
+
+commit 7a59b82d052b8799030115e63e9be81d745e2097
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sun Oct 25 14:01:46 2020 -0500
+
+    removed somethings (cleaned up)
+
+commit 035e3e625cf059d587af85c48c2323c932e23e9e
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sun Oct 25 13:47:11 2020 -0500
+
+    cleaned
+
+commit aeead22dd270fa9e13ce3384fb51b5f421e814ef
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sat Oct 24 13:50:36 2020 -0500
+
+    updates
+
+commit d03bcebea3e037846724b742394daea2a2f98cc0
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sat Oct 24 13:38:10 2020 -0500
+
+    Update oss.c
+
+commit 20da57b50751fcd936b6c4029b2c4b04e4298527
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sat Oct 24 13:36:19 2020 -0500
+
+    updated header files
+
+commit 23c26ec88d0ff761aa7f0b2f9e3c460801876ec3
+Merge: aff8027 e4684c6
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sat Oct 24 13:28:21 2020 -0500
+
+    Merge branch 'main' of https://github.com/pango3001/process_scheduling into main
+
+commit aff8027cf56ff6363d5966780f6db1cb9caa4661
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sat Oct 24 13:27:07 2020 -0500
+
+    added header files
+
+commit e4684c6805cbdc3fef3899c2f809a6812653298b
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sat Oct 24 13:26:15 2020 -0500
+
+    updates
+
+commit 7ba5a5c3db16e738d7b107cc5a7846bdd725b73e
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sat Oct 24 13:15:33 2020 -0500
+
+    fixed user_proc.c
+
+commit 3bd990e53d018c87036dac9ea9b5ad79b7e43124
+Author: Jesse McCarville <pango3001@gmail.com>
+Date:   Sat Oct 24 11:21:14 2020 -0500
+
+    created makefile and .c files
+
+commit 033b845c5ec37c375251d9d076e16f0b6e1004dc
+Author: pango3001 <pango3001@gmail.com>
+Date:   Sat Oct 24 11:04:47 2020 -0500
+
+    Initial commit
