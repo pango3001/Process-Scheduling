@@ -41,30 +41,16 @@ typedef struct {
 } process_table;
 
 
-
+// Prototypes
 FILE* logFile;//log file
-/*
-const key_t PCB_TABLE_KEY = 110667;//key for shared PCB Table
-const key_t CLOCK_KEY = 110626;//key for shared simulated clock 
-const key_t MSG_KEY = 052644;//key for message queue
-*/
-
-
-
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
 int messQid;//id for message queue
-
-
-
 void increment_sim_time(simu_time* simTime, int increment);
 simu_time subtract_sim_times(simu_time a, simu_time b);
 simu_time add_sim_times(simu_time a, simu_time b);
 simu_time divide_sim_time(simu_time simTime, int divisor);
 process_table create_pcb(int priority, int pid, simu_time currentTime);
-
-
-
 process_table* attach_pcb_table();
 simu_time* attach_sim_clock();
 void get_clock_and_table(int n);
