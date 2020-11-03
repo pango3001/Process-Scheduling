@@ -373,7 +373,7 @@ void oss(int maxProcesses) {
             burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
             if (perc_quant_used == 100) {                  // Used full time slice
                 increment_sim_time(simClock, burst);  // increment the clock
-                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", burst);
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
@@ -415,7 +415,7 @@ void oss(int maxProcesses) {
             burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
             if (perc_quant_used == 100) {
                 increment_sim_time(simClock, burst);
-                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", burst);
                 fprintf(logFile, "OSS: PID: %3d goes to Queue 2\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
@@ -458,7 +458,7 @@ void oss(int maxProcesses) {
             burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
             if (perc_quant_used == 100) {
                 increment_sim_time(simClock, burst);
-                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", burst);
                 fprintf(logFile, "OSS: PID: %3d goes to Queue 3\n", simPid);
                 // updat pcb
                 increment_sim_time(&table[simPid].cpuTime, burst);
@@ -501,7 +501,7 @@ void oss(int maxProcesses) {
             burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
             if (perc_quant_used == 100) {
                 increment_sim_time(simClock, burst);
-                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", simPid, burst);
+                fprintf(logFile, "OSS: Total time this dispatch: %9dns\n", burst);
                 fprintf(logFile, "OSS: PID: %3d goes to Queue 3\n", simPid);
                 
                 increment_sim_time(&table[simPid].cpuTime, burst);  // updates table
