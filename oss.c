@@ -63,9 +63,9 @@ const key_t CLOCK_KEY = 110626;//key for shared simulated clock
 const key_t MSG_KEY = 052644;//key for message queue
 */
 
-const unsigned int PCB_TABLE_KEY = ftok("./oss", 'a');
-const unsigned int CLOCK_KEY = ftok("./oss", 'b');
-const unsigned int MSG_KEY = ftok("./oss", 'c');
+
+
+
 
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
@@ -152,6 +152,7 @@ void delete_shar_mem() {
 // Make pcb table
 process_table* create_table(int n) {
     process_table* table;
+    unsigned int PCB_TABLE_KEY = ftok("./oss", 'a');
     pcbTableId = shmget(PCB_TABLE_KEY, sizeof(process_table) * n, IPC_CREAT | 0777);
     if (pcbTableId < 0) {  // error
         perror("./oss: Error: shmget ");
@@ -167,6 +168,7 @@ process_table* create_table(int n) {
 // Make simulated clock
 simu_time* create_sim_clock() {
     simu_time* simClock;
+    unsigned int CLOCK_KEY = ftok("./oss", 'b');
     clockId = shmget(CLOCK_KEY, sizeof(simu_time), IPC_CREAT | 0777);
     if (clockId < 0) {  // error
         perror("./oss: Error: shmget ");
@@ -183,6 +185,7 @@ simu_time* create_sim_clock() {
 }
 // creates message queue
 void create_msqueue() {
+    unsigned int MSG_KEY = ftok("./oss", 'c');
     messageID = msgget(MSG_KEY, 0666 | IPC_CREAT);
     if (messageID < 0) {
         perror("./oss: Error: msgget ");
