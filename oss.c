@@ -313,7 +313,7 @@ void oss(int maxProcesses) {
 
     while (terminated < maxTotalProcesses) {
 
-        if (lines >= (MAX_LINES-1000) // allows for processes already started to finesh and be written to file
+        if (lines >= (MAX_LINES-1000)) // allows for processes already started to finesh and be written to file
             maxTotalProcesses = generated;
 
         // check for an available pid
