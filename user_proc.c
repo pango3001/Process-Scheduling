@@ -48,7 +48,7 @@ const key_t CLOCK_KEY = 110626;//key for shared simulated clock
 const key_t MSG_KEY = 052644;//key for message queue
 int pcbTableId;//shmid for PCB Table
 int clockId;//shmid for simulated clock
-int msqid;//id for message queue
+int messQid;//id for message queue
 
 
 
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
     int quantum;
     int outcome = 0;
     pid = atoi(argv[1]);
-    msqid = atoi(argv[2]);
+    messQid = atoi(argv[2]);
     quantum = atoi(argv[3]);
     srand(time(0) + (pid + 1));  // seeding srand
     process_table* table;
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 
     // while loop to wait for messages from oss until we terminate.
     while (outcome != 1) {  // outcome == 1 means terminate
-        if ((msgrcv(msqid, &msg, sizeof(msg.mess_quant), (pid + 1), 0)) == -1) {
+        if ((msgrcv(messQid, &msg, sizeof(msg.mess_quant), (pid + 1), 0)) == -1) {
             perror("./user: Error: msgrcv ");
             exit(EXIT_FAILURE);
         }
@@ -116,21 +116,18 @@ int main(int argc, char* argv[]) {
             break;
         default:
             break;
-        }                       // end switch
+        }
         msg.mess_ID = pid + 100;  // oss is waiting for a msg w/ type pid+100
-        //printf("USER: sending type: %ld from pid: %d", msg.mess_ID, pid);
-        if (msgsnd(msqid, &msg, sizeof(msg.mess_quant), 0) == -1) {
+
+        if (msgsnd(messQid, &msg, sizeof(msg.mess_quant), 0) == -1) {
             perror("./user: Error: msgsnd ");
             exit(EXIT_FAILURE);
         }
-        //printf(", sent type: %ld from pid: %d\n", msg.mess_ID, pid);
-        // BLocked Outcome
-        // already sent message to oss that we are blocked
-        // set to
+
+   
         if (outcome == 2) {
-            // while loop to wait for event time to pass
+            // wait for event time to pass
             while (table[pid].onDeck == 0) {
-                //printf("waiting %ds%9dns\n", event.s, event.ns);
                 if (event.simu_seconds > simClock->simu_seconds) {
                     table[pid].onDeck = 1;
                 }
@@ -139,8 +136,7 @@ int main(int argc, char* argv[]) {
                 }
             }
         }
-    }  // end while. no longer sending or recieving messages
-    // printf("%d term\n", pid);
+    } 
     return 0;
 }
 
@@ -202,7 +198,8 @@ void increment_sim_time(simu_time* simTime, int increment) {
         simTime->simu_seconds += 1;
     }
 }
-// returns a - b
+
+// subtracts times
 simu_time subtract_sim_times(simu_time a, simu_time b) {
     simu_time diff = { .simu_seconds= a.simu_seconds- b.simu_seconds,
                       .simu_nanosecs = a.simu_nanosecs - b.simu_nanosecs };
@@ -212,7 +209,7 @@ simu_time subtract_sim_times(simu_time a, simu_time b) {
     }
     return diff;
 }
-//returns a + b
+//adds times
 simu_time add_sim_times(simu_time a, simu_time b) {
     simu_time sum = { .simu_seconds = a.simu_seconds + b.simu_seconds,
                       .simu_nanosecs = a.simu_nanosecs + b.simu_nanosecs };
@@ -223,7 +220,7 @@ simu_time add_sim_times(simu_time a, simu_time b) {
     return sum;
 }
 
-//returns simtime / divisor
+// divide times
 simu_time divide_sim_time(simu_time simTime, int divisor) {
     simu_time quotient = { .simu_seconds= simTime.simu_seconds / divisor, .simu_nanosecs = simTime.simu_nanosecs / divisor };
     return quotient;

@@ -98,21 +98,9 @@ int main(int argc, char* argv[]) {
     alarm(20);
     srand(time(0));// seed rand
     printf("Running sim...\n");
-    useconds_t usec = 5;
-    usleep(usec);
-    printf(".");
-    usleep(usec);
-    printf(".");
-    usleep(usec);
-    printf(".");
-    usleep(usec);
-    printf(".");
-    usleep(usec);
-    printf(".");
-
 
     oss(MAX_PCB);
-    printf("Ending sim and cleaned up!\n");
+    
     printf("Please use the command 'cat oss.log' to view log. \n");
 
     // cleaning up
@@ -278,7 +266,7 @@ void oss(int maxProcesses) {
     int blockedInc = 1000000; // blocked queue check increment
     int quantum = 10000000; // base time quantum
     int burst; // actual time used by the process
-    int response; // response from process. will be percentage of quantum used
+    int perc_quant_used; // response from process. will be percentage of quantum used
 
     simu_time maxTimeBetweenNewProcesses = { .simu_seconds= 0, .simu_nanosecs = 500000000 };
     simu_time nextProcess; // holds the time we should spawn the next process
@@ -323,10 +311,8 @@ void oss(int maxProcesses) {
     nextProcess = get_next_process_time(maxTimeBetweenNewProcesses, (*simClock));
 
     while (terminated < maxTotalProcesses) {
-        // if we have written 9000 lines stop generating
-        // criteria is to stop at 10000 however lines will continue to be written
-        // because there are still processes in the system
-        if (lines >= 9000)
+
+        if (lines >= (MAX_LINES-1000) // allows for processes already started to finesh and be written to file
             maxTotalProcesses = generated;
 
         // check for an available pid
@@ -381,10 +367,10 @@ void oss(int maxProcesses) {
             simPid = leave_queue(rrQueue);               // get pid at head of the queue
             priority = table[simPid].priority;       // get stored priority
             // dispatch the process
-            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
+            perc_quant_used = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
             // calculate burst time
-            burst = response * (quantum / 100) * pow(2.0, (double)priority);
-            if (response == 100) {                  // Used full time slice
+            burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
+            if (perc_quant_used == 100) {                  // Used full time slice
                 increment_sim_time(simClock, burst);  // increment the clock
                 fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
                 fprintf(logFile, "OSS: PID: %3d -> Round Robin\n", simPid);
@@ -393,7 +379,7 @@ void oss(int maxProcesses) {
                 table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 enter_queue(rrQueue, simPid);
             }
-            else if (response < 0) {  // BLocked
+            else if (perc_quant_used < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
                 fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
@@ -424,9 +410,9 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, schedInc);
             simPid = leave_queue(queue1);
             priority = table[simPid].priority;
-            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
-            burst = response * (quantum / 100) * pow(2.0, (double)priority);
-            if (response == 100) {
+            perc_quant_used = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
+            burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
+            if (perc_quant_used == 100) {
                 increment_sim_time(simClock, burst);
                 fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
                 fprintf(logFile, "OSS: PID: %3d -> Queue 2\n", simPid);
@@ -436,7 +422,7 @@ void oss(int maxProcesses) {
                 table[simPid].priority = 2;
                 enter_queue(queue2, simPid);
             }
-            else if (response < 0) {  // BLocked
+            else if (perc_quant_used < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
                 fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
@@ -467,9 +453,9 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, schedInc);
             simPid = leave_queue(queue2);
             priority = table[simPid].priority;
-            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
-            burst = response * (quantum / 100) * pow(2.0, (double)priority);
-            if (response == 100) {
+            perc_quant_used = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
+            burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
+            if (perc_quant_used == 100) {
                 increment_sim_time(simClock, burst);
                 fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
                 fprintf(logFile, "OSS: PID: %3d -> Queue 3\n", simPid);
@@ -479,7 +465,7 @@ void oss(int maxProcesses) {
                 table[simPid].priority = 3;
                 enter_queue(queue3, simPid);
             }
-            else if (response < 0) {  // BLocked
+            else if (perc_quant_used < 0) {  // BLocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
                 fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
@@ -510,9 +496,9 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, schedInc);
             simPid = leave_queue(queue3);
             priority = table[simPid].priority;
-            response = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
-            burst = response * (quantum / 100) * pow(2.0, (double)priority);
-            if (response == 100) {
+            perc_quant_used = dispatch(simPid, priority, messageID, (*simClock), quantum, &lines);
+            burst = perc_quant_used * (quantum / 100) * pow(2.0, (double)priority);
+            if (perc_quant_used == 100) {
                 increment_sim_time(simClock, burst);
                 fprintf(logFile, "OSS: Full Slice PID: %3d Used: %9dns\n", simPid, burst);
                 fprintf(logFile, "OSS: PID: %3d goes to Queue 3\n", simPid);
@@ -521,7 +507,7 @@ void oss(int maxProcesses) {
                 table[simPid].sysTime = minus((*simClock), table[simPid].arrivalTime);
                 enter_queue(queue3, simPid);
             }
-            else if (response < 0) {  // if blocked
+            else if (perc_quant_used < 0) {  // if blocked
                 burst = burst * -1;
                 increment_sim_time(simClock, burst);  // increment the clock
                 fprintf(logFile, "OSS: Blocked    PID: %3d Used: %9dns\n", simPid, burst);
@@ -552,6 +538,9 @@ void oss(int maxProcesses) {
             increment_sim_time(simClock, idleInc);
         }
     }
+    
+    printf("Ending sim and cleaned up!\n");
+    
     double totCPU = (totalCPU.simu_seconds + (0.000000001 * totalCPU.simu_nanosecs));
     double totSys = (totalSYS.simu_seconds + (0.000000001 * totalSYS.simu_nanosecs));
     double totWait = (totalWait.simu_seconds + (0.000000001 * totalWait.simu_nanosecs));
@@ -635,7 +624,7 @@ simu_time add(simu_time a, simu_time b) {
     return sum;
 }
 
-//returns simtime / divisor
+// divide times
 simu_time divide(simu_time simTime, int divisor) {
     simu_time quotient = { .simu_seconds = simTime.simu_seconds / divisor, .simu_nanosecs = simTime.simu_nanosecs / divisor };
     return quotient;
