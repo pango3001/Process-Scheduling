@@ -65,29 +65,29 @@ int clockId;//shmid for simulated clock
 int messageID;//id for message queue
 
 // Prototypes
-
-void create_msqueue();
 FILE* open_file(char*, char*, char*);
 static void time_out();
+void create_msqueue();
 void cleanup();
 void delete_shar_mem();
-process_table* create_table(int);
+void oss(int);
+void increment_sim_time(simu_time* simTime, int increment);
+void enter_queue(queue_t* queue, int pid);
+int leave_queue(queue_t* queue);
 int get_sim_pid(int*, int);
 int set_priority(int);
 int check_blocked(int*, process_table*, int);
-void oss(int);
 int dispatch(int, int, int, simu_time, int, int*);
+int should_spawn(int, simu_time, simu_time, int, int);
+process_table* create_table(int);
 simu_time* create_sim_clock();
 simu_time get_next_process_time(simu_time, simu_time);
-int should_spawn(int, simu_time, simu_time, int, int);
-void increment_sim_time(simu_time* simTime, int increment);
-queue_t* create_queue(int size);
 simu_time minus(simu_time a, simu_time b);
 simu_time add(simu_time a, simu_time b);
 simu_time divide(simu_time simTime, int divisor);
+queue_t* create_queue(int size);
 process_table create_pcb(int priority, int pid, simu_time currentTime);
-void enter_queue(queue_t* queue, int pid);
-int leave_queue(queue_t* queue);
+
 
 
 
