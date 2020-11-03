@@ -49,9 +49,6 @@ const key_t CLOCK_KEY = 110626;//key for shared simulated clock
 const key_t MSG_KEY = 052644;//key for message queue
 */
 
-unsigned int PCB_TABLE_KEY = ftok("./oss", 'a');
-unsigned int CLOCK_KEY = ftok("./oss", 'b');
-unsigned int MSG_KEY = ftok("./oss", 'c');
 
 
 int pcbTableId;//shmid for PCB Table
@@ -170,12 +167,14 @@ simu_time* attach_sim_clock() {
 
 void get_clock_and_table(int n) {
     // Getting shared memory for the simulated clock
+    unsigned int CLOCK_KEY = ftok("./oss", 'b');
     clockId = shmget(CLOCK_KEY, sizeof(simu_time), IPC_CREAT | 0777);
     if (clockId < 0) {  // error
         perror("./user: Error: shmget ");
         exit(EXIT_FAILURE);
     }
     // Getting shared memory for the pcb table
+    unsigned int PCB_TABLE_KEY = ftok("./oss", 'a');
     pcbTableId = shmget(PCB_TABLE_KEY, sizeof(process_table) * (n + 1), IPC_CREAT | 0777);
     if (pcbTableId < 0) {
         perror("./user: Error: shmget ");
