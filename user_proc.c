@@ -49,9 +49,9 @@ const key_t CLOCK_KEY = 110626;//key for shared simulated clock
 const key_t MSG_KEY = 052644;//key for message queue
 */
 
-const key_t PCB_TABLE_KEY = ftok("./oss", 'a');
-const key_t CLOCK_KEY = ftok("./oss", 'b');
-const key_t MSG_KEY = ftok("./oss", 'c');
+key_t PCB_TABLE_KEY = ftok("./oss", 'a');
+key_t CLOCK_KEY = ftok("./oss", 'b');
+key_t MSG_KEY = ftok("./oss", 'c');
 
 
 int pcbTableId;//shmid for PCB Table
