@@ -1,19 +1,216 @@
-# process_scheduling
+# CS 4760 Operating Systems
 
-IMPORTANT NOTE!!!!
+Assignment # 4 Due Date: October 30, 2020
+
+# Process Scheduling
+
+# Purpose
+
+The goal of this homework is to learn about process scheduling inside an operating system. You will work on the specified scheduling
+algorithm and simulate its performance.
+
+# IMPORTANT NOTE
 if program hangs, perform a make clean then rebuild (should not be an issue but just in case)
 if problems persist perform ipcrm -add
 
+# Task
+
+In this project, you will simulate the process scheduling part of an operating system. You will implement time-based scheduling,
+ignoring almost every other aspect of theOS. Please use message queues for synchronization.
+
+Operating System Simulator
+
+The operating system simulator, orOSS, will be your main program and serve as the master process. You will start the simulator (call
+the executableoss) as one main process who will fork multiple children at random times. The randomness will be simulated by a
+logical clock that will also be updated byoss.
+
+In the beginning,osswill allocate shared memory for system data structures, including a process table with a process control block for
+each user process. The process control block is a fixed size structure and contains information to manage the child process scheduling.
+Notice that since it is a simulator, you will not need to allocate space to save the context of child processes. But you must allocate
+space for scheduling-related items such as totalCPUtime used, total time in the system, time used during the last burst, your local
+simulated pid, and process priority, if any. The process control block resides in shared memory and is accessible to the children. Since
+we are limiting ourselves to 20 processes in this class, you should allocate space for up to 18 process control blocks. Also create a bit
+vector, local tooss, that will help you keep track of the process control blocks (or processIDs) that are already taken.
+
+osssimulates the passing of time by using a simulated system clock. The clock is stored in two shared integers in memory, one which
+stores seconds and the other nanoseconds. so use two unsigned integers for the clock.osswill be creating user processes at random
+intervals, say every second on an average. While the simulated clock (the two integers) is viewable by the child processes, it should
+only be advanced (changed) byoss.
+
+Note thatosssimulates time passing in the system by adding time to the clock and as it is the only process that would change the
+clock, if a user process uses some time,ossshould indicate this by advancing the clock. In the same fashion, ifossdoes something
+that should take some time if it was a real operating system, it should increment the clock by a small amount to indicate the time it
+spent.
+
+osswill create user processes at random intervals (of simulated time), so you will have two constants; let us call them
+maxTimeBetweenNewProcsNSandmaxTimeBetweenNewProcsSecs.osswill launch a new user process based on a ran-
+dom time interval from 0 to those constants. Itgeneratesa new process by allocating and initializing the process control block for
+the process and then,forks the process. The child process willexeclthe binary. I would suggest setting these constants initially
+to spawning a new process about every 1 second, but you can experiment with this later to keep the system busy. New processes that
+are created can have one of two scheduling classes, either real-time or a normal user process, and will remain in that class for their
+lifetime. There should be constant representing the percentage of time a process is launched as a normal user process or a real-time
+one. While this constant is specified by you, it should be heavily weighted to generating mainly user processes.
+
+osswill run concurrently with all the user processes. After it sets up all the data structures, it enters a loop where it generates and
+schedules processes. Itgeneratesa new process by allocating and initializing the process control block for the process and then,forks
+the process. The child process willexeclthe binary.
+
+osswill be in control of all concurrency. In the beginning, there will be no processes in the system but it will have a time in the future
+where it will launch a process. If there are no processes currently ready to run in the system, it should increment the clock until it is the
+time where it should launch a process. It should then set up that process, generate a new time where it will launch a process and then
+using a message queue, schedule a process to run by sending it a message. It should then wait for a message back from that process
 
 
-Implementing steps
-• Start by creating a Makefile that compiles and builds the two executables: oss and user_proc.
-• Have oss create a process control table with one user process (of real-time class) to verify it is working
-• Schedule the one user process over and over, logging the data
-• Create the round robin queue, add additional user processes, making all user processes alternate in it
-• Keep track of and output statistics like throughput, idle time, etc
-• Implement an additional user class and the multi-level feedback queue.
-• Add the chance for user processes to be blocked on an event, keep track of statistics on this
+that it has finished its task. If your process table is already full when you go to generate a process, just skip that generation, but do
+determine another time in the future to try and generate a new process.
+
+Advance the logical clock by 1.xx seconds in each iteration of the loop where xx is the number of nanoseconds. xx will be a random
+number in the interval [0,1000] to simulate some overhead activity for each iteration.
+
+A new process should be generated every 1 second, on an average. So, you should generate a random number between 0 and 2
+assigning it to time to create new process. If your clock has passed this time since the creation of last process, generate a new process
+(andexeclit).
+
+ossacts as the scheduler and so willschedulea process by sending it a message using a message queue. When initially started, there
+will be no processes in the system but it will have a time in the future where it will launch a process. If there are no processes currently
+ready to run in the system, it should increment the clock until it is the time where it should launch a process. It should then set up that
+process, generate a new time where it will create a new process and then using a message queue, schedule a process to run by sending
+it a message. It should then wait for a message back from that process that it has finished its task. If your process table is already full
+when you go to generate a process, just skip that generation, but do determine another time in the future to try and generate a new
+process.
+
+Scheduling Algorithm
+
+Assuming you have more than one process in your simulated system,osswillselecta process to run andscheduleit for execution. It
+will select the process by using a scheduling algorithm with the following features:
+
+Implement a multi-level feedback queue with Linux-like scheduling. That is, you will have two classes of processes: active and
+expired. When a process has exhausted its quantum, it will be moved to expired set.osswill always pick up the process with highest
+priority that is acive. There are four scheduling queues, each having an associated time quantum. The base time quantum is determined
+by you as a constant, let us say something like 10 milliseconds, but certainly could be experimented with. The highest priority queue
+has this base time quantum as the amount of time it would schedule a child process if it scheduled it out of that queue. The second
+highest priority queue would have half of that, the third highest priority queue would have quarter of the base queue quantum and so
+on, as per a normal multi-level feedback queue. If a process finishes using its entire timeslice for the queue, it should be moved to a
+queue one lower in priority. If a process comes out of a blocked queue, it should go to the highest priority queue.
+
+Whenosshas to pick a process to schedule, it will look for the highest priority occupied queue and schedule the process at the head
+of this queue. The process will bedispatchedby sending the process a message using a message queue indicating how much of a time
+slice it has to run. Note that this scheduling itself takes time, so before launching the process theossshould increment the clock for
+the amount of work that it did, let us say from 100 to 10000 nanoseconds.
+
+User Processes
+
+All user processes are alike but simulate the system by performing some tasks at random times. The user process will keep checking
+in the shared memory location if it has been scheduled and once scheduled, it will start to run. It should generate a random number to
+check whether it will use the entire quantum, or only a part of it (a binary random number will be sufficient for this purpose). If it has
+to use only a part of the quantum, it will generate a random number in the range [0,quantum] to see how long it runs.
+
+The user processes will wait on receiving a message giving them a time slice and then it will simulate running. They do not do any
+actualwork but instead send a message toosssaying how much time they used and if they had to useI/Oor had to terminate.
+
+As a constant in your system, you should have a probability that a process will terminate when scheduled. I would suggest this
+probability be fairly small to start. Processes will then, using a random number, use this to determine if they should terminate. Note
+that when creating this random number you must be careful that the seed you use is different for all processes, so I suggest seeding
+off of some function of a processes pid. If it would terminate, it would of course use some random amount of its timeslice before
+terminating. It should indicate toossthat it has decided to terminate and also how much of its timeslice it used, so thatosscan
+increment the clock by the appropriate amount.
+
+Once it has decided that it will not terminate, then we have to determine if it will use its entire timeslice or if it will get blocked on an
+event. This should be determined by a random number between 0 and 1. If it uses up its timeslice, this information should be conveyed
+to master. Otherwise, the process starts to wait for an event that will last forr.sseconds whererandsare random numbers with
+range[0,3]and[0,1000]respectively, and 3 indicates that the process gets preempted after usingp%of its assigned quantum, where
+pis a random number in the range[1,99]. As this could happen for multiple processes, this will require a blocked queue, checked by
+ossevery time it makes a decision on scheduling to see if it should wake up these processes and put them back in the appropriate
+
+
+queues. Note that the simulated work of moving a process from a blocked queue to a ready queue would take more time than a normal
+scheduling decision so it would make sense to increment the system clock to indicate this.
+
+Your simulation should end with a report on average wait time, averageCPUutilization and average time a process waited in a blocked
+queue. Also include how long theCPUwas idle with no ready processes.
+
+Make sure that you have signal handing to terminate all processes, if needed. In case of abnormal termination, make sure to remove
+shared memory and message queues.
+
+# Invoking the solution
+
+Executeosswith no parameters. You may add some parameters to modify the number of processes or base quantum but if you do so,
+document this in yourREADME.
+
+Log Output
+
+Your program should send enough output to a log file such that it is possible for me to determine its operation. For example:
+
+OSS: Generating process with PID 3 and putting it in queue 1 at time 0:
+OSS: Dispatching process with PID 2 from queue 1 at time 0:5000805,
+OSS: total time this dispatch was 790 nanoseconds
+OSS: Receiving that process with PID 2 ran for 400000 nanoseconds
+OSS: Putting process with PID 2 into queue 2
+OSS: Dispatching process with PID 3 from queue 1 at time 0:5401805,
+OSS: total time this dispatch was 1000 nanoseconds
+OSS: Receiving that process with PID 3 ran for 270000 nanoseconds,
+OSS: not using its entire time quantum
+OSS: Putting process with PID 3 into queue 1
+OSS: Dispatching process with PID 1 from queue 1 at time 0:5402505,
+OSS: total time spent in dispatch was 7000 nanoseconds
+etc
+
+I suggest not simply appending to previous logs, but start a new file each time. Also be careful about infinite loops that could generate
+excessively long log files. So for example, keep track of total lines in the log file and terminate writing to the log if it exceeds 10000
+lines.
+
+Note that the above log was using arbitrary numbers, so your times spent in dispatch could be quite different.
+
+# Suggested implementation steps
+
+I highly suggest you do this project incrementally. I suggest implementation in the following order:
+
+- Start by creating aMakefilethat compiles and builds the two executables:ossanduser_proc.
+- Haveosscreate a process control table with one user process (of real-time class) to verify it is working
+- Schedule the one user process over and over, logging the data
+- Create the round robin queue, add additional user processes, making all user processes alternate in it
+- Keep track of and output statistics like throughput, idle time, etc
+- Implement an additional user class and the multi-level feedback queue.
+- Add the chance for user processes to be blocked on an event, keep track of statistics on this
+
+Do not try to do everything at once and be stuck with no idea what is failing.
+
+
+Termination Criteria
+
+ossshould stop generating processes if it has already generated 100 processes or if more than 3 real-life seconds have passed. If you
+stop adding new processes, the system should eventually empty of processes and then it should terminate. What is important is that
+you tune your parameters so that the system has processes in all the queues at some point and that I can see that in the log file. As
+discussed previously, ensure that appropriate statistics are displayed.
+
+# Criteria for success
+
+Make sure that you implement the specified algorithm and document it appropriately.You must clean up after yourself. That is, after
+the program terminates, whether normally or by force, there should be no shared memory, semaphore, or message queue that is left
+allocated to you.
+
+# Grading
+
+1. Overall submission: 30pts. Program compiles and upon reading, seems to solve the assigned problem in the specified manner.
+2. README/Makefile: 10pts. Ensure that they are present and work appropriately.
+3. Code readability: 10pts. Code should be readable with appropriate comments. Author and date should be identified.
+4. Conformance to specifications: 50pts. Algorithm is properly implemented and documented.
+
+Submission
+
+Handin an electronic copy of all the sources,README, Makefile(s), and results. Create your programs in a directory calledusername.
+whereusernameis your login name on hoare. Once you are done with everything,remove the executables and object files, and issue
+the following commands:
+
+% cd
+% chmod 755 ̃
+% ̃sanjiv/bin/handin cs4760 4
+% chmod 700 ̃
+
+Do not forgetMakefile(with suffix rules), version control, andREADMEfor the assignment.
+
+
+
 
 commits
 commit 6b7260d7dbf03d8cdc41df9c79ac7f2d8d1b539d
